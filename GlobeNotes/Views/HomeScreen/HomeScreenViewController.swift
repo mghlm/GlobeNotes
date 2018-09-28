@@ -60,6 +60,7 @@ final class HomeScreenViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         let settingsNavBarItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.rightBarButtonItems = [mapNavBarItem, settingsNavBarItem]
+        navigationController?.navigationBar.barTintColor = .white 
         
         
         setupConstraints()
