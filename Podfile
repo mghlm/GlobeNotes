@@ -7,6 +7,7 @@ target 'GlobeNotes' do
 
   # Pods for GlobeNotes
 
+  pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
