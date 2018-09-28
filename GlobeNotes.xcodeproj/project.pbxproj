@@ -21,6 +21,7 @@
 		CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDCD215E8B35003C06D2 /* Extensions.swift */; };
 		CC74DDD1215E9500003C06D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDD0215E9500003C06D2 /* User.swift */; };
 		CC74DDD3215E9B01003C06D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */; };
+		CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		CC74DDCD215E8B35003C06D2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CC74DDD0215E9500003C06D2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		CC74DDC7215E88DE003C06D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CCEB9ED6215EA41E00383156 /* HomeScreen */,
 				CC74DDC6215E88C7003C06D2 /* Login */,
 			);
 			path = Views;
@@ -197,6 +200,14 @@
 				CC74DDD0215E9500003C06D2 /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CCEB9ED6215EA41E00383156 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		F095D5ED5AB2E5125F3D8DFB /* Frameworks */ = {
@@ -431,6 +442,7 @@
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
 				CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */,
+				CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
