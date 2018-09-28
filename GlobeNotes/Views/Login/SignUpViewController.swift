@@ -64,6 +64,8 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    fileprivate var stackView: UIStackView!
+    
     // MARK: - ViewController
     
     override func viewDidLoad() {
@@ -78,7 +80,7 @@ class SignUpViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton])
+        stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 10
