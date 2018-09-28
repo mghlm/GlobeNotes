@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
@@ -109,7 +110,58 @@ class SignUpViewController: UIViewController {
     }
     
     @objc fileprivate func handleTextInputChange() {
+        guard let email = emailTextField.text, !email.isEmpty else { return }
+        guard let username = usernameTextField.text, !username.isEmpty else { return }
+        guard let password = passwordTextField.text, !password.isEmpty else { return }
         
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error: Error?) in
+            if let error = error {
+                print("Failed to create user:", error)
+                return
+            }
+            print("Successfully created user:", user?.uid ?? "")
+            
+            guard let image = self.addPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
+            let filename = NSUUID().uuidString
+            
+            let storageReference = Storage.storage().reference()
+            let storageReferenceChild = storageReference.child("profile_images").child(filename)
+            
+            storageReferenceChild.putData(uploadData, metadata: nil, completion: { (metaData, error) in
+                if let error = error {
+                    print("Failed to upload image:", error.localizedDescription)
+                    return
+                }
+                
+                storageReferenceChild.downloadURL(completion: { (url, error) in
+                    if let error = error {
+                        print("Failed to retrieve URL:", error.localizedDescription)
+                        return
+                    }
+                    let profileImageUrl = url?.absoluteString
+                    print("Profile image successfully downloadet: \(profileImageUrl ?? "")")
+                    
+                    guard let uid = user?.uid else { return }
+                    let dictionaryValues = ["username": username, "profileImageUrl": profileImageUrl]
+                    let values = [uid: dictionaryValues]
+                    
+                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, reference) in
+                        if let error = error {
+                            print("Failed to save user info into DB:", error.localizedDescription)
+                            return
+                        }
+                        
+                        print("Successfully saved user info into DB")
+                        
+                        guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                        mainTabBarController.setupViewControllers()
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                })
+            })
+        }
     }
     
     @objc fileprivate func handleSignUp() {
