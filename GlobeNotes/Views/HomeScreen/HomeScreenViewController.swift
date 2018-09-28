@@ -17,7 +17,7 @@ final class HomeScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if Auth.auth().currentUser == nil {
-            showSignUp()
+            showSignInScreen()
         }
     }
     
@@ -41,9 +41,9 @@ final class HomeScreenViewController: UIViewController {
         
     }
     
-    fileprivate func showSignUp() {
-        let signUpViewController = SignUpViewController()
-        let navController = UINavigationController(rootViewController: signUpViewController)
+    fileprivate func showSignInScreen() {
+        let signInViewController = SignInViewController()
+        let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
     }
     

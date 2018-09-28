@@ -65,7 +65,7 @@ final class SignInViewController: UIViewController {
     }()
     
     fileprivate var dontHaveAccountButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Don't have an account? Sign up!", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
@@ -87,6 +87,7 @@ final class SignInViewController: UIViewController {
     
     fileprivate func setupUI() {
         view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white 
         
         view.addSubview(mainTitleLabel)
         view.addSubview(emojiLabel)
@@ -95,12 +96,18 @@ final class SignInViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 10
         view.addSubview(stackView)
+        view.addSubview(dontHaveAccountButton)
         
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
-        
+        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 120, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
+        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+        dontHaveAccountButton.anchor(centerX: view.centerXAnchor, centerY: nil)
+        dontHaveAccountButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 40, paddingRight: 0, width: 0, height: 0)
     }
     
     @objc fileprivate func handleTextInputChange() {
@@ -112,7 +119,8 @@ final class SignInViewController: UIViewController {
     }
     
     @objc fileprivate func handleSignUp() {
-        
+        let signUpViewController = SignUpViewController()
+        navigationController?.pushViewController(signUpViewController, animated: true)
     }
     
 }
