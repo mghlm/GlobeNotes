@@ -11,6 +11,7 @@ target 'GlobeNotes' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'FontAwesome.swift'
 
   target 'GlobeNotesTests' do
     inherit! :search_paths

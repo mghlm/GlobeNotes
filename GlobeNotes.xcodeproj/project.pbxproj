@@ -137,15 +137,15 @@
 		CC74DD97215E8731003C06D2 /* GlobeNotes */ = {
 			isa = PBXGroup;
 			children = (
-				CC74DDCF215E94F7003C06D2 /* Models */,
-				CC74DDCC215E8B2A003C06D2 /* Utils */,
-				CC74DDC7215E88DE003C06D2 /* Views */,
 				CC74DD98215E8731003C06D2 /* AppDelegate.swift */,
 				CC74DD9C215E8731003C06D2 /* Main.storyboard */,
 				CC74DD9F215E8732003C06D2 /* Assets.xcassets */,
 				CC74DDA1215E8732003C06D2 /* LaunchScreen.storyboard */,
 				CC74DDA4215E8732003C06D2 /* Info.plist */,
 				CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */,
+				CC74DDCC215E8B2A003C06D2 /* Utils */,
+				CC74DDCF215E94F7003C06D2 /* Models */,
+				CC74DDC7215E88DE003C06D2 /* Views */,
 			);
 			path = GlobeNotes;
 			sourceTree = "<group>";
@@ -377,6 +377,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GlobeNotes/Pods-GlobeNotes-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -384,6 +385,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",

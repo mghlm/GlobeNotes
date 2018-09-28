@@ -105,7 +105,7 @@ final class SignUpViewController: UIViewController {
         mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 120, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
         emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 270)
     }
     
     @objc fileprivate func handleTextInputChange() {
@@ -131,6 +131,7 @@ final class SignUpViewController: UIViewController {
                 return
             }
             print("Successfully created user:", user?.user.uid ?? "")
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

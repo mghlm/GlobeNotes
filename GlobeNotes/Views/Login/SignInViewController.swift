@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 final class SignInViewController: UIViewController {
     
@@ -115,6 +116,17 @@ final class SignInViewController: UIViewController {
     }
     
     @objc fileprivate func handleSignIn() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print("Failed to sign in user:", error)
+                return
+            }
+            print("Successfully signed in user:", user?.user.uid ?? "")
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     

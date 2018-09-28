@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "11FF4E118447181F10B9561F84664583"
-               BuildableName = "Pods_GlobeNotes.framework"
-               BlueprintName = "Pods-GlobeNotes"
+               BlueprintIdentifier = "D0DA0BE6B6947E8522D0685FC5C7400D"
+               BuildableName = "FontAwesome.swift.bundle"
+               BlueprintName = "FontAwesome.swift-FontAwesome.swift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "11FF4E118447181F10B9561F84664583"
-            BuildableName = "Pods_GlobeNotes.framework"
-            BlueprintName = "Pods-GlobeNotes"
+            BlueprintIdentifier = "D0DA0BE6B6947E8522D0685FC5C7400D"
+            BuildableName = "FontAwesome.swift.bundle"
+            BlueprintName = "FontAwesome.swift-FontAwesome.swift"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
