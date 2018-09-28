@@ -12,14 +12,6 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    fileprivate var addPhotoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "addPhoto").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(self, action: #selector(handlePhotoButton), for: .touchUpInside)
-        
-        return button
-    }()
-    
     fileprivate var emailTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Email"
@@ -92,14 +84,8 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func setupConstraints() {
-        addPhotoButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 60, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 140, height: 140)
-        addPhotoButton.anchor(centerX: view.centerXAnchor, centerY: nil)
         
-        stackView.anchor(top: addPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
-    }
-    
-    @objc fileprivate func handlePhotoButton() {
-        
+        stackView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 200, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
     }
     
     @objc fileprivate func handleTextInputChange() {
@@ -109,7 +95,6 @@ class SignUpViewController: UIViewController {
     @objc fileprivate func handleSignUp() {
         
     }
-    
 }
 
 
