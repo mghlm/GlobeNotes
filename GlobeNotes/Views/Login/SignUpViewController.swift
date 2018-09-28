@@ -78,8 +78,6 @@ class SignUpViewController: UIViewController {
         stackView.spacing = 10
         view.addSubview(stackView)
         
-        view.addSubview(addPhotoButton)
-        
         setupConstraints()
     }
     
