@@ -9,24 +9,20 @@
 import UIKit
 import Firebase
 
-class HomeScreenViewController: UIViewController {
+final class HomeScreenViewController: UIViewController {
     
     // MARK: - Private properties
     
     // MARK: - ViewController
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("")
-        }
-        
+    override func viewWillAppear(_ animated: Bool) {
         if Auth.auth().currentUser == nil {
             showSignUp()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setupUI()
     }

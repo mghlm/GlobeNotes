@@ -9,13 +9,13 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
     // MARK: - Private Properties
     
     fileprivate var mainTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Welcome to GlobeNote! Please sign up to start adding notes to the world 😊"
+        lbl.text = "Welcome to GlobeNote! Please sign up to start adding notes to the world."
         lbl.font = UIFont.boldSystemFont(ofSize: 24)
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -89,6 +89,7 @@ class SignUpViewController: UIViewController {
     
     fileprivate func setupUI() {
         view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
         
         view.addSubview(mainTitleLabel)
         view.addSubview(emojiLabel)
@@ -105,8 +106,8 @@ class SignUpViewController: UIViewController {
     fileprivate func setupConstraints() {
         mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
-        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 50, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 25, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
     }
     
     @objc fileprivate func handleTextInputChange() {
