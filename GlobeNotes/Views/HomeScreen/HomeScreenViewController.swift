@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeScreenViewController: UIViewController {
     
@@ -17,18 +18,37 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("")
+        }
+        
+        if Auth.auth().currentUser == nil {
+            showSignUp()
+        }
+        
         setupUI()
     }
     
     // MARK: - Private methods
     
     fileprivate func setupUI() {
+        view.backgroundColor = .white
+        
+        
         
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
         
+    }
+    
+    fileprivate func showSignUp() {
+        let signUpViewController = SignUpViewController()
+        let navController = UINavigationController(rootViewController: signUpViewController)
+        present(navController, animated: false)
     }
     
 }
