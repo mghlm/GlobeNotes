@@ -54,7 +54,10 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate func setupUI() {
         view.backgroundColor = .white
+        
+        mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
         let mapNavBarItem = UIBarButtonItem(customView: mapButton)
+        settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         let settingsNavBarItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.rightBarButtonItems = [mapNavBarItem, settingsNavBarItem]
         
@@ -72,4 +75,47 @@ final class HomeScreenViewController: UIViewController {
         present(navController, animated: false)
     }
     
+    @objc fileprivate func handleShowMap() {
+        
+    }
+    
+    @objc fileprivate func handleSettings() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { (_) in
+            do {
+                try Auth.auth().signOut()
+                let navController = UINavigationController(rootViewController: SignInViewController())
+                self.navigationController?.present(navController, animated: true, completion: nil)
+            } catch let error {
+                print("Failed to sign out:", error)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true)
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

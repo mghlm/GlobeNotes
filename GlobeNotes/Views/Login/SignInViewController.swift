@@ -112,7 +112,15 @@ final class SignInViewController: UIViewController {
     }
     
     @objc fileprivate func handleTextInputChange() {
+        let isFormValid = emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
+        if isFormValid {
+            signInButton.isEnabled = true
+            signInButton.backgroundColor = UIColor.blue
+        } else {
+            signInButton.isEnabled = false
+            signInButton.backgroundColor = UIColor.lightGray
+        }
     }
     
     @objc fileprivate func handleSignIn() {
