@@ -19,6 +19,8 @@ class NoteTableViewCell: UITableViewCell {
         }
     }
     
+    static let id = "NoteTableViewCell"
+    
     // MARK: - Private properties
     
     fileprivate var noteTitleLabel: UILabel = {
@@ -73,5 +75,4 @@ class NoteTableViewCell: UITableViewCell {
             self.locationLabel.text = "📍: \(city), \(country)"
         }
     }
-
 }
