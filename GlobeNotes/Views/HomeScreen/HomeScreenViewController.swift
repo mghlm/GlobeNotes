@@ -36,6 +36,12 @@ final class HomeScreenViewController: UIViewController {
         return button
     }()
     
+    fileprivate var notesTableView: UITableView = {
+        let tv = UITableView()
+        
+        return tv
+    }()
+    
     // MARK: - ViewController
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +66,7 @@ final class HomeScreenViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         let settingsNavBarItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.rightBarButtonItems = [mapNavBarItem, settingsNavBarItem]
-        navigationController?.navigationBar.barTintColor = .white 
+        navigationController?.navigationBar.barTintColor = .white
         
         
         setupConstraints()
