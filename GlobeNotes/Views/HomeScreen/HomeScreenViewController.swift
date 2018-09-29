@@ -91,7 +91,7 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Nearby notes"
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddNote))
         mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
         let mapNavBarItem = UIBarButtonItem(customView: mapButton)
         settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
@@ -104,6 +104,10 @@ final class HomeScreenViewController: UIViewController {
         let signInViewController = SignInViewController()
         let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
+    }
+    
+    @objc fileprivate func handleAddNote() {
+        
     }
     
     @objc fileprivate func handleShowMap() {
