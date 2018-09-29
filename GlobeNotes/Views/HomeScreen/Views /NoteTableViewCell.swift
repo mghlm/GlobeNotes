@@ -27,8 +27,10 @@ class NoteTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    fileprivate var noteTextLabel: UILabel = {
+    fileprivate var noteAuthorLabel: UILabel = {
         let lbl = UILabel()
+        lbl.font = UIFont.italicSystemFont(ofSize: 10)
+        lbl.textColor = .gray
         return lbl
     }()
     
@@ -41,17 +43,19 @@ class NoteTableViewCell: UITableViewCell {
     
     fileprivate func setupUI() {
         noteTitleLabel.text = note.title
-        noteTextLabel.text = note.text
+        noteAuthorLabel.text = "created at \(note.creationDate.description) by \(note.user.name)"
         setupLocationLabel()
         addSubview(noteTitleLabel)
-        addSubview(noteTextLabel)
+        addSubview(noteAuthorLabel)
         addSubview(locationLabel)
         
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
-        
+        noteTitleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: locationLabel.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        noteAuthorLabel.anchor(top: noteTitleLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 0, width: 0, height: 0)
+        locationLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
     }
     
     fileprivate func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ city: String?, _ country: String?, _ error: Error?) -> ()) {
@@ -66,7 +70,7 @@ class NoteTableViewCell: UITableViewCell {
             guard let city = city else { return }
             guard let country = country else { return }
             
-            self.locationLabel.text = "\(city), \(country)"
+            self.locationLabel.text = "📍: \(city), \(country)"
         }
     }
 
