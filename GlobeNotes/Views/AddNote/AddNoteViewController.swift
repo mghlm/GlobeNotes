@@ -124,6 +124,8 @@ class AddNoteViewController: UIViewController {
         submitUpButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingBottom: 50, paddingRight: 24, width: 0, height: 50)
     }
     
+    // MARK: - Handlers
+    
     @objc fileprivate func handleDismiss() {
         self.dismiss(animated: true, completion: nil)
     }
