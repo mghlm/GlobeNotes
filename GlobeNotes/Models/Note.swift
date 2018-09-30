@@ -12,14 +12,14 @@ struct Note {
     
     var id: String?
     
-    let user: User
+    let user: User?
     let title: String
     let text: String
     let latitude: Double
     let longitude: Double
     let creationDate: Date
     
-    init(user: User, dictionary: [String: Any]) {
+    init(user: User?, dictionary: [String: Any]) {
         self.user = user
         self.title = dictionary["title"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""

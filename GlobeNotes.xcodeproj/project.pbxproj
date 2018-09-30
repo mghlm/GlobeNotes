@@ -12,6 +12,7 @@
 		A171B94A2F19BB32A90BB959 /* Pods_GlobeNotesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
 		CC6D0368215FCD44005F9CFA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0367215FCD44005F9CFA /* Note.swift */; };
+		CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */; };
 		CC74DD99215E8731003C06D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DD98215E8731003C06D2 /* AppDelegate.swift */; };
 		CC74DD9E215E8731003C06D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC74DD9C215E8731003C06D2 /* Main.storyboard */; };
 		CC74DDA0215E8732003C06D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC74DD9F215E8732003C06D2 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		B420BEF1AA7F42725A15A3B1 /* Pods-GlobeNotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobeNotesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobeNotesUITests/Pods-GlobeNotesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		CC6D0367215FCD44005F9CFA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		CC74DD95215E8731003C06D2 /* GlobeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlobeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC74DD98215E8731003C06D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC74DD9D215E8731003C06D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 				CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */,
 			);
 			path = "Views ";
+			sourceTree = "<group>";
+		};
+		CC71F3E22160F0A9005E33EF /* AddNote */ = {
+			isa = PBXGroup;
+			children = (
+				CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */,
+			);
+			path = AddNote;
 			sourceTree = "<group>";
 		};
 		CC74DD8C215E8731003C06D2 = {
@@ -192,6 +202,7 @@
 		CC74DDC7215E88DE003C06D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC71F3E22160F0A9005E33EF /* AddNote */,
 				CCEB9ED6215EA41E00383156 /* HomeScreen */,
 				CC74DDC6215E88C7003C06D2 /* Login */,
 			);
@@ -455,6 +466,7 @@
 			files = (
 				CC74DDC9215E88F0003C06D2 /* SignUpViewController.swift in Sources */,
 				CC74DD99215E8731003C06D2 /* AppDelegate.swift in Sources */,
+				CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
