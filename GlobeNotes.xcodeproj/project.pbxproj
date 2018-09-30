@@ -202,8 +202,8 @@
 		CC74DDC7215E88DE003C06D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CC71F3E22160F0A9005E33EF /* AddNote */,
 				CCEB9ED6215EA41E00383156 /* HomeScreen */,
+				CC71F3E22160F0A9005E33EF /* AddNote */,
 				CC74DDC6215E88C7003C06D2 /* Login */,
 			);
 			path = Views;

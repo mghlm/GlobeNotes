@@ -81,6 +81,11 @@ class AddNoteViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Public properties
+    
+    var latitude: Double?
+    var longitude: Double?
+    
     // MARK: - Constants
     
     static let refreshTableViewNotificationName = NSNotification.Name(rawValue: "refreshTableView")
@@ -144,7 +149,7 @@ class AddNoteViewController: UIViewController {
         let usersNoteReference = Database.database().reference().child("notes")
         let ref = usersNoteReference.childByAutoId()
         
-        let values = ["title": titleText, "text": noteText ?? "", "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        let values = ["title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
         ref.updateChildValues(values) { (error, reference) in
             if let error = error {
