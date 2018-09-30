@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AddNoteViewController: UIViewController {
     
@@ -132,6 +133,24 @@ class AddNoteViewController: UIViewController {
     
     @objc fileprivate func handleSubmit() {
         
+        guard let titleText = titleTextField.text else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text 
+        
+        let usersNoteReference = Database.database().reference().child("notes").child(uid)
+        let ref = usersNoteReference.childByAutoId()
+        
+        let values = ["title": titleText, "text": noteText ?? "", "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        
+        ref.updateChildValues(values) { (error, reference) in
+            if let error = error {
+                print("Failed to save note to database:", error)
+                return
+            }
+            
+            print("Successfully saved note to database")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 }
