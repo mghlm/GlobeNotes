@@ -12,7 +12,17 @@ import FontAwesome_swift
 
 final class HomeScreenViewController: UIViewController {
     
+    /// Dummy data
+    
+    let dummyNote: [String : Any] = ["title": "A note",
+                                     "text": "bla bla bla blaaa bla bla bla",
+                                     "latitude": 51.538543,
+                                     "longitude": -0.060457,
+                                     "creationDate": Date()]
+    
     // MARK: - Private properties
+    
+    fileprivate var notes: [Note]!
     
     fileprivate var mapButton: UIButton = {
         let button = UIButton()
@@ -38,7 +48,7 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate var notesTableView: UITableView = {
         let tv = UITableView()
-        
+        tv.register(NoteTableViewCell.self, forCellReuseIdentifier: NoteTableViewCell.id)
         return tv
     }()
     
@@ -60,26 +70,44 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate func setupUI() {
         view.backgroundColor = .white
+        setupNavigationBar()
         
+        notes = [Note]()
+        let dummyUser = User(uid: "blabla", dictionary: dummyNote)
+        let note = Note(user: dummyUser, dictionary: dummyNote)
+        notes.append(note)
+        
+        notesTableView.delegate = self
+        notesTableView.dataSource = self
+        view.addSubview(notesTableView)
+        
+        setupConstraints()
+    }
+    
+    fileprivate func setupConstraints() {
+        notesTableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+    }
+    
+    fileprivate func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Nearby notes"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddNote))
         mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
         let mapNavBarItem = UIBarButtonItem(customView: mapButton)
         settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         let settingsNavBarItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.rightBarButtonItems = [mapNavBarItem, settingsNavBarItem]
         navigationController?.navigationBar.barTintColor = .white
-        
-        
-        setupConstraints()
-    }
-    
-    fileprivate func setupConstraints() {
-        
     }
     
     fileprivate func showSignInScreen() {
         let signInViewController = SignInViewController()
         let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
+    }
+    
+    @objc fileprivate func handleAddNote() {
+        
     }
     
     @objc fileprivate func handleShowMap() {
@@ -100,6 +128,27 @@ final class HomeScreenViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true)
     }
+}
+
+extension HomeScreenViewController: UITableViewDelegate {
+    
+}
+
+extension HomeScreenViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return notes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.id) as! NoteTableViewCell
+        let note = notes[indexPath.row]
+        cell.note = note
+        
+        return cell
+    }
+    
+    
+    
     
 }
 
