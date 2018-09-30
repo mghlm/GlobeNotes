@@ -107,7 +107,8 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleAddNote() {
-        
+        let addNoteViewController = AddNoteViewController()
+        navigationController?.present(addNoteViewController, animated: true, completion: nil)
     }
     
     @objc fileprivate func handleShowMap() {
