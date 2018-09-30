@@ -116,7 +116,7 @@ class AddNoteViewController: UIViewController {
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
         titleTextField.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 25, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
         textTextView.anchor(top: titleTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 25, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 200)
-        submitUpButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingBottom: 24, paddingRight: 24, width: 0, height: 50)
+        submitUpButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingBottom: 50, paddingRight: 24, width: 0, height: 50)
     }
     
     @objc fileprivate func handleDismiss() {

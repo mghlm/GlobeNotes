@@ -71,8 +71,6 @@ final class HomeScreenViewController: UIViewController {
         notes = [Note]()
         fetchNotes()
         
-        
-        
         notesTableView.delegate = self
         notesTableView.dataSource = self
         view.addSubview(notesTableView)
@@ -123,7 +121,6 @@ final class HomeScreenViewController: UIViewController {
                 note.id = key
                 self.notes.append(note)
                 self.notesTableView.reloadData()
-                
             })
         }
     }
@@ -139,10 +136,6 @@ final class HomeScreenViewController: UIViewController {
         notes.removeAll()
         fetchNotes()
     }
-    
-//    @objc fileprivate func handleRefreshTableView() {
-//        notesTableView.reloadData()
-//    }
     
     @objc fileprivate func handleShowMap() {
         
@@ -180,9 +173,6 @@ extension HomeScreenViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
     
 }
 
