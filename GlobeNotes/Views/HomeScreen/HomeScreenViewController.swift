@@ -16,6 +16,17 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate var notes: [Note]!
     
+    fileprivate var addNoteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        button.setTitle(String.fontAwesomeIcon(name: .plus), for: .normal)
+        button.titleLabel?.font = UIFont.fontAwesome(ofSize: 26, style: .solid)
+        button.setTitleColor(UIColor.rgb(red: 0, green: 122, blue: 255), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        
+        return button
+    }()
+    
     fileprivate var mapButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -85,7 +96,8 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Nearby notes"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddNote))
+        addNoteButton.addTarget(self, action: #selector(handleAddNote), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: addNoteButton)
         mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
         let mapNavBarItem = UIBarButtonItem(customView: mapButton)
         settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
