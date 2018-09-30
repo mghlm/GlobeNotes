@@ -163,6 +163,10 @@ final class HomeScreenViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
+    fileprivate func sortNotes() {
+        
+    }
+    
     // MARK: - Handlers
     
     @objc fileprivate func handleAddNote() {
@@ -183,6 +187,9 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleSettings() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Sort notes by distance", style: .default, handler: { (_) in
+            self.sortNotes()
+        }))
         alertController.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { (_) in
             do {
                 try Auth.auth().signOut()
