@@ -12,14 +12,6 @@ import FontAwesome_swift
 
 final class HomeScreenViewController: UIViewController {
     
-    /// Dummy data
-    
-    let dummyNote: [String : Any] = ["title": "A note",
-                                     "text": "bla bla bla blaaa bla bla bla",
-                                     "latitude": 51.538543,
-                                     "longitude": -0.060457,
-                                     "creationDate": Date()]
-    
     // MARK: - Private properties
     
     fileprivate var notes: [Note]!
@@ -52,6 +44,8 @@ final class HomeScreenViewController: UIViewController {
         return tv
     }()
     
+    fileprivate var refreshControl: UIRefreshControl!
+    
     // MARK: - ViewController
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +56,7 @@ final class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRefresh), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         
         setupUI()
     }
@@ -71,11 +66,12 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = .white
         setupNavigationBar()
+        setupRefreshControl()
         
         notes = [Note]()
-        let dummyUser = User(uid: "blabla", dictionary: dummyNote)
-        let note = Note(user: dummyUser, dictionary: dummyNote)
-        notes.append(note)
+        fetchNotes()
+        
+        
         
         notesTableView.delegate = self
         notesTableView.dataSource = self
@@ -100,16 +96,53 @@ final class HomeScreenViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
     }
     
+    fileprivate func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        notesTableView.refreshControl = refreshControl
+    }
+    
     fileprivate func showSignInScreen() {
         let signInViewController = SignInViewController()
         let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
     }
     
+    fileprivate func fetchNotes() {
+        let databaseReference = Database.database().reference(withPath: "notes")
+        databaseReference.observeSingleEvent(of: .value) { (snapshot) in
+            
+            self.refreshControl.endRefreshing()
+            
+            guard let dictionaries = snapshot.value as? [String: Any] else { return }
+            
+            dictionaries.forEach({ (key, value) in
+                guard let dictionary = value as? [String: Any] else { return }
+                
+                var note = Note(user: nil, dictionary: dictionary)
+                note.id = key
+                self.notes.append(note)
+                self.notesTableView.reloadData()
+                
+            })
+        }
+    }
+    
+    // MARK: - Handlers
+    
     @objc fileprivate func handleAddNote() {
         let addNoteViewController = AddNoteViewController()
         navigationController?.present(addNoteViewController, animated: true, completion: nil)
     }
+    
+    @objc fileprivate func handleRefresh() {
+        notes.removeAll()
+        fetchNotes()
+    }
+    
+//    @objc fileprivate func handleRefreshTableView() {
+//        notesTableView.reloadData()
+//    }
     
     @objc fileprivate func handleShowMap() {
         

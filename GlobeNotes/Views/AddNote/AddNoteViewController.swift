@@ -81,6 +81,10 @@ class AddNoteViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Constants
+    
+    static let refreshTableViewNotificationName = NSNotification.Name(rawValue: "refreshTableView")
+    
     // MARK: - ViewController
     
     override func viewDidLoad() {
@@ -134,10 +138,10 @@ class AddNoteViewController: UIViewController {
     @objc fileprivate func handleSubmit() {
         
         guard let titleText = titleTextField.text else { return }
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text 
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text
         
-        let usersNoteReference = Database.database().reference().child("notes").child(uid)
+        let usersNoteReference = Database.database().reference().child("notes")
         let ref = usersNoteReference.childByAutoId()
         
         let values = ["title": titleText, "text": noteText ?? "", "creationDate": Date().timeIntervalSince1970] as [String: Any]
@@ -149,7 +153,9 @@ class AddNoteViewController: UIViewController {
             }
             
             print("Successfully saved note to database")
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+            })
         }
     }
     
