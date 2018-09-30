@@ -15,8 +15,8 @@ struct Note {
     let user: User?
     let title: String
     let text: String
-    let latitude: Double
-    let longitude: Double
+    let latitude: Double?
+    let longitude: Double?
     let creationDate: Date
     
     init(user: User?, dictionary: [String: Any]) {

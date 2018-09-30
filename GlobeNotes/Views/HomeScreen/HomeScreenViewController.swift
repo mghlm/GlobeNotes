@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FontAwesome_swift
+import CoreLocation
 
 final class HomeScreenViewController: UIViewController {
     
@@ -56,6 +57,9 @@ final class HomeScreenViewController: UIViewController {
     }()
     
     fileprivate var refreshControl: UIRefreshControl!
+    fileprivate var locationManager: CLLocationManager!
+    fileprivate var userLatitude: Double?
+    fileprivate var userLongitude: Double?
     
     // MARK: - ViewController
     
@@ -68,6 +72,7 @@ final class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(handleRefresh), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+        getUsersLocation()
         
         setupUI()
     }
@@ -79,7 +84,6 @@ final class HomeScreenViewController: UIViewController {
         setupNavigationBar()
         setupRefreshControl()
         
-        notes = [Note]()
         fetchNotes()
         
         notesTableView.delegate = self
@@ -119,6 +123,7 @@ final class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func fetchNotes() {
+        notes = [Note]()
         let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
             
@@ -137,10 +142,33 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
+    fileprivate func getUsersLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        if status == .denied || status == .restricted {
+            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to see notes near you", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
+        locationManager.startUpdatingLocation()
+    }
+    
     // MARK: - Handlers
     
     @objc fileprivate func handleAddNote() {
         let addNoteViewController = AddNoteViewController()
+        addNoteViewController.latitude = userLatitude
+        addNoteViewController.longitude = userLongitude 
         navigationController?.present(addNoteViewController, animated: true, completion: nil)
     }
     
@@ -185,7 +213,20 @@ extension HomeScreenViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension HomeScreenViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.first {
+            print("user's current location:", currentLocation.coordinate)
+            userLatitude = currentLocation.coordinate.latitude
+            userLongitude = currentLocation.coordinate.longitude
+        }
+    }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get user's current location:", error)
+    }
 }
 
 

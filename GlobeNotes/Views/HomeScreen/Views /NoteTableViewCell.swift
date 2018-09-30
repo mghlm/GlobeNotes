@@ -69,18 +69,20 @@ class NoteTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupLocationLabel() {
-        let location = CLLocation(latitude: note.latitude, longitude: note.longitude)
-        fetchCityAndCountry(from: location) { (city, country, error) in
-            if let error = error {
-                print("Failed to fetch location:", error)
-                self.locationLabel.text = "📍 Can't fetch location data"
+        if let latitude = note.latitude, let longitude = note.longitude {
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            fetchCityAndCountry(from: location) { (city, country, error) in
+                if let error = error {
+                    print("Failed to fetch location:", error)
+                    self.locationLabel.text = "📍 Can't fetch location data"
+                }
+                
+                guard let city = city else { return }
+                guard let country = country else { return }
+                
+                self.locationLabel.font = UIFont.systemFont(ofSize: 14)
+                self.locationLabel.text = "📍 \(city), \(country)"
             }
-            
-            guard let city = city else { return }
-            guard let country = country else { return }
-            
-            self.locationLabel.font = UIFont.systemFont(ofSize: 14)
-            self.locationLabel.text = "📍 \(city), \(country)"
         }
     }
 }
