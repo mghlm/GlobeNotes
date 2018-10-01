@@ -76,6 +76,10 @@ final class SignInViewController: UIViewController {
     
     fileprivate var stackView: UIStackView!
     
+    // MARK: - Constants
+    
+    static let successAlert = NSNotification.Name(rawValue: "successSignInAlert")
+    
     // MARK: - ViewController
     
     override func viewDidLoad() {
@@ -133,7 +137,9 @@ final class SignInViewController: UIViewController {
                 return
             }
             print("Successfully signed in user:", user?.user.uid ?? "")
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
+            })
         }
         
     }
