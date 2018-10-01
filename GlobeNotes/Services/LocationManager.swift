@@ -31,13 +31,17 @@ class LocationManager: NSObject, LocationManagerType {
         return lm
     }()
     
+    // MARK: - Public properties
+    
     var usersCurrentLocation: CLLocation!
+    var authorizationStatus: CLAuthorizationStatus!
     
     // MARK: - Initialization
     
     override init() {
         super.init()
         
+        authorizationStatus = CLLocationManager.authorizationStatus()
         locationManager.delegate = self
     }
     
@@ -66,3 +70,19 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Failed to fetch location:", error)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
