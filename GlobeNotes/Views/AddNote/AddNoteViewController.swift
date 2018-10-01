@@ -135,7 +135,7 @@ class AddNoteViewController: UIViewController {
         
         if isFormValid {
             submitUpButton.isEnabled = true
-            submitUpButton.backgroundColor = UIColor.blue
+            submitUpButton.backgroundColor = UIColor.rgb(red: 0, green: 122, blue: 255)
         } else {
             submitUpButton.isEnabled = false
             submitUpButton.backgroundColor = UIColor.lightGray

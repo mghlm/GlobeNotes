@@ -113,7 +113,7 @@ final class SignUpViewController: UIViewController {
         
         if isFormValid {
             signUpButton.isEnabled = true
-            signUpButton.backgroundColor = UIColor.blue
+            signUpButton.backgroundColor = UIColor.rgb(red: 0, green: 122, blue: 255)
         } else {
             signUpButton.isEnabled = false
             signUpButton.backgroundColor = UIColor.lightGray
