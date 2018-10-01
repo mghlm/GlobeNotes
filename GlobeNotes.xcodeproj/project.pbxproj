@@ -13,6 +13,7 @@
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
 		CC6D0368215FCD44005F9CFA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0367215FCD44005F9CFA /* Note.swift */; };
 		CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */; };
+		CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCED21627D5E00ABF450 /* LocationManager.swift */; };
 		CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */; };
 		CC74DD99215E8731003C06D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DD98215E8731003C06D2 /* AppDelegate.swift */; };
 		CC74DD9E215E8731003C06D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC74DD9C215E8731003C06D2 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		CC6D0367215FCD44005F9CFA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewController.swift; sourceTree = "<group>"; };
+		CC6FBCED21627D5E00ABF450 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		CC74DD95215E8731003C06D2 /* GlobeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlobeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC74DD98215E8731003C06D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		CC6FBCEB21627D3000ABF450 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CC6FBCED21627D5E00ABF450 /* LocationManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		CC71F3E22160F0A9005E33EF /* AddNote */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		CC74DD97215E8731003C06D2 /* GlobeNotes */ = {
 			isa = PBXGroup;
 			children = (
+				CC6FBCEB21627D3000ABF450 /* Services */,
 				CC74DD98215E8731003C06D2 /* AppDelegate.swift */,
 				CC74DD9C215E8731003C06D2 /* Main.storyboard */,
 				CC74DD9F215E8732003C06D2 /* Assets.xcassets */,
@@ -478,6 +489,7 @@
 				CC74DDC9215E88F0003C06D2 /* SignUpViewController.swift in Sources */,
 				CC74DD99215E8731003C06D2 /* AppDelegate.swift in Sources */,
 				CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */,
+				CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,

@@ -58,8 +58,7 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate var refreshControl: UIRefreshControl!
     fileprivate var locationManager: CLLocationManager!
-    fileprivate var userLatitude: Double?
-    fileprivate var userLongitude: Double?
+    fileprivate var userLocation: CLLocation!
     
     // MARK: - ViewController
     
@@ -194,8 +193,8 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleAddNote() {
         let addNoteViewController = AddNoteViewController()
-        addNoteViewController.latitude = userLatitude
-        addNoteViewController.longitude = userLongitude 
+        addNoteViewController.latitude = userLocation.coordinate.latitude
+        addNoteViewController.longitude = userLocation.coordinate.longitude
         navigationController?.present(addNoteViewController, animated: true, completion: nil)
     }
     
@@ -214,7 +213,8 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleShowMap() {
-        
+        let mapViewController = MapScreenViewController()
+        navigationController?.pushViewController(mapViewController, animated: true)
     }
     
     @objc fileprivate func handleSettings() {
@@ -258,8 +258,7 @@ extension HomeScreenViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first {
             print("user's current location:", currentLocation.coordinate)
-            userLatitude = currentLocation.coordinate.latitude
-            userLongitude = currentLocation.coordinate.longitude
+            userLocation = currentLocation
         }
     }
     
