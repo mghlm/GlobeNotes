@@ -57,8 +57,10 @@ final class HomeScreenViewController: UIViewController {
     }()
     
     fileprivate var refreshControl: UIRefreshControl!
-    fileprivate var locationManager: CLLocationManager!
-    fileprivate var userLocation: CLLocation!
+    
+    // MARK: - Public properties
+    
+    var locationManager: LocationManager!
     
     // MARK: - ViewController
     
@@ -72,7 +74,8 @@ final class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
-        getUsersLocation()
+        
+        requestLocationAuthorization(with: locationManager.authorizationStatus)
         
         setupUI()
     }
@@ -142,25 +145,19 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
-    fileprivate func getUsersLocation() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == .notDetermined {
+    fileprivate func requestLocationAuthorization(with status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             return
-        }
-        if status == .denied || status == .restricted {
+        case .denied, .restricted:
             let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to see notes near you", preferredStyle: .alert)
-            
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
-            
             present(alert, animated: true, completion: nil)
+        default:
+            locationManager.startUpdatingLocation()
         }
-        locationManager.startUpdatingLocation()
     }
     
     fileprivate func sortNotes() {
@@ -193,8 +190,8 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleAddNote() {
         let addNoteViewController = AddNoteViewController()
-        addNoteViewController.latitude = userLocation.coordinate.latitude
-        addNoteViewController.longitude = userLocation.coordinate.longitude
+        addNoteViewController.latitude = locationManager.usersCurrentLocation.coordinate.latitude
+        addNoteViewController.longitude = locationManager.usersCurrentLocation.coordinate.longitude
         navigationController?.present(addNoteViewController, animated: true, completion: nil)
     }
     
@@ -251,19 +248,6 @@ extension HomeScreenViewController: UITableViewDataSource {
         cell.note = note
         
         return cell
-    }
-}
-
-extension HomeScreenViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.first {
-            print("user's current location:", currentLocation.coordinate)
-            userLocation = currentLocation
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get user's current location:", error)
     }
 }
 
