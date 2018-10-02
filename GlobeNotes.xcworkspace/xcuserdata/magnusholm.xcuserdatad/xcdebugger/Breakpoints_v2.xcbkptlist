@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GlobeNotes/Views/AddNote/AddNoteViewController.swift"
-            timestampString = "560182539.895638"
+            filePath = "GlobeNotes/Views/HomeScreen/HomeScreenViewController.swift"
+            timestampString = "560184229.0370229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "handleSubmit()"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

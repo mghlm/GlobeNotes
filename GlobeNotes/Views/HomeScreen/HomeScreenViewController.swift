@@ -76,6 +76,13 @@ final class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            Database.fetchUserWithUid(uid: uid) { (user) in
+                self.user = user
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
         
