@@ -15,7 +15,7 @@ final class HomeScreenViewController: UIViewController {
     
     // MARK: - Private properties
     
-    fileprivate var notes: [Note]!
+    fileprivate var notes = [Note]()
     
     fileprivate var addNoteButton: UIButton = {
         let button = UIButton()
@@ -56,8 +56,6 @@ final class HomeScreenViewController: UIViewController {
         return tv
     }()
     
-    fileprivate var refreshControl: UIRefreshControl!
-    
     // MARK: - Public properties
     
     var user: User?
@@ -90,9 +88,6 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = .white
         setupNavigationBar()
-        setupRefreshControl()
-        
-        fetchNotes()
         
         notesTableView.delegate = self
         notesTableView.dataSource = self
@@ -118,35 +113,26 @@ final class HomeScreenViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
     }
     
-    fileprivate func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        notesTableView.refreshControl = refreshControl
-    }
-    
     fileprivate func showSignInScreen() {
         let signInViewController = SignInViewController()
         let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
     }
     
-    fileprivate func fetchNotes() {
-        notes = [Note]()
+    fileprivate func fetchNotes(with user: User?) {
         let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
-            
-            self.refreshControl.endRefreshing()
             
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 
-                var note = Note(user: self.user, dictionary: dictionary)
+                var note = Note(user: user, dictionary: dictionary)
                 note.id = key
                 self.notes.append(note)
-                self.notesTableView.reloadData()
             })
+            self.notesTableView.reloadData()
         }
     }
     
@@ -195,6 +181,7 @@ final class HomeScreenViewController: UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUid(uid: uid) { (user) in
             self.user = user
+            self.fetchNotes(with: user)
         }
     }
     
@@ -218,13 +205,9 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func refreshAndShowAlert() {
-        handleRefresh()
-        showAlert(with: "Note successfully added!", delay: 1.5)
-    }
-    
-    @objc fileprivate func handleRefresh() {
         notes.removeAll()
-        fetchNotes()
+        fetchNotes(with: user)
+        showAlert(with: "Note successfully added!", delay: 1.5)
     }
     
     @objc fileprivate func handleShowMap() {
