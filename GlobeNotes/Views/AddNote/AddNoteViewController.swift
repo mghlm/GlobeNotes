@@ -115,7 +115,7 @@ class AddNoteViewController: UIViewController {
     }
     
     fileprivate func setupConstraints() {
-        dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
+        dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 10, width: 50, height: 50)
         mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
@@ -146,7 +146,8 @@ class AddNoteViewController: UIViewController {
         
         guard let titleText = titleTextField.text else { return }
         let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text
-        let usersNoteReference = Database.database().reference().child("notes")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let usersNoteReference = Database.database().reference().child("notes").child(uid)
         let ref = usersNoteReference.childByAutoId()
         
         let values = ["title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]

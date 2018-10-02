@@ -79,6 +79,7 @@ final class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
+        fetchNotes()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
         
@@ -123,7 +124,7 @@ final class HomeScreenViewController: UIViewController {
         present(navController, animated: false)
     }
     
-    fileprivate func fetchNotes(with user: User?) {
+    fileprivate func fetchNotes() {
         let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
             
@@ -132,7 +133,7 @@ final class HomeScreenViewController: UIViewController {
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 
-                var note = Note(user: user, dictionary: dictionary)
+                var note = Note(user: nil, dictionary: dictionary)
                 note.id = key
                 self.notes.append(note)
             })
@@ -185,7 +186,6 @@ final class HomeScreenViewController: UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUid(uid: uid) { (user) in
             self.user = user
-            self.fetchNotes(with: user)
         }
     }
     
@@ -210,7 +210,7 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func refreshAndShowAlert() {
         notes.removeAll()
-        fetchNotes(with: user)
+        fetchNotes()
         showAlert(with: "Note successfully added!", delay: 1.5)
     }
     
