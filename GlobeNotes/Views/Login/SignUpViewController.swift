@@ -131,6 +131,19 @@ final class SignUpViewController: UIViewController {
                 return
             }
             print("Successfully created user:", user?.user.uid ?? "")
+            
+            if let uid = user?.user.uid {
+                let dictionaryValues = ["name": username]
+                let values = [uid: dictionaryValues]
+                
+                Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, databaseReference) in
+                    if let error = error {
+                        print("Failed to save username to db:", error)
+                        return
+                    }
+                    print("Successfully saved username to db")
+                })
+            }
             self.dismiss(animated: true, completion: nil)
         }
     }

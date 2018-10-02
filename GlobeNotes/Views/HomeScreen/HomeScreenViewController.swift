@@ -15,7 +15,7 @@ final class HomeScreenViewController: UIViewController {
     
     // MARK: - Private properties
     
-    fileprivate var notes: [Note]!
+    fileprivate var notes = [Note]()
     
     fileprivate var addNoteButton: UIButton = {
         let button = UIButton()
@@ -56,10 +56,13 @@ final class HomeScreenViewController: UIViewController {
         return tv
     }()
     
-    fileprivate var refreshControl: UIRefreshControl!
-    fileprivate var locationManager: CLLocationManager!
-    fileprivate var userLatitude: Double?
-    fileprivate var userLongitude: Double?
+    // MARK: - Public properties
+    
+    var user: User?
+    
+    // MARK: - Dependencies
+    
+    var locationManager: LocationManagerType!
     
     // MARK: - ViewController
     
@@ -71,9 +74,11 @@ final class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUser()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
-        getUsersLocation()
+        
+        requestLocationAuthorization(with: locationManager.authorizationStatus)
         
         setupUI()
     }
@@ -83,9 +88,6 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = .white
         setupNavigationBar()
-        setupRefreshControl()
-        
-        fetchNotes()
         
         notesTableView.delegate = self
         notesTableView.dataSource = self
@@ -111,110 +113,108 @@ final class HomeScreenViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
     }
     
-    fileprivate func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        notesTableView.refreshControl = refreshControl
-    }
-    
     fileprivate func showSignInScreen() {
         let signInViewController = SignInViewController()
         let navController = UINavigationController(rootViewController: signInViewController)
         present(navController, animated: false)
     }
     
-    fileprivate func fetchNotes() {
-        notes = [Note]()
+    fileprivate func fetchNotes(with user: User?) {
         let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
-            
-            self.refreshControl.endRefreshing()
             
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 
-                var note = Note(user: nil, dictionary: dictionary)
+                var note = Note(user: user, dictionary: dictionary)
                 note.id = key
                 self.notes.append(note)
-                self.notesTableView.reloadData()
             })
+            self.notesTableView.reloadData()
         }
     }
     
-    fileprivate func getUsersLocation() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == .notDetermined {
+    fileprivate func requestLocationAuthorization(with status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             return
+        case .denied, .restricted:
+            showLocationRequiredAlert()
+        default:
+            locationManager.startUpdatingLocation()
         }
-        if status == .denied || status == .restricted {
-            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to see notes near you", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            
-            present(alert, animated: true, completion: nil)
-        }
-        locationManager.startUpdatingLocation()
     }
     
     fileprivate func sortNotes() {
         
     }
     
-    fileprivate func showSuccessSignInAlert() {
-        let userName = Auth.auth().currentUser?.displayName ?? ""
-        let signInMessage = userName == "" ? "Successfully signed in" : "Successfully signed in as \(userName)"
-        let alert = UIAlertController(title: nil, message: signInMessage, preferredStyle: .alert)
+    fileprivate func showAlert(with message: String, delay: Double) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
         
-        let deadline = DispatchTime.now() + 1.5
+        let deadline = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             alert.dismiss(animated: true, completion: nil)
         }
     }
     
-    fileprivate func showNoteAddedAlertView() {
-        let alert = UIAlertController(title: nil, message: "Note successfully added!", preferredStyle: .alert)
-        present(alert, animated: true, completion: nil)
+    fileprivate func showLocationRequiredAlert() {
+        let alert = UIAlertController(title: "No location", message: "Please allow the app to use your location", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Go to settings", style: .default) { (_) in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: nil)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(settingsAction)
+        alert.addAction(cancelAction)
         
-        let deadline = DispatchTime.now() + 1.5
-        DispatchQueue.main.asyncAfter(deadline: deadline) {
-            alert.dismiss(animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUid(uid: uid) { (user) in
+            self.user = user
+            self.fetchNotes(with: user)
         }
     }
     
     // MARK: - Handlers
     
     @objc fileprivate func handleAddNote() {
-        let addNoteViewController = AddNoteViewController()
-        addNoteViewController.latitude = userLatitude
-        addNoteViewController.longitude = userLongitude 
-        navigationController?.present(addNoteViewController, animated: true, completion: nil)
+        if locationManager.isLocationAuthorized() {
+            let addNoteViewController = AddNoteViewController()
+            addNoteViewController.latitude = locationManager.usersCurrentLocation?.coordinate.latitude ?? 0
+            addNoteViewController.longitude = locationManager.usersCurrentLocation?.coordinate.longitude ?? 0
+            navigationController?.present(addNoteViewController, animated: true, completion: nil)
+        } else {
+            showLocationRequiredAlert()
+        }
     }
     
     @objc fileprivate func handleShowSuccessAlert() {
-        showSuccessSignInAlert()
+        let userName = Auth.auth().currentUser?.displayName ?? ""
+        let signInMessage = userName == "" ? "Successfully signed in" : "Successfully signed in as \(userName)"
+        showAlert(with: signInMessage, delay: 1.5)
     }
     
     @objc fileprivate func refreshAndShowAlert() {
-        handleRefresh()
-        showNoteAddedAlertView()
-    }
-    
-    @objc fileprivate func handleRefresh() {
         notes.removeAll()
-        fetchNotes()
+        fetchNotes(with: user)
+        showAlert(with: "Note successfully added!", delay: 1.5)
     }
     
     @objc fileprivate func handleShowMap() {
-        
+        let mapViewController = MapScreenViewController()
+        mapViewController.locationManager = locationManager
+        mapViewController.notes = notes
+        navigationController?.pushViewController(mapViewController, animated: true)
     }
     
     @objc fileprivate func handleSettings() {
@@ -251,20 +251,6 @@ extension HomeScreenViewController: UITableViewDataSource {
         cell.note = note
         
         return cell
-    }
-}
-
-extension HomeScreenViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.first {
-            print("user's current location:", currentLocation.coordinate)
-            userLatitude = currentLocation.coordinate.latitude
-            userLongitude = currentLocation.coordinate.longitude
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get user's current location:", error)
     }
 }
 

@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow()
-        let navController = UINavigationController(rootViewController: HomeScreenViewController())
+        let homeScreenViewController = HomeScreenViewController()
+        homeScreenViewController.locationManager = LocationManager()
+        let navController = UINavigationController(rootViewController: homeScreenViewController)
         window?.rootViewController = navController
         
         return true
