@@ -53,6 +53,7 @@ final class HomeScreenViewController: UIViewController {
     fileprivate var notesTableView: UITableView = {
         let tv = UITableView()
         tv.register(NoteTableViewCell.self, forCellReuseIdentifier: NoteTableViewCell.id)
+        
         return tv
     }()
     
@@ -237,7 +238,12 @@ final class HomeScreenViewController: UIViewController {
 }
 
 extension HomeScreenViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let navController = navigationController else { return }
+        let noteDetailsViewController = NoteDetailsViewController()
+        noteDetailsViewController.note = notes[indexPath.row]
+        navController.pushViewController(noteDetailsViewController, animated: true)
+    }
 }
 
 extension HomeScreenViewController: UITableViewDataSource {

@@ -53,6 +53,8 @@ final class NoteDetailsViewController: UIViewController {
     // MARK: - Private methods
     
     fileprivate func setupUI() {
+        view.backgroundColor = .white
+        
         mainTitleLabel.text = note.title
         view.addSubview(mainTitleLabel)
         contentLabel.text = note.text
@@ -60,7 +62,7 @@ final class NoteDetailsViewController: UIViewController {
         if let imageUrl = note.imageUrl {
             setupImageView(with: imageUrl)
         }
-        
+        view.addSubview(imageView)
         setupConstraints()
     }
     
