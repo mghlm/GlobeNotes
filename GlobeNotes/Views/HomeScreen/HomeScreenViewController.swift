@@ -169,24 +169,24 @@ final class HomeScreenViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             alert.dismiss(animated: true, completion: nil)
         }
-//    }
-//    
+    }
+//
 //    fileprivate func showSuccessSignInAlert() {
 //        let userName = Auth.auth().currentUser?.displayName ?? ""
 //        let signInMessage = userName == "" ? "Successfully signed in" : "Successfully signed in as \(userName)"
 //        let alert = UIAlertController(title: nil, message: signInMessage, preferredStyle: .alert)
 //        present(alert, animated: true, completion: nil)
-//        
+//
 //        let deadline = DispatchTime.now() + 1.5
 //        DispatchQueue.main.asyncAfter(deadline: deadline) {
 //            alert.dismiss(animated: true, completion: nil)
 //        }
 //    }
-//    
+//
 //    fileprivate func showNoteAddedAlertView() {
 //        let alert = UIAlertController(title: nil, message: "Note successfully added!", preferredStyle: .alert)
 //        present(alert, animated: true, completion: nil)
-//        
+//
 //        let deadline = DispatchTime.now() + 1.5
 //        DispatchQueue.main.asyncAfter(deadline: deadline) {
 //            alert.dismiss(animated: true, completion: nil)
@@ -201,7 +201,7 @@ final class HomeScreenViewController: UIViewController {
                 UIApplication.shared.open(settingsUrl, completionHandler: nil)
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)
         
@@ -213,8 +213,8 @@ final class HomeScreenViewController: UIViewController {
     @objc fileprivate func handleAddNote() {
         if locationManager.isLocationAuthorized() {
             let addNoteViewController = AddNoteViewController()
-            addNoteViewController.latitude = locationManager.usersCurrentLocation.coordinate.latitude
-            addNoteViewController.longitude = locationManager.usersCurrentLocation.coordinate.longitude
+            addNoteViewController.latitude = locationManager.usersCurrentLocation?.coordinate.latitude ?? 0
+            addNoteViewController.longitude = locationManager.usersCurrentLocation?.coordinate.longitude ?? 0
             navigationController?.present(addNoteViewController, animated: true, completion: nil)
         } else {
             showLocationRequiredAlert()

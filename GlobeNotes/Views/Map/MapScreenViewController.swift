@@ -37,7 +37,9 @@ final class MapScreenViewController: UIViewController {
     
     fileprivate func setupUI() {
         setupMapView()
-        zoomToUsersCurrentLocation()
+        if locationManager.isLocationAuthorized() {
+            zoomToUsersCurrentLocation()
+        }
         setupConstraints()
     }
     
@@ -53,11 +55,12 @@ final class MapScreenViewController: UIViewController {
     }
     
     fileprivate func zoomToUsersCurrentLocation() {
-        let usersCoordinateLocation = locationManager.usersCurrentLocation.coordinate
-        let location = CLLocationCoordinate2D(latitude: usersCoordinateLocation.latitude, longitude: usersCoordinateLocation.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
+        if let usersCoordinateLocation = locationManager.usersCurrentLocation?.coordinate {
+            let location = CLLocationCoordinate2D(latitude: usersCoordinateLocation.latitude, longitude: usersCoordinateLocation.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        }
     }
     
     fileprivate func addAnnotations() {

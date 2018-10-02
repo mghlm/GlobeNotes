@@ -13,7 +13,7 @@ import UIKit
 protocol LocationManagerType {
     
     /// Fetches the current location of the user
-    var usersCurrentLocation: CLLocation! { get }
+    var usersCurrentLocation: CLLocation? { get }
     
     /// Fetches the current status of user's given permission of sharing their permission
     var authorizationStatus: CLAuthorizationStatus! { get }
@@ -45,7 +45,7 @@ class LocationManager: NSObject, LocationManagerType {
     
     // MARK: - Public properties
     
-    var usersCurrentLocation: CLLocation!
+    var usersCurrentLocation: CLLocation?
     var authorizationStatus: CLAuthorizationStatus!
     
     // MARK: - Initialization
@@ -80,6 +80,20 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard !locations.isEmpty else { return }
         usersCurrentLocation = locations.first
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            startUpdatingLocation()
+            authorizationStatus = .authorizedWhenInUse
+            break
+        default:
+            stopUpdatingLocation()
+            authorizationStatus = .denied
+            usersCurrentLocation = nil
+            requestWhenInUseAuthorization()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
