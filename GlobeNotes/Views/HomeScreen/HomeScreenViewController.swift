@@ -211,6 +211,7 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleShowMap() {
         let mapViewController = MapScreenViewController()
+        mapViewController.locationManager = locationManager
         navigationController?.pushViewController(mapViewController, animated: true)
     }
     
