@@ -15,7 +15,6 @@ struct Note {
     let user: User?
     let title: String
     let text: String
-    let userName: String
     let latitude: Double?
     let longitude: Double?
     let creationDate: Date
@@ -24,7 +23,6 @@ struct Note {
         self.user = user
         self.title = dictionary["title"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
-        self.userName = dictionary["userName"] as? String ?? ""
         self.latitude = dictionary["latitude"] as? Double ?? 0
         self.longitude = dictionary["longitude"] as? Double ?? 0
         self.creationDate = Date()

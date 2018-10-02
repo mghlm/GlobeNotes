@@ -145,13 +145,13 @@ class AddNoteViewController: UIViewController {
     @objc fileprivate func handleSubmit() {
         
         guard let titleText = titleTextField.text else { return }
-        guard let userName = Auth.auth().currentUser?.email else { return }
+        guard let userName = Auth.auth().currentUser?.displayName else { return }
         let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text
         
         let usersNoteReference = Database.database().reference().child("notes")
         let ref = usersNoteReference.childByAutoId()
         
-        let values = ["title": titleText, "text": noteText ?? "", "userName": userName, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        let values = ["title": titleText, "text": noteText ?? "", "ame": userName, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
         ref.updateChildValues(values) { (error, reference) in
             if let error = error {
