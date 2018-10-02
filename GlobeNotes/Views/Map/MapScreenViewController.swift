@@ -28,7 +28,6 @@ final class MapScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
         
         setupUI()
     }
@@ -36,6 +35,7 @@ final class MapScreenViewController: UIViewController {
     // MARK: - Private methods
     
     fileprivate func setupUI() {
+        navigationItem.largeTitleDisplayMode = .never
         setupMapView()
         if locationManager.isLocationAuthorized() {
             zoomToUsersCurrentLocation()

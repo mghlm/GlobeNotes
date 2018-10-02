@@ -71,6 +71,9 @@ final class HomeScreenViewController: UIViewController {
         if Auth.auth().currentUser == nil {
             showSignInScreen()
         }
+        if let selectionIndexPath = notesTableView.indexPathForSelectedRow {
+            notesTableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
     }
     
     override func viewDidLoad() {

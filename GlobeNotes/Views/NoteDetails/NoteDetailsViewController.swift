@@ -55,6 +55,8 @@ final class NoteDetailsViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = .white
         
+        navigationItem.largeTitleDisplayMode = .never
+        
         mainTitleLabel.text = note.title
         view.addSubview(mainTitleLabel)
         contentLabel.text = note.text
@@ -67,7 +69,7 @@ final class NoteDetailsViewController: UIViewController {
     }
     
     fileprivate func setupConstraints() {
-        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 70, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 115, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         contentLabel.anchor(top: mainTitleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         imageView.anchor(top: contentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
     }
