@@ -58,7 +58,7 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate var refreshControl: UIRefreshControl!
     
-    // MARK: - Public properties
+    // MARK: - Dependencies
     
     var locationManager: LocationManager!
     

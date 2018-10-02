@@ -12,12 +12,16 @@ import UIKit
 
 protocol LocationManagerType {
     
+    /// Fetches the current location of the user
     var usersCurrentLocation: CLLocation! { get }
     
+    /// Starts updating user's live location
     func startUpdatingLocation()
     
+    /// Ends updating user's live location
     func stopUpdatingLocation()
     
+    /// Presents an alert for the user to choose to accept their location to be shared with the app
     func requestWhenInUseAuthorization()
 }
 
