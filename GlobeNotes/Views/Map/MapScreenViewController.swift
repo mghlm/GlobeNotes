@@ -22,7 +22,7 @@ final class MapScreenViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    var locationManager: LocationManager!
+    var locationManager: LocationManagerType!
     
     // MARK: - ViewController
     

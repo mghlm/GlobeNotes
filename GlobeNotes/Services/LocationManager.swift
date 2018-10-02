@@ -15,6 +15,9 @@ protocol LocationManagerType {
     /// Fetches the current location of the user
     var usersCurrentLocation: CLLocation! { get }
     
+    /// Fetches the current status of user's given permission of sharing their permission
+    var authorizationStatus: CLAuthorizationStatus! { get }
+    
     /// Starts updating user's live location
     func startUpdatingLocation()
     
