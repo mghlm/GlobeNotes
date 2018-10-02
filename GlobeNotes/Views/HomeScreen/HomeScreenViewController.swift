@@ -76,13 +76,7 @@ final class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let uid = Auth.auth().currentUser?.uid {
-            Database.fetchUserWithUid(uid: uid) { (user) in
-                self.user = user
-            }
-        }
-        
+        fetchUser()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
         
@@ -148,7 +142,7 @@ final class HomeScreenViewController: UIViewController {
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 
-                var note = Note(user: nil, dictionary: dictionary)
+                var note = Note(user: self.user, dictionary: dictionary)
                 note.id = key
                 self.notes.append(note)
                 self.notesTableView.reloadData()
@@ -195,6 +189,13 @@ final class HomeScreenViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUid(uid: uid) { (user) in
+            self.user = user
+        }
     }
     
     // MARK: - Handlers
