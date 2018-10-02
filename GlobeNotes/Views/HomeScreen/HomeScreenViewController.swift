@@ -212,6 +212,7 @@ final class HomeScreenViewController: UIViewController {
     @objc fileprivate func handleShowMap() {
         let mapViewController = MapScreenViewController()
         mapViewController.locationManager = locationManager
+        mapViewController.notes = notes 
         navigationController?.pushViewController(mapViewController, animated: true)
     }
     
