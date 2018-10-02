@@ -83,8 +83,8 @@ class AddNoteViewController: UIViewController {
     
     // MARK: - Public properties
     
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: Double!
+    var longitude: Double!
     
     // MARK: - Constants
     
@@ -145,13 +145,13 @@ class AddNoteViewController: UIViewController {
     @objc fileprivate func handleSubmit() {
         
         guard let titleText = titleTextField.text else { return }
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let userName = Auth.auth().currentUser?.email else { return }
         let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text
         
         let usersNoteReference = Database.database().reference().child("notes")
         let ref = usersNoteReference.childByAutoId()
         
-        let values = ["title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        let values = ["title": titleText, "text": noteText ?? "", "userName": userName, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
         ref.updateChildValues(values) { (error, reference) in
             if let error = error {
@@ -165,7 +165,6 @@ class AddNoteViewController: UIViewController {
             })
         }
     }
-    
 }
 
 extension AddNoteViewController: UITextViewDelegate {

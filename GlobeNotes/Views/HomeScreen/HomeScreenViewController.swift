@@ -170,28 +170,6 @@ final class HomeScreenViewController: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         }
     }
-//
-//    fileprivate func showSuccessSignInAlert() {
-//        let userName = Auth.auth().currentUser?.displayName ?? ""
-//        let signInMessage = userName == "" ? "Successfully signed in" : "Successfully signed in as \(userName)"
-//        let alert = UIAlertController(title: nil, message: signInMessage, preferredStyle: .alert)
-//        present(alert, animated: true, completion: nil)
-//
-//        let deadline = DispatchTime.now() + 1.5
-//        DispatchQueue.main.asyncAfter(deadline: deadline) {
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//    }
-//
-//    fileprivate func showNoteAddedAlertView() {
-//        let alert = UIAlertController(title: nil, message: "Note successfully added!", preferredStyle: .alert)
-//        present(alert, animated: true, completion: nil)
-//
-//        let deadline = DispatchTime.now() + 1.5
-//        DispatchQueue.main.asyncAfter(deadline: deadline) {
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//    }
     
     fileprivate func showLocationRequiredAlert() {
         let alert = UIAlertController(title: "No location", message: "Please allow the app to use your location", preferredStyle: .alert)
