@@ -23,6 +23,11 @@ protocol LocationManagerType {
     
     /// Presents an alert for the user to choose to accept their location to be shared with the app
     func requestWhenInUseAuthorization()
+    
+    /// Checks if user has given permission for app to use location either always or when in use
+    ///
+    /// - Returns: true or false based on user's permission
+    func isLocationAuthorized() -> Bool
 }
 
 class LocationManager: NSObject, LocationManagerType {
@@ -61,6 +66,10 @@ class LocationManager: NSObject, LocationManagerType {
     
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func isLocationAuthorized() -> Bool {
+        return authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse
     }
 }
 
