@@ -137,6 +137,7 @@ final class SignInViewController: UIViewController {
                 return
             }
             print("Successfully signed in user:", user?.user.uid ?? "")
+            
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
             })
