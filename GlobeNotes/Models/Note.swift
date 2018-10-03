@@ -13,7 +13,7 @@ struct Note {
     var id: String?
     var uid: String?
     
-    let userName: String?
+    let userName: String
     let title: String
     let text: String
     let imageUrl: String?
@@ -22,7 +22,7 @@ struct Note {
     let creationDate: Date
     
     init(dictionary: [String: Any]) {
-        self.userName = dictionary["userName"] as? String
+        self.userName = dictionary["userName"] as! String
         self.title = dictionary["title"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
         self.imageUrl = dictionary["imageUrl"] as? String 

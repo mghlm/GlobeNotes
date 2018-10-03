@@ -59,7 +59,7 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate let databaseReference = Database.database().reference(withPath: "notes")
     fileprivate var searchController: UISearchController!
-//    fileprivate var searchFilteredUsers = [User]()
+    fileprivate var staticNotes: [Note]!
 //    fileprivate var searchUsers = [User]()
     
     // MARK: - Public properties
@@ -153,22 +153,28 @@ final class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func fetchNotes() {
-        databaseReference.observeSingleEvent(of: .value) { (snapshot) in
-            guard let dictionaries = snapshot.value as? [String: Any] else { return }
-            
-            dictionaries.forEach({ (key, value) in
-                guard let userIdDictionary = value as? [String: Any] else { return }
-                let userId = key
-                
-                userIdDictionary.forEach({ (key, value) in
-                    guard let noteDictionary = value as? [String: Any] else { return }
-                    
-                    var note = Note(dictionary: noteDictionary)
-                    note.uid = userId
-                    note.id = key
-                    self.notes.append(note)
-                })
-            })
+//        databaseReference.observeSingleEvent(of: .value) { (snapshot) in
+//            guard let dictionaries = snapshot.value as? [String: Any] else { return }
+//
+//            dictionaries.forEach({ (key, value) in
+//                guard let userIdDictionary = value as? [String: Any] else { return }
+//                let userId = key
+//
+//                userIdDictionary.forEach({ (key, value) in
+//                    guard let noteDictionary = value as? [String: Any] else { return }
+//
+//                    var note = Note(dictionary: noteDictionary)
+//                    note.uid = userId
+//                    note.id = key
+//                    self.notes.append(note)
+//                })
+//            })
+//            self.notesTableView.reloadData()
+//        }
+        
+        Database.fetchNotes { (notes) in
+            self.notes = notes
+            self.staticNotes = notes
             self.notesTableView.reloadData()
         }
     }
@@ -292,7 +298,14 @@ final class HomeScreenViewController: UIViewController {
 
 extension HomeScreenViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        if searchText.isEmpty {
+            notes = staticNotes
+        } else {
+            notes = staticNotes.filter({ (note) -> Bool in
+                return note.userName.lowercased().contains(searchText.lowercased()) || note.title.lowercased().contains(searchText.lowercased())
+            })
+        }
+        notesTableView.reloadData()
     }
 }
 
