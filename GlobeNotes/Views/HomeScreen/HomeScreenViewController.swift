@@ -60,7 +60,7 @@ final class HomeScreenViewController: UIViewController {
     fileprivate let databaseReference = Database.database().reference(withPath: "notes")
     fileprivate var searchController: UISearchController!
     fileprivate var staticNotes: [Note]!
-//    fileprivate var searchUsers = [User]()
+    fileprivate var isShowingOnlyCurrentUsersNotes = false
     
     // MARK: - Public properties
     
@@ -153,25 +153,6 @@ final class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func fetchNotes() {
-//        databaseReference.observeSingleEvent(of: .value) { (snapshot) in
-//            guard let dictionaries = snapshot.value as? [String: Any] else { return }
-//
-//            dictionaries.forEach({ (key, value) in
-//                guard let userIdDictionary = value as? [String: Any] else { return }
-//                let userId = key
-//
-//                userIdDictionary.forEach({ (key, value) in
-//                    guard let noteDictionary = value as? [String: Any] else { return }
-//
-//                    var note = Note(dictionary: noteDictionary)
-//                    note.uid = userId
-//                    note.id = key
-//                    self.notes.append(note)
-//                })
-//            })
-//            self.notesTableView.reloadData()
-//        }
-        
         Database.fetchNotes { (notes) in
             self.notes = notes
             self.staticNotes = notes
@@ -193,6 +174,20 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate func sortNotes() {
         
+    }
+    
+    fileprivate func switchBetweenShowAllOrOnlyUsersNotes() {
+        if isShowingOnlyCurrentUsersNotes == false {
+            guard let uid = user?.uid else { return }
+            notes = staticNotes.filter { (note) -> Bool in
+                return note.uid == uid
+            }
+            isShowingOnlyCurrentUsersNotes = true
+        } else {
+            notes = staticNotes
+            isShowingOnlyCurrentUsersNotes = false
+        }
+        notesTableView.reloadData()
     }
     
     fileprivate func setupNotifications() {
@@ -280,6 +275,10 @@ final class HomeScreenViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Sort notes by distance", style: .default, handler: { (_) in
             self.sortNotes()
+        }))
+        let filterByUserText = isShowingOnlyCurrentUsersNotes == false ? "Show only my notes" : "Show all notes"
+        alertController.addAction(UIAlertAction(title: filterByUserText, style: .default, handler: { (_) in
+            self.switchBetweenShowAllOrOnlyUsersNotes()
         }))
         alertController.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { (_) in
             do {
