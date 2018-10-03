@@ -127,15 +127,18 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func fetchNotes() {
         let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
-            
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach({ (key, value) in
-                guard let dictionary = value as? [String: Any] else { return }
+                guard let userIdDictionary = value as? [String: Any] else { return }
                 
-                var note = Note(dictionary: dictionary)
-                note.id = key
-                self.notes.append(note)
+                userIdDictionary.forEach({ (key, value) in
+                    guard let noteDictionary = value as? [String: Any] else { return }
+                    
+                    var note = Note(dictionary: noteDictionary)
+                    note.id = key
+                    self.notes.append(note)
+                })
             })
             self.notesTableView.reloadData()
         }
@@ -211,7 +214,6 @@ final class HomeScreenViewController: UIViewController {
             let signInMessage = user.userName == "" ? "Successfully signed in" : "Successfully signed in as \(user.userName)"
             self.showAlert(with: signInMessage, delay: 1.5)
         }
-        
     }
     
     @objc fileprivate func refreshAndShowAlert() {
