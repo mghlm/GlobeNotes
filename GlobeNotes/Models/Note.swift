@@ -11,6 +11,7 @@ import Foundation
 struct Note {
     
     var id: String?
+    var uid: String?
     
     let userName: String?
     let title: String

@@ -58,6 +58,7 @@ final class HomeScreenViewController: UIViewController {
     }()
     
     fileprivate let databaseReference = Database.database().reference(withPath: "notes")
+    fileprivate var searchController: UISearchController!
     
     // MARK: - Public properties
     
@@ -109,6 +110,23 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Nearby notes"
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.sizeToFit()
+        searchController.delegate = self
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            navigationItem.titleView = searchController.searchBar
+            navigationItem.titleView?.layoutSubviews()
+        }
+        
+        
+//        navigationItem.searchController
+        
         addNoteButton.addTarget(self, action: #selector(handleAddNote), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: addNoteButton)
         mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
@@ -138,11 +156,13 @@ final class HomeScreenViewController: UIViewController {
             
             dictionaries.forEach({ (key, value) in
                 guard let userIdDictionary = value as? [String: Any] else { return }
+                let userId = key
                 
                 userIdDictionary.forEach({ (key, value) in
                     guard let noteDictionary = value as? [String: Any] else { return }
                     
                     var note = Note(dictionary: noteDictionary)
+                    note.uid = userId
                     note.id = key
                     self.notes.append(note)
                 })
@@ -268,6 +288,10 @@ final class HomeScreenViewController: UIViewController {
     }
 }
 
+extension HomeScreenViewController: UISearchControllerDelegate {
+    
+}
+
 extension HomeScreenViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navController = navigationController else { return }
@@ -275,6 +299,22 @@ extension HomeScreenViewController: UITableViewDelegate {
         noteDetailsViewController.note = notes[indexPath.row]
         navController.pushViewController(noteDetailsViewController, animated: true)
     }
+    
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        let cell = tableView.cellForRow(at: indexPath) as! NoteTableViewCell
+//        if cell.note.uid == user?.uid {
+//            return true
+//        } else {
+//            return true
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            notes.remove(at: indexPath.row)
+//            tableView.reloadData()
+//        }
+//    }
 }
 
 extension HomeScreenViewController: UITableViewDataSource {
