@@ -12,7 +12,7 @@ struct Note {
     
     var id: String?
     
-    let user: User?
+    let userName: String?
     let title: String
     let text: String
     let imageUrl: String?
@@ -20,13 +20,13 @@ struct Note {
     let longitude: Double?
     let creationDate: Date
     
-    init(user: User?, dictionary: [String: Any]) {
-        self.user = user
+    init(dictionary: [String: Any]) {
+        self.userName = dictionary["userName"] as? String
         self.title = dictionary["title"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
         self.imageUrl = dictionary["imageUrl"] as? String 
-        self.latitude = dictionary["latitude"] as? Double ?? 0
-        self.longitude = dictionary["longitude"] as? Double ?? 0
+        self.latitude = dictionary["latitude"] as? Double
+        self.longitude = dictionary["longitude"] as? Double
         self.creationDate = Date()
     }
 }

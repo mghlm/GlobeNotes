@@ -133,7 +133,7 @@ final class HomeScreenViewController: UIViewController {
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 
-                var note = Note(user: nil, dictionary: dictionary)
+                var note = Note(dictionary: dictionary)
                 note.id = key
                 self.notes.append(note)
             })
@@ -192,8 +192,10 @@ final class HomeScreenViewController: UIViewController {
     // MARK: - Handlers
     
     @objc fileprivate func handleAddNote() {
+        guard let userName = user?.userName else { return }
         if locationManager.isLocationAuthorized() {
             let addNoteViewController = AddNoteViewController()
+            addNoteViewController.userName = userName
             addNoteViewController.latitude = locationManager.usersCurrentLocation?.coordinate.latitude ?? 0
             addNoteViewController.longitude = locationManager.usersCurrentLocation?.coordinate.longitude ?? 0
             navigationController?.present(addNoteViewController, animated: true, completion: nil)
@@ -203,8 +205,7 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleShowSuccessAlert() {
-        let userName = Auth.auth().currentUser?.displayName ?? ""
-        let signInMessage = userName == "" ? "Successfully signed in" : "Successfully signed in as \(userName)"
+        let signInMessage = user?.userName == nil ? "Successfully signed in" : "Successfully signed in as \(user?.userName ?? "")"
         showAlert(with: signInMessage, delay: 1.5)
     }
     

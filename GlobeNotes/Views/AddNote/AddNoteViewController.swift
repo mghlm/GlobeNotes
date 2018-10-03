@@ -83,6 +83,7 @@ class AddNoteViewController: UIViewController {
     
     // MARK: - Public properties
     
+    var userName: String!
     var latitude: Double!
     var longitude: Double!
     
@@ -150,7 +151,7 @@ class AddNoteViewController: UIViewController {
         let usersNoteReference = Database.database().reference().child("notes").child(uid)
         let ref = usersNoteReference.childByAutoId()
         
-        let values = ["title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        let values = ["userName": userName, "title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
         ref.updateChildValues(values) { (error, reference) in
             if let error = error {

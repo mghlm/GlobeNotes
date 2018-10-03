@@ -48,7 +48,7 @@ class NoteTableViewCell: UITableViewCell {
     fileprivate func setupUI() {
         noteTitleLabel.text = "✏️ \(note.title)"
         setupLocationLabel()
-        noteAuthorLabel.text = "created at \(formattedDateString(for: note.creationDate)) by \(note.user?.name ?? "unkown user")"
+        noteAuthorLabel.text = note.userName == nil ? "created at \(formattedDateString(for: note.creationDate))" : "created at \(formattedDateString(for: note.creationDate)) by \(note.userName)"
         addSubview(noteTitleLabel)
         addSubview(locationLabel)
         addSubview(noteAuthorLabel)
@@ -74,7 +74,7 @@ class NoteTableViewCell: UITableViewCell {
             fetchCityAndCountry(from: location) { (city, country, error) in
                 if let error = error {
                     print("Failed to fetch location:", error)
-                    self.locationLabel.text = "📍 Can't fetch location data"
+                    self.locationLabel.text = "📍 Failed to fetch location info"
                 }
                 
                 guard let city = city else { return }

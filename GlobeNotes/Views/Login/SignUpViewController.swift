@@ -133,7 +133,7 @@ final class SignUpViewController: UIViewController {
             print("Successfully created user:", user?.user.uid ?? "")
             
             if let uid = user?.user.uid {
-                let dictionaryValues = ["name": username]
+                let dictionaryValues = ["userName": username]
                 let values = [uid: dictionaryValues]
                 
                 Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, databaseReference) in
