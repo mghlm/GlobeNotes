@@ -11,10 +11,10 @@ import Foundation
 struct User {
     
     let uid: String
-    let name: String
+    let userName: String
     
     init(uid: String, dictionary: [String: Any]) {
         self.uid = uid
-        self.name = dictionary["name"] as? String ?? ""
+        self.userName = dictionary["userName"] as? String ?? ""
     }
 }

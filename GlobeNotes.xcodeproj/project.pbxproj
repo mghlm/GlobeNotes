@@ -16,6 +16,7 @@
 		CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCED21627D5E00ABF450 /* LocationManager.swift */; };
 		CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCEF21636FEE00ABF450 /* NoteAnnotation.swift */; };
 		CC6FBCF42163B6AD00ABF450 /* FirebaseShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCF32163B6AD00ABF450 /* FirebaseShared.swift */; };
+		CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCF62163DAED00ABF450 /* NoteDetailsViewController.swift */; };
 		CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */; };
 		CC74DD99215E8731003C06D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DD98215E8731003C06D2 /* AppDelegate.swift */; };
 		CC74DD9E215E8731003C06D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC74DD9C215E8731003C06D2 /* Main.storyboard */; };
@@ -64,6 +65,7 @@
 		CC6FBCED21627D5E00ABF450 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CC6FBCEF21636FEE00ABF450 /* NoteAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnnotation.swift; sourceTree = "<group>"; };
 		CC6FBCF32163B6AD00ABF450 /* FirebaseShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseShared.swift; sourceTree = "<group>"; };
+		CC6FBCF62163DAED00ABF450 /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
 		CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		CC74DD95215E8731003C06D2 /* GlobeNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlobeNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC74DD98215E8731003C06D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		CC6FBCF52163DADC00ABF450 /* NoteDetails */ = {
+			isa = PBXGroup;
+			children = (
+				CC6FBCF62163DAED00ABF450 /* NoteDetailsViewController.swift */,
+			);
+			path = NoteDetails;
+			sourceTree = "<group>";
+		};
 		CC71F3E22160F0A9005E33EF /* AddNote */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +238,7 @@
 		CC74DDC7215E88DE003C06D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC6FBCF52163DADC00ABF450 /* NoteDetails */,
 				CC6FBCE821625F8D00ABF450 /* Map */,
 				CCEB9ED6215EA41E00383156 /* HomeScreen */,
 				CC71F3E22160F0A9005E33EF /* AddNote */,
@@ -497,6 +508,7 @@
 				CC6FBCF42163B6AD00ABF450 /* FirebaseShared.swift in Sources */,
 				CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */,
 				CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */,
+				CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
