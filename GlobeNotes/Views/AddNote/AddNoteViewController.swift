@@ -36,7 +36,7 @@ class AddNoteViewController: UIViewController {
     fileprivate var emojiLabel: UILabel = {
         let lbl = UILabel()
         lbl.text = "✏️"
-        lbl.font = UIFont.systemFont(ofSize: 80)
+        lbl.font = UIFont.systemFont(ofSize: 40)
         
         return lbl
     }()
@@ -118,13 +118,13 @@ class AddNoteViewController: UIViewController {
     }
     
     fileprivate func setupConstraints() {
-        dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 10, width: 50, height: 50)
-        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
-        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 35, paddingLeft: 20, paddingBottom: 0, paddingRight: 10, width: 50, height: 50)
+        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
-        titleTextField.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 25, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
-        textTextView.anchor(top: titleTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 25, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 200)
-        submitUpButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingBottom: 50, paddingRight: 24, width: 0, height: 50)
+        titleTextField.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
+        textTextView.anchor(top: titleTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 100)
+        submitUpButton.anchor(top: textTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
     }
     
     // MARK: - Handlers
