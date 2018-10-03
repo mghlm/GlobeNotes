@@ -26,7 +26,7 @@ final class SignUpViewController: UIViewController {
     fileprivate var emojiLabel: UILabel = {
         let lbl = UILabel()
         lbl.text = "📍✏️"
-        lbl.font = UIFont.systemFont(ofSize: 80)
+        lbl.font = UIFont.systemFont(ofSize: 40)
         
         return lbl
     }()
@@ -76,6 +76,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     fileprivate var stackView: UIStackView!
+    fileprivate var dismissKeyboardGestureRecognizer: UIGestureRecognizer!
     
     // MARK: - Shared
     
@@ -101,15 +102,17 @@ final class SignUpViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 10
         view.addSubview(stackView)
+        dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDismissKeyboard))
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
-        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 120, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
-        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 270)
+        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
     }
     
     @objc fileprivate func handleTextInputChange() {
@@ -151,6 +154,10 @@ final class SignUpViewController: UIViewController {
             NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc fileprivate func handleDismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

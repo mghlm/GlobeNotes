@@ -15,7 +15,7 @@ final class SignInViewController: UIViewController {
     
     fileprivate var mainTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Welcome to GlobeNote! Please log in to start exploring the world of notes"
+        lbl.text = "Welcome to GlobeNote! Please sign in"
         lbl.font = UIFont.boldSystemFont(ofSize: 24)
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -26,7 +26,7 @@ final class SignInViewController: UIViewController {
     fileprivate var emojiLabel: UILabel = {
         let lbl = UILabel()
         lbl.text = "🌎📝"
-        lbl.font = UIFont.systemFont(ofSize: 80)
+        lbl.font = UIFont.systemFont(ofSize: 40)
         
         return lbl
     }()
@@ -75,6 +75,7 @@ final class SignInViewController: UIViewController {
     }()
     
     fileprivate var stackView: UIStackView!
+    fileprivate var dismissKeyboardGestureRecognizer: UIGestureRecognizer!
     
     // MARK: - Constants
     
@@ -102,15 +103,17 @@ final class SignInViewController: UIViewController {
         stackView.spacing = 10
         view.addSubview(stackView)
         view.addSubview(dontHaveAccountButton)
+        dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDismissKeyboard))
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
-        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 120, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        mainTitleLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
-        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+        emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 150)
         dontHaveAccountButton.anchor(centerX: view.centerXAnchor, centerY: nil)
         dontHaveAccountButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 40, paddingRight: 0, width: 0, height: 0)
     }
@@ -148,6 +151,10 @@ final class SignInViewController: UIViewController {
     @objc fileprivate func handleSignUp() {
         let signUpViewController = SignUpViewController()
         navigationController?.pushViewController(signUpViewController, animated: true)
+    }
+    
+    @objc fileprivate func handleDismissKeyboard() {
+        view.endEditing(true)
     }
     
 }
