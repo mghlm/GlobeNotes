@@ -77,6 +77,10 @@ final class SignUpViewController: UIViewController {
     
     fileprivate var stackView: UIStackView!
     
+    // MARK: - Shared
+    
+    static let successAlert = NSNotification.Name(rawValue: "successSignUpAlert")
+    
     // MARK: - ViewController
     
     override func viewDidLoad() {
@@ -144,6 +148,7 @@ final class SignUpViewController: UIViewController {
                     print("Successfully saved username to db")
                 })
             }
+            NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
     }

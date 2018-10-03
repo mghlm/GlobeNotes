@@ -82,6 +82,8 @@ final class HomeScreenViewController: UIViewController {
         fetchNotes()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessSignUpAlert), name: SignUpViewController.successAlert, object: nil)
+        
         
         requestLocationAuthorization(with: locationManager.authorizationStatus)
         
@@ -216,6 +218,15 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
+    @objc fileprivate func handleShowSuccessSignUpAlert() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUid(uid: uid) { (user) in
+            self.user = user
+            let signInMessage = user.userName == "" ? "Successfully created a new user" : "Successfully created new user \(user.userName)"
+            self.showAlert(with: signInMessage, delay: 1.5)
+        }
+    }
+    
     @objc fileprivate func refreshAndShowAlert() {
         notes.removeAll()
         fetchNotes()
@@ -239,6 +250,7 @@ final class HomeScreenViewController: UIViewController {
                 try Auth.auth().signOut()
                 let navController = UINavigationController(rootViewController: SignInViewController())
                 self.navigationController?.present(navController, animated: true, completion: nil)
+                self.user = nil 
             } catch let error {
                 print("Failed to sign out:", error)
             }
