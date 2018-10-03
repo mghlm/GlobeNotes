@@ -59,6 +59,8 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate let databaseReference = Database.database().reference(withPath: "notes")
     fileprivate var searchController: UISearchController!
+//    fileprivate var searchFilteredUsers = [User]()
+//    fileprivate var searchUsers = [User]()
     
     // MARK: - Public properties
     
@@ -107,15 +109,12 @@ final class HomeScreenViewController: UIViewController {
         notesTableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
-    fileprivate func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Nearby notes"
-        
+    fileprivate func setupSearchController() {
+        self.definesPresentationContext = true
         searchController = UISearchController(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.sizeToFit()
-        searchController.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
         
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
@@ -123,10 +122,11 @@ final class HomeScreenViewController: UIViewController {
             navigationItem.titleView = searchController.searchBar
             navigationItem.titleView?.layoutSubviews()
         }
-        
-        
-//        navigationItem.searchController
-        
+    }
+    
+    fileprivate func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Nearby notes"
         addNoteButton.addTarget(self, action: #selector(handleAddNote), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: addNoteButton)
         mapButton.addTarget(self, action: #selector(handleShowMap), for: .touchUpInside)
@@ -135,6 +135,8 @@ final class HomeScreenViewController: UIViewController {
         let settingsNavBarItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.rightBarButtonItems = [mapNavBarItem, settingsNavBarItem]
         navigationController?.navigationBar.barTintColor = .white
+        
+        setupSearchController()
     }
     
     fileprivate func showSignInScreen() {
@@ -288,8 +290,10 @@ final class HomeScreenViewController: UIViewController {
     }
 }
 
-extension HomeScreenViewController: UISearchControllerDelegate {
-    
+extension HomeScreenViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
 }
 
 extension HomeScreenViewController: UITableViewDelegate {
