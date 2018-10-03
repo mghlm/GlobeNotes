@@ -81,13 +81,15 @@ class AddNoteViewController: UIViewController {
         return button
     }()
     
+    fileprivate let databaseRef = Database.database().reference(withPath: "notes")
+    
     // MARK: - Public properties
     
     var userName: String!
     var latitude: Double!
     var longitude: Double!
     
-    // MARK: - Constants
+    // MARK: - Shared
     
     static let refreshTableViewNotificationName = NSNotification.Name(rawValue: "refreshTableView")
     
@@ -153,16 +155,9 @@ class AddNoteViewController: UIViewController {
         
         let values = ["userName": userName, "title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
-        ref.updateChildValues(values) { (error, reference) in
-            if let error = error {
-                print("Failed to save note to database:", error)
-                return
-            }
-            
-            print("Successfully saved note to database")
-            self.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
-            })
+        ref.setValue(values)
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
         }
     }
 }

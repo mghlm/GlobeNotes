@@ -205,8 +205,13 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleShowSuccessAlert() {
-        let signInMessage = user?.userName == nil ? "Successfully signed in" : "Successfully signed in as \(user?.userName ?? "")"
-        showAlert(with: signInMessage, delay: 1.5)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUid(uid: uid) { (user) in
+            self.user = user
+            let signInMessage = user.userName == "" ? "Successfully signed in" : "Successfully signed in as \(user.userName)"
+            self.showAlert(with: signInMessage, delay: 1.5)
+        }
+        
     }
     
     @objc fileprivate func refreshAndShowAlert() {
