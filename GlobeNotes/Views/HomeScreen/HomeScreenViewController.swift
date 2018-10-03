@@ -57,6 +57,8 @@ final class HomeScreenViewController: UIViewController {
         return tv
     }()
     
+    fileprivate let databaseReference = Database.database().reference(withPath: "notes")
+    
     // MARK: - Public properties
     
     var user: User?
@@ -80,10 +82,7 @@ final class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         fetchUser()
         fetchNotes()
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessAlert), name: SignInViewController.successAlert, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessSignUpAlert), name: SignUpViewController.successAlert, object: nil)
-        
+        setupNotifications()
         
         requestLocationAuthorization(with: locationManager.authorizationStatus)
         
@@ -126,8 +125,14 @@ final class HomeScreenViewController: UIViewController {
         present(navController, animated: false)
     }
     
+    fileprivate func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUid(uid: uid) { (user) in
+            self.user = user
+        }
+    }
+    
     fileprivate func fetchNotes() {
-        let databaseReference = Database.database().reference(withPath: "notes")
         databaseReference.observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
@@ -162,6 +167,12 @@ final class HomeScreenViewController: UIViewController {
         
     }
     
+    fileprivate func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshAndShowNoteAddedAlert), name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessSignInAlert), name: SignInViewController.successAlert, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleShowSuccessSignUpAlert), name: SignUpViewController.successAlert, object: nil)
+    }
+    
     fileprivate func showAlert(with message: String, delay: Double) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
@@ -187,13 +198,6 @@ final class HomeScreenViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.fetchUserWithUid(uid: uid) { (user) in
-            self.user = user
-        }
-    }
-    
     // MARK: - Handlers
     
     @objc fileprivate func handleAddNote() {
@@ -209,7 +213,9 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
-    @objc fileprivate func handleShowSuccessAlert() {
+    @objc fileprivate func handleShowSuccessSignInAlert() {
+        self.notes.removeAll()
+        self.fetchNotes()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUid(uid: uid) { (user) in
             self.user = user
@@ -219,6 +225,8 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleShowSuccessSignUpAlert() {
+        self.notes.removeAll()
+        self.fetchNotes()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUid(uid: uid) { (user) in
             self.user = user
@@ -227,7 +235,7 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
-    @objc fileprivate func refreshAndShowAlert() {
+    @objc fileprivate func refreshAndShowNoteAddedAlert() {
         notes.removeAll()
         fetchNotes()
         showAlert(with: "Note successfully added!", delay: 1.5)
