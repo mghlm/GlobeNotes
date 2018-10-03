@@ -15,7 +15,7 @@ class NoteAnnotation: NSObject, MKAnnotation {
     
     init(note: Note) {
         self.title = note.title
-        self.subtitle = "Created \(note.creationDate.timeIntervalSince1970) by \(note.userName ?? "unkown user")"
+        self.subtitle = note.userName != nil ? "Note created by \(note.userName ?? "")" : ""
         self.coordinate = CLLocationCoordinate2D(latitude: note.latitude ?? 0, longitude: note.longitude ?? 0)
     }
 }
