@@ -1,5 +1,5 @@
 //
-//  SignInViewControllerViewModel.swift
+//  SignInViewModel.swift
 //  GlobeNotes
 //
 //  Created by magnus holm on 04/10/2018.
@@ -9,11 +9,11 @@
 import Foundation
 import Firebase
 
-protocol SignInViewControllerViewModelType {
+protocol SignInViewModelType {
     func signInUser(with email: String, password: String, completion: @escaping () -> Void)
 }
 
-struct SignInViewControllerViewModel: SignInViewControllerViewModelType {
+struct SignInViewModel: SignInViewModelType {
     func signInUser(with email: String, password: String, completion: @escaping () -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {

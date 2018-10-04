@@ -1,5 +1,5 @@
 //
-//  SignUpViewControllerViewModel.swift
+//  SignUpViewModel.swift
 //  GlobeNotes
 //
 //  Created by magnus holm on 04/10/2018.
@@ -9,13 +9,13 @@
 import Foundation
 import Firebase
 
-protocol SignUpViewControllerViewModelType {
+protocol SignUpViewModelType {
     var dbRef: DatabaseReference { get }
     
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void)
 }
 
-struct SignUpViewControllerViewModel: SignUpViewControllerViewModelType {
+struct SignUpViewModel: SignUpViewModelType {
     var dbRef: DatabaseReference = Database.database().reference()
     
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void) {

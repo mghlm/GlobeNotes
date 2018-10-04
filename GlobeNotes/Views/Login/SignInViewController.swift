@@ -13,7 +13,10 @@ final class SignInViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: SignInViewControllerViewModelType!
+    fileprivate var viewModel: SignInViewModelType = {
+        let vm = SignInViewModel()
+        return vm
+    }()
     
     // MARK: - Private properties
     
@@ -90,7 +93,6 @@ final class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupDependencies()
         setupUI()
     }
     
@@ -123,10 +125,6 @@ final class SignInViewController: UIViewController {
         dontHaveAccountButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 40, paddingRight: 0, width: 0, height: 0)
     }
     
-    fileprivate func setupDependencies() {
-        viewModel = SignInViewControllerViewModel()
-    }
-    
     @objc fileprivate func handleTextInputChange() {
         let isFormValid = emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
@@ -148,18 +146,6 @@ final class SignInViewController: UIViewController {
                 NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
             })
         }
-        
-//        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-//            if let error = error {
-//                print("Failed to sign in user:", error)
-//                return
-//            }
-//            print("Successfully signed in user:", user?.user.uid ?? "")
-//
-//            self.dismiss(animated: true, completion: {
-//                NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
-//            })
-//        }
     }
     
     @objc fileprivate func handlePushToSignUp() {

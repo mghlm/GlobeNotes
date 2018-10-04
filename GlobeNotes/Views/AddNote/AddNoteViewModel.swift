@@ -1,5 +1,5 @@
 //
-//  AddNoteViewControllerViewModel.swift
+//  AddNoteViewModel.swift
 //  GlobeNotes
 //
 //  Created by magnus holm on 04/10/2018.
@@ -9,14 +9,14 @@
 import Foundation
 import Firebase
 
-protocol AddNoteViewControllerViewModelType {
+protocol AddNoteViewModelType {
     
     var locationManager: LocationManagerType { get }
     
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void)
 }
 
-struct AddNoteViewControllerViewModel: AddNoteViewControllerViewModelType {
+struct AddNoteViewModel: AddNoteViewModelType {
     
     var locationManager: LocationManagerType = {
         let lm = LocationManager()

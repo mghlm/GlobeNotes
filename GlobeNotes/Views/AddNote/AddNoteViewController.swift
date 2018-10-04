@@ -13,7 +13,10 @@ class AddNoteViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: AddNoteViewControllerViewModelType!
+    fileprivate var viewModel: AddNoteViewModelType = {
+        let vm = AddNoteViewModel()
+        return vm
+    }()
     
     // MARK: - Private properties
     
@@ -100,7 +103,6 @@ class AddNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupDependencies()
         setupUI()
     }
     
@@ -128,10 +130,6 @@ class AddNoteViewController: UIViewController {
         titleTextField.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
         textTextView.anchor(top: titleTextField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 100)
         submitUpButton.anchor(top: textTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
-    }
-    
-    fileprivate func setupDependencies() {
-        viewModel = AddNoteViewControllerViewModel()
     }
     
     // MARK: - Handlers
