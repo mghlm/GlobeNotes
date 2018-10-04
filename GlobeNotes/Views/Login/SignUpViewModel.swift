@@ -10,6 +10,14 @@ import Foundation
 import Firebase
 
 protocol SignUpViewModelType {
+    
+    /// Creates a new account and signs it up to Firebase Authentication
+    ///
+    /// - Parameters:
+    ///   - email: User's email input
+    ///   - username: User's username input
+    ///   - password: User's password input
+    ///   - completion: Completion called when new account is successfully created and saved in the database
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void)
 }
 

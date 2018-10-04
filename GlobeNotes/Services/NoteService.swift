@@ -10,6 +10,10 @@ import Foundation
 import Firebase
 
 protocol NoteServiceType {
+    
+    /// Fetches all notes currently saved in database
+    ///
+    /// - Parameter completion: To be used with array of all notes when all notes are successfully fetched
     func fetchNotes(completion: @escaping ([Note]) -> ())
 }
 

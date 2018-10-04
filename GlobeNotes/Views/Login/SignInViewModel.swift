@@ -10,6 +10,13 @@ import Foundation
 import Firebase
 
 protocol SignInViewModelType {
+    
+    /// Signs in a user to Firebase Authentication
+    ///
+    /// - Parameters:
+    ///   - email: User's email address
+    ///   - password: User's password they created when signing up
+    ///   - completion: Completion called after successful sign in
     func signInUser(with email: String, password: String, completion: @escaping () -> Void)
 }
 
