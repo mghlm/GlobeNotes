@@ -11,6 +11,10 @@ import Firebase
 
 final class SignInViewController: UIViewController {
     
+    // MARK: - Dependencies
+    
+    fileprivate var viewModel: SignInViewControllerViewModelType!
+    
     // MARK: - Private properties
     
     fileprivate var mainTitleLabel: UILabel = {
@@ -86,6 +90,7 @@ final class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDependencies()
         setupUI()
     }
     
@@ -118,6 +123,10 @@ final class SignInViewController: UIViewController {
         dontHaveAccountButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 40, paddingRight: 0, width: 0, height: 0)
     }
     
+    fileprivate func setupDependencies() {
+        viewModel = SignInViewControllerViewModel()
+    }
+    
     @objc fileprivate func handleTextInputChange() {
         let isFormValid = emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
@@ -134,18 +143,23 @@ final class SignInViewController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            if let error = error {
-                print("Failed to sign in user:", error)
-                return
-            }
-            print("Successfully signed in user:", user?.user.uid ?? "")
-            
+        viewModel.signInUser(with: email, password: password) {
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
             })
         }
         
+//        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+//            if let error = error {
+//                print("Failed to sign in user:", error)
+//                return
+//            }
+//            print("Successfully signed in user:", user?.user.uid ?? "")
+//
+//            self.dismiss(animated: true, completion: {
+//                NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
+//            })
+//        }
     }
     
     @objc fileprivate func handleSignUp() {
@@ -157,7 +171,6 @@ final class SignInViewController: UIViewController {
     @objc fileprivate func handleDismissKeyboard() {
         view.endEditing(true)
     }
-    
 }
 
 

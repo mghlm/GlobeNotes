@@ -168,8 +168,6 @@ final class SignUpViewController: UIViewController {
     @objc fileprivate func handleDismissKeyboard() {
         view.endEditing(true)
     }
-    
-    
 }
 
 

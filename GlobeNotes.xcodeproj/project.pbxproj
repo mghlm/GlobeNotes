@@ -10,6 +10,7 @@
 		4B205D41A6EB8EBEEA4574DC /* Pods_GlobeNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A48AA5F20103E04BCD0B38 /* Pods_GlobeNotes.framework */; };
 		6E3164FFB19ECC27A04B5B21 /* Pods_GlobeNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */; };
 		A171B94A2F19BB32A90BB959 /* Pods_GlobeNotesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */; };
+		CC5CE30121664A5000974F68 /* SignInViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInViewControllerViewModel.swift */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
 		CC6D0368215FCD44005F9CFA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0367215FCD44005F9CFA /* Note.swift */; };
 		CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */; };
@@ -60,6 +61,7 @@
 		67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B420BEF1AA7F42725A15A3B1 /* Pods-GlobeNotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobeNotesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobeNotesUITests/Pods-GlobeNotesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CC5CE30021664A5000974F68 /* SignInViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerViewModel.swift; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		CC6D0367215FCD44005F9CFA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				CC74DDC8215E88F0003C06D2 /* SignUpViewController.swift */,
 				CC9A421C2166231D00F17259 /* SignUpViewControllerViewModel.swift */,
 				CC74DDCA215E8911003C06D2 /* SignInViewController.swift */,
+				CC5CE30021664A5000974F68 /* SignInViewControllerViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				CC9A421D2166231D00F17259 /* SignUpViewControllerViewModel.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
+				CC5CE30121664A5000974F68 /* SignInViewControllerViewModel.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
