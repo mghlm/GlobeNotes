@@ -13,6 +13,8 @@
 		CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenViewModel.swift */; };
 		CC3CE40421667CD7005044CE /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40321667CD7005044CE /* NoteService.swift */; };
 		CC3CE40621669BD5005044CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40521669BD5005044CE /* AuthService.swift */; };
+		CC3CE4082166A66E005044CE /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4072166A66E005044CE /* NoteViewModel.swift */; };
+		CC3CE40A2166A7D3005044CE /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4092166A7D3005044CE /* HomeScreenViewModel.swift */; };
 		CC5CE30121664A5000974F68 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInViewModel.swift */; };
 		CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNoteViewModel.swift */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
@@ -68,6 +70,8 @@
 		CC3CE401216671F3005044CE /* MapScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewModel.swift; sourceTree = "<group>"; };
 		CC3CE40321667CD7005044CE /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		CC3CE40521669BD5005044CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CC3CE4072166A66E005044CE /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		CC3CE4092166A7D3005044CE /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		CC5CE30021664A5000974F68 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		CC5CE3022166527300974F68 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 			children = (
 				CC74DDD0215E9500003C06D2 /* User.swift */,
 				CC6D0367215FCD44005F9CFA /* Note.swift */,
+				CC3CE4072166A66E005044CE /* NoteViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			children = (
 				CC6D0364215FCAE4005F9CFA /* Views  */,
 				CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */,
+				CC3CE4092166A7D3005044CE /* HomeScreenViewModel.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -540,7 +546,9 @@
 				CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC3CE40421667CD7005044CE /* NoteService.swift in Sources */,
+				CC3CE40A2166A7D3005044CE /* HomeScreenViewModel.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
+				CC3CE4082166A66E005044CE /* NoteViewModel.swift in Sources */,
 				CC5CE30121664A5000974F68 /* SignInViewModel.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,

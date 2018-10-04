@@ -22,8 +22,8 @@ final class MapScreenViewController: UIViewController {
     
     // MARK: - Constants
     
-    let latitudeSpan = 0.15
-    let longitudeSpan = 0.15
+    let regionLatitudeSpan = 0.15
+    let regionLongitudeSpan = 0.15
     
     // MARK: - ViewController
     
@@ -53,7 +53,7 @@ final class MapScreenViewController: UIViewController {
         }
         mapView.showsUserLocation = true
         if viewModel.isLocationAuthorized() {
-            zoomToUsersCurrentLocation(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan)
+            zoomToUsersCurrentLocation(latitudeSpan: regionLatitudeSpan, longitudeSpan: regionLongitudeSpan)
         }
         view.addSubview(mapView)
     }

@@ -67,5 +67,4 @@ struct AuthService: AuthServiceType {
             completion()
         }
     }
-    
 }

@@ -13,6 +13,13 @@ import CoreLocation
 
 final class HomeScreenViewController: UIViewController {
     
+    // MARK: - Dependencies
+    
+    fileprivate var viewModel: HomeScreenViewModel = {
+        let vm = HomeScreenViewModel()
+        return vm
+    }()
+    
     // MARK: - Private properties
     
     fileprivate var notes = [Note]()
