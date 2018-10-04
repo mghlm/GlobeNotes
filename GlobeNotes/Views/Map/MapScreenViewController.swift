@@ -14,27 +14,25 @@ final class MapScreenViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var locationManager: LocationManagerType = {
-        let lm = LocationManager()
-        return lm
-    }()
-    
-    // MARK: - Private properties
-    
-    fileprivate var mapView: MKMapView!
+    var viewModel: MapScreenViewModelType!
     
     // MARK: - Public properties
     
     var notes: [Note]!
     
-    // MARK: - Dependencies
+    // MARK: - Private properties
     
-    var locationManager: LocationManagerType!
+    fileprivate var mapView: MKMapView!
     
     // MARK: - ViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.fetchNotes { (notes) in
+            self.notes = notes
+            self.addAnnotations()
+        }
         
         setupUI()
     }
@@ -43,10 +41,8 @@ final class MapScreenViewController: UIViewController {
     
     fileprivate func setupUI() {
         navigationItem.largeTitleDisplayMode = .never
+        
         setupMapView()
-        if locationManager.isLocationAuthorized() {
-            zoomToUsersCurrentLocation()
-        }
         setupConstraints()
     }
     
@@ -57,15 +53,14 @@ final class MapScreenViewController: UIViewController {
     fileprivate func setupMapView() {
         mapView = MKMapView()
         mapView.showsUserLocation = true
-        addAnnotations()
+        if viewModel.isLocationAuthorized() {
+            zoomToUsersCurrentLocation()
+        }
         view.addSubview(mapView)
     }
     
     fileprivate func zoomToUsersCurrentLocation() {
-        if let usersCoordinateLocation = locationManager.usersCurrentLocation?.coordinate {
-            let location = CLLocationCoordinate2D(latitude: usersCoordinateLocation.latitude, longitude: usersCoordinateLocation.longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
-            let region = MKCoordinateRegion(center: location, span: span)
+        if let region = viewModel.getRegion(latitudeSpan: 0.15, longitudeSpan: 0.15) {
             mapView.setRegion(region, animated: true)
         }
     }

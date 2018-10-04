@@ -11,14 +11,12 @@ import Firebase
 
 protocol AddNoteViewModelType {
     
-    var locationManager: LocationManagerType { get }
-    
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void)
 }
 
 struct AddNoteViewModel: AddNoteViewModelType {
     
-    var locationManager: LocationManagerType = {
+    private let locationManager: LocationManagerType = {
         let lm = LocationManager()
         return lm
     }()

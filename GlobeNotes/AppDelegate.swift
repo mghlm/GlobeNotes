@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         let homeScreenViewController = HomeScreenViewController()
         homeScreenViewController.locationManager = LocationManager()
+        homeScreenViewController.noteService = NoteService()
         let navController = UINavigationController(rootViewController: homeScreenViewController)
         
         window?.rootViewController = navController
