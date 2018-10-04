@@ -29,6 +29,7 @@
 		CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDCD215E8B35003C06D2 /* Extensions.swift */; };
 		CC74DDD1215E9500003C06D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDD0215E9500003C06D2 /* User.swift */; };
 		CC74DDD3215E9B01003C06D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */; };
+		CC9A421D2166231D00F17259 /* SignUpViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9A421C2166231D00F17259 /* SignUpViewControllerViewModel.swift */; };
 		CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		CC74DDCD215E8B35003C06D2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CC74DDD0215E9500003C06D2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC9A421C2166231D00F17259 /* SignUpViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerViewModel.swift; sourceTree = "<group>"; };
 		CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 		CC74DD97215E8731003C06D2 /* GlobeNotes */ = {
 			isa = PBXGroup;
 			children = (
+				CC9A421921661F5500F17259 /* Services */,
 				CC6FBCEB21627D3000ABF450 /* Components */,
 				CC74DD98215E8731003C06D2 /* AppDelegate.swift */,
 				CC74DD9C215E8731003C06D2 /* Main.storyboard */,
@@ -230,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				CC74DDC8215E88F0003C06D2 /* SignUpViewController.swift */,
+				CC9A421C2166231D00F17259 /* SignUpViewControllerViewModel.swift */,
 				CC74DDCA215E8911003C06D2 /* SignInViewController.swift */,
 			);
 			path = Login;
@@ -263,6 +267,13 @@
 				CC6D0367215FCD44005F9CFA /* Note.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CC9A421921661F5500F17259 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CCEB9ED6215EA41E00383156 /* HomeScreen */ = {
@@ -509,6 +520,7 @@
 				CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */,
 				CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */,
 				CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */,
+				CC9A421D2166231D00F17259 /* SignUpViewControllerViewModel.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
