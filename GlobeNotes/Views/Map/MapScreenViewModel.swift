@@ -15,7 +15,6 @@ protocol MapScreenViewModelType {
     func isLocationAuthorized() -> Bool
     func getUsersLocationCoordinates() -> CLLocationCoordinate2D?
     func fetchNotes(completion: @escaping ([Note]) -> ())
-//    func fetchNotes() -> [Note]
 }
 
 struct MapScreenViewModel: MapScreenViewModelType {
@@ -58,13 +57,4 @@ struct MapScreenViewModel: MapScreenViewModelType {
             completion(notes)
         }
     }
-    
-    
-//    func fetchNotes() -> [Note] {
-//        var notes = [Note]()
-//        noteService.fetchNotes { (fetchedNotes) in
-//            notes = fetchedNotes
-//        }
-//        return notes
-//    }
 }

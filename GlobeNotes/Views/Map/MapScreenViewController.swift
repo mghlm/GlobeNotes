@@ -16,23 +16,19 @@ final class MapScreenViewController: UIViewController {
     
     var viewModel: MapScreenViewModelType!
     
-    // MARK: - Public properties
-    
-    var notes: [Note]!
-    
     // MARK: - Private properties
     
     fileprivate var mapView: MKMapView!
+    
+    // MARK: - Constants
+    
+    let latitudeSpan = 0.15
+    let longitudeSpan = 0.15
     
     // MARK: - ViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.fetchNotes { (notes) in
-            self.notes = notes
-            self.addAnnotations()
-        }
         
         setupUI()
     }
@@ -52,20 +48,27 @@ final class MapScreenViewController: UIViewController {
     
     fileprivate func setupMapView() {
         mapView = MKMapView()
+        viewModel.fetchNotes { (notes) in
+            self.addAnnotations(with: notes)
+        }
         mapView.showsUserLocation = true
         if viewModel.isLocationAuthorized() {
-            zoomToUsersCurrentLocation()
+            zoomToUsersCurrentLocation(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan)
         }
         view.addSubview(mapView)
     }
     
-    fileprivate func zoomToUsersCurrentLocation() {
-        if let region = viewModel.getRegion(latitudeSpan: 0.15, longitudeSpan: 0.15) {
+    /// Zooms to specified region with user's current location as center
+    fileprivate func zoomToUsersCurrentLocation(latitudeSpan: Double, longitudeSpan: Double) {
+        if let region = viewModel.getRegion(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
             mapView.setRegion(region, animated: true)
         }
     }
     
-    fileprivate func addAnnotations() {
+    /// Adds annotations to the mapView based on the fetched notes
+    ///
+    /// - Parameter notes: All the notes currently in the database
+    fileprivate func addAnnotations(with notes: [Note]) {
         for note in notes {
             let annotation = NoteAnnotation(note: note)
             mapView.addAnnotation(annotation)
