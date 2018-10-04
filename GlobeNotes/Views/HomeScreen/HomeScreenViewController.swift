@@ -228,8 +228,6 @@ final class HomeScreenViewController: UIViewController {
         if locationManager.isLocationAuthorized() {
             let addNoteViewController = AddNoteViewController()
             addNoteViewController.userName = userName
-            addNoteViewController.latitude = locationManager.usersCurrentLocation?.coordinate.latitude ?? 0
-            addNoteViewController.longitude = locationManager.usersCurrentLocation?.coordinate.longitude ?? 0
             navigationController?.present(addNoteViewController, animated: true, completion: nil)
         } else {
             showLocationRequiredAlert()

@@ -90,8 +90,6 @@ class AddNoteViewController: UIViewController {
     // MARK: - Public properties
     
     var userName: String!
-    var latitude: Double!
-    var longitude: Double!
     
     // MARK: - Shared
     
@@ -158,22 +156,11 @@ class AddNoteViewController: UIViewController {
         guard let title = titleTextField.text else { return }
         let text = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text ?? ""
         
-        viewModel.submitNote(with: userName, title: title, text: text, latitude: latitude, longitude: longitude, creationDate: Date()) {
+        viewModel.submitNote(with: userName, title: title, text: text, creationDate: Date()) {
             self.dismiss(animated: true) {
                 NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
             }
         }
-        
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        let usersNoteReference = Database.database().reference().child("notes").child(uid)
-//        let ref = usersNoteReference.childByAutoId()
-//
-//        let values = ["userName": userName, "title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
-//
-//        ref.setValue(values)
-//        self.dismiss(animated: true) {
-//            NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
-//        }
     }
 }
 

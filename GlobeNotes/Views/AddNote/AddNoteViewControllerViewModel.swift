@@ -10,13 +10,24 @@ import Foundation
 import Firebase
 
 protocol AddNoteViewControllerViewModelType {
-    func submitNote(with username: String, title: String, text: String, latitude: Double, longitude: Double, creationDate: Date, completion: @escaping () -> Void)
     
+    var locationManager: LocationManagerType { get }
+    
+    func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void)
 }
 
 struct AddNoteViewControllerViewModel: AddNoteViewControllerViewModelType {
-    func submitNote(with username: String, title: String, text: String, latitude: Double, longitude: Double, creationDate: Date, completion: @escaping () -> Void) {
+    
+    var locationManager: LocationManagerType = {
+        let lm = LocationManager()
+        return lm
+    }()
+    
+    func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let latitude = locationManager.usersCurrentLocation?.coordinate.latitude else { return }
+        guard let longitude = locationManager.usersCurrentLocation?.coordinate.longitude else { return }
+        
         let dbRef = Database.database().reference().child("notes").child(uid).childByAutoId()
         let values = ["userName": username, "title": title, "text": text, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
