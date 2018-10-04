@@ -14,7 +14,7 @@ final class SignUpViewController: UIViewController {
     // MARK: - Dependencies
     
     fileprivate var viewModel: SignUpViewModelType = {
-        let vm = SignUpViewModel()
+        let vm = SignUpViewModel(authService: AuthService())
         return vm
     }()
     
@@ -144,29 +144,6 @@ final class SignUpViewController: UIViewController {
                 NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
             })
         })
-        
-//        Auth.auth().createUser(withEmail: email, password: password) { (user, error: Error?) in
-//            if let error = error {
-//                print("Failed to create user:", error)
-//                return
-//            }
-//            print("Successfully created user:", user?.user.uid ?? "")
-//
-//            if let uid = user?.user.uid {
-//                let dictionaryValues = ["userName": username]
-//                let values = [uid: dictionaryValues]
-//
-//                Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, databaseReference) in
-//                    if let error = error {
-//                        print("Failed to save username to db:", error)
-//                        return
-//                    }
-//                    print("Successfully saved username to db")
-//                })
-//            }
-//            NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
-//            self.dismiss(animated: true, completion: nil)
-//        }
     }
     
     @objc fileprivate func handleDismissKeyboard() {

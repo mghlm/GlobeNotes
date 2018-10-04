@@ -14,13 +14,21 @@ protocol SignInViewModelType {
 }
 
 struct SignInViewModel: SignInViewModelType {
+    
+    // MARK: - Dependencies
+    
+    fileprivate var authService: AuthServiceType!
+    
+    // MARK: - Init
+    
+    init(authService: AuthServiceType) {
+        self.authService = authService
+    }
+    
+    // Public methods
+    
     func signInUser(with email: String, password: String, completion: @escaping () -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            if let error = error {
-                print("Failed to sign in user:", error)
-                return
-            }
-            print("Successfully signed in user", user?.user.uid ?? "")
+        authService.signInUser(email: email, password: password) {
             completion()
         }
     }

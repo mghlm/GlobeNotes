@@ -10,36 +10,28 @@ import Foundation
 import Firebase
 
 protocol SignUpViewModelType {
-    var dbRef: DatabaseReference { get }
-    
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void)
 }
 
 struct SignUpViewModel: SignUpViewModelType {
-    var dbRef: DatabaseReference = Database.database().reference()
+    
+    // MARK: - Dependencies
+    
+    fileprivate var authService: AuthServiceType!
+    
+    // MARK: - Prive properties
+    
+    private var dbRef: DatabaseReference = Database.database().reference()
+    
+    // MARK: - Init
+    
+    init(authService: AuthServiceType) {
+        self.authService = authService
+    }
     
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error: Error?) in
-            if let error = error {
-                print("Failed to create user:", error)
-                return
-            }
-            
-            print("Successfully created new user")
+        authService.signUpNewUser(email: email, username: username, password: password) { () in
             completion()
-            
-            if let uid = user?.user.uid {
-                let dictionaryValues = ["userName": username]
-                let values = [uid: dictionaryValues]
-                
-                self.dbRef.child("users").updateChildValues(values, withCompletionBlock: { (error, databaseReference) in
-                    if let error = error {
-                        print("Failed to save username to db:", error)
-                        return
-                    }
-                    print("Succesffully saved username")
-                })
-            }
         }
     }
 }

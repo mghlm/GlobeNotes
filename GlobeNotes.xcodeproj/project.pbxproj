@@ -12,6 +12,7 @@
 		A171B94A2F19BB32A90BB959 /* Pods_GlobeNotesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */; };
 		CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenViewModel.swift */; };
 		CC3CE40421667CD7005044CE /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40321667CD7005044CE /* NoteService.swift */; };
+		CC3CE40621669BD5005044CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40521669BD5005044CE /* AuthService.swift */; };
 		CC5CE30121664A5000974F68 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInViewModel.swift */; };
 		CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNoteViewModel.swift */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
@@ -66,6 +67,7 @@
 		B420BEF1AA7F42725A15A3B1 /* Pods-GlobeNotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobeNotesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobeNotesUITests/Pods-GlobeNotesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CC3CE401216671F3005044CE /* MapScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewModel.swift; sourceTree = "<group>"; };
 		CC3CE40321667CD7005044CE /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
+		CC3CE40521669BD5005044CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CC5CE30021664A5000974F68 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		CC5CE3022166527300974F68 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,12 +158,12 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
-		CC6FBCEB21627D3000ABF450 /* Components */ = {
+		CC6FBCEB21627D3000ABF450 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				CC6FBCED21627D5E00ABF450 /* LocationManager.swift */,
 			);
-			path = Components;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		CC6FBCF52163DADC00ABF450 /* NoteDetails */ = {
@@ -207,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				CC9A421921661F5500F17259 /* Services */,
-				CC6FBCEB21627D3000ABF450 /* Components */,
+				CC6FBCEB21627D3000ABF450 /* Managers */,
 				CC74DD98215E8731003C06D2 /* AppDelegate.swift */,
 				CC74DD9C215E8731003C06D2 /* Main.storyboard */,
 				CC74DD9F215E8732003C06D2 /* Assets.xcassets */,
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				CC3CE40321667CD7005044CE /* NoteService.swift */,
+				CC3CE40521669BD5005044CE /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */,
 				CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */,
 				CC9A421D2166231D00F17259 /* SignUpViewModel.swift in Sources */,
+				CC3CE40621669BD5005044CE /* AuthService.swift in Sources */,
 				CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC3CE40421667CD7005044CE /* NoteService.swift in Sources */,

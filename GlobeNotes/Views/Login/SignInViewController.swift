@@ -14,7 +14,7 @@ final class SignInViewController: UIViewController {
     // MARK: - Dependencies
     
     fileprivate var viewModel: SignInViewModelType = {
-        let vm = SignInViewModel()
+        let vm = SignInViewModel(authService: AuthService())
         return vm
     }()
     
