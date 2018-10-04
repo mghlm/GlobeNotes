@@ -12,6 +12,13 @@ import CoreLocation
 
 final class MapScreenViewController: UIViewController {
     
+    // MARK: - Dependencies
+    
+    fileprivate var locationManager: LocationManagerType = {
+        let lm = LocationManager()
+        return lm
+    }()
+    
     // MARK: - Private properties
     
     fileprivate var mapView: MKMapView!

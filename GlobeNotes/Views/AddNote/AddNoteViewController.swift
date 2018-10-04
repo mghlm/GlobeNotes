@@ -88,8 +88,6 @@ class AddNoteViewController: UIViewController {
         return button
     }()
     
-    fileprivate let databaseRef = Database.database().reference(withPath: "notes")
-    
     // MARK: - Public properties
     
     var userName: String!
