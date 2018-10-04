@@ -13,7 +13,7 @@ final class SignUpViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    var viewModel: SignUpViewControllerViewModelType!
+    fileprivate var viewModel: SignUpViewControllerViewModelType!
     
     // MARK: - Private Properties
     
@@ -91,6 +91,7 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDependencies()
         setupUI()
     }
     
@@ -117,6 +118,10 @@ final class SignUpViewController: UIViewController {
         emojiLabel.anchor(centerX: view.centerXAnchor, centerY: nil)
         emojiLabel.anchor(top: mainTitleLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         stackView.anchor(top: emojiLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+    }
+    
+    fileprivate func setupDependencies() {
+        viewModel = SignUpViewControllerViewModel()
     }
     
     @objc fileprivate func handleTextInputChange() {
