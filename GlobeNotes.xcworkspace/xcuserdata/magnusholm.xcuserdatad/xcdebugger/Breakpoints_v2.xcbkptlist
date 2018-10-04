@@ -6,49 +6,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GlobeNotes/Views/HomeScreen/HomeScreenViewController.swift"
-            timestampString = "560277997.955272"
+            timestampString = "560350510.86272"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "HomeScreenViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GlobeNotes.HomeScreenViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; GlobeNotes.HomeScreenViewController"
-                  moduleName = "GlobeNotes"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/magnusholm/Developer/Projects/GlobeNotes/GlobeNotes/Views/HomeScreen/HomeScreenViewController.swift"
-                  timestampString = "560277998.174226"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "824">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GlobeNotes.HomeScreenViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GlobeNotes.HomeScreenViewController&gt;"
-                  moduleName = "GlobeNotes"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/magnusholm/Developer/Projects/GlobeNotes/GlobeNotes/Views/HomeScreen/HomeScreenViewController.swift"
-                  timestampString = "560277998.176793"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "808">
-               </Location>
-            </Locations>
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

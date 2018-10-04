@@ -150,6 +150,7 @@ final class SignInViewController: UIViewController {
     
     @objc fileprivate func handleSignUp() {
         let signUpViewController = SignUpViewController()
+        signUpViewController.viewModel = SignUpViewControllerViewModel()
         navigationController?.pushViewController(signUpViewController, animated: true)
     }
     
