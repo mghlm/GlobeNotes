@@ -73,7 +73,7 @@ final class SignInViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Don't have an account? Sign up!", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlePushToSignUp), for: .touchUpInside)
         
         return button
     }()
@@ -162,7 +162,7 @@ final class SignInViewController: UIViewController {
 //        }
     }
     
-    @objc fileprivate func handleSignUp() {
+    @objc fileprivate func handlePushToSignUp() {
         let signUpViewController = SignUpViewController()
         navigationController?.pushViewController(signUpViewController, animated: true)
     }

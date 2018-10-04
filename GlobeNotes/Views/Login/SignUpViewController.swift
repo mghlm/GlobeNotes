@@ -142,8 +142,9 @@ final class SignUpViewController: UIViewController {
         guard let password = passwordTextField.text, !password.isEmpty else { return }
         
         viewModel.signUpNewUser(with: email, username: username, password: password, completion: {
-            NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
+            })
         })
         
 //        Auth.auth().createUser(withEmail: email, password: password) { (user, error: Error?) in

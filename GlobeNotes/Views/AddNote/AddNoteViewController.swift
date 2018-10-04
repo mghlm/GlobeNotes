@@ -11,6 +11,10 @@ import Firebase
 
 class AddNoteViewController: UIViewController {
     
+    // MARK: - Dependencies
+    
+    fileprivate var viewModel: AddNoteViewControllerViewModelType!
+    
     // MARK: - Private properties
     
     fileprivate var dismissButton: UIButton = {
@@ -98,6 +102,7 @@ class AddNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDependencies()
         setupUI()
     }
     
@@ -127,6 +132,10 @@ class AddNoteViewController: UIViewController {
         submitUpButton.anchor(top: textTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 50)
     }
     
+    fileprivate func setupDependencies() {
+        viewModel = AddNoteViewControllerViewModel()
+    }
+    
     // MARK: - Handlers
     
     @objc fileprivate func handleDismiss() {
@@ -146,19 +155,25 @@ class AddNoteViewController: UIViewController {
     }
     
     @objc fileprivate func handleSubmit() {
+        guard let title = titleTextField.text else { return }
+        let text = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text ?? ""
         
-        guard let titleText = titleTextField.text else { return }
-        let noteText = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let usersNoteReference = Database.database().reference().child("notes").child(uid)
-        let ref = usersNoteReference.childByAutoId()
-        
-        let values = ["userName": userName, "title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
-        
-        ref.setValue(values)
-        self.dismiss(animated: true) {
-            NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+        viewModel.submitNote(with: userName, title: title, text: text, latitude: latitude, longitude: longitude, creationDate: Date()) {
+            self.dismiss(animated: true) {
+                NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+            }
         }
+        
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        let usersNoteReference = Database.database().reference().child("notes").child(uid)
+//        let ref = usersNoteReference.childByAutoId()
+//
+//        let values = ["userName": userName, "title": titleText, "text": noteText ?? "", "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+//
+//        ref.setValue(values)
+//        self.dismiss(animated: true) {
+//            NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
+//        }
     }
 }
 
