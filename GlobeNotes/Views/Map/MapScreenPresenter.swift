@@ -11,8 +11,22 @@ import MapKit
 
 protocol MapScreenPresenterType {
     
+    /// Gets a region to show on map
+    ///
+    /// - Parameters:
+    ///   - latitudeSpan: The specified span of the latitude
+    ///   - longitudeSpan: The specified span of longitude
+    /// - Returns: A region to use for map
     func getRegion(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
+    
+    /// To check if user has authorized location
+    ///
+    /// - Returns: True or false
     func isLocationAuthorized() -> Bool
+    
+    /// To get the current location of the user
+    ///
+    /// - Returns: User's location as CLLocation coordinate object
     func getUsersLocationCoordinates() -> CLLocationCoordinate2D?
     
     /// Adds annotations to the mapView based on the fetched notes

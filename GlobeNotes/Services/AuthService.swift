@@ -28,10 +28,20 @@ protocol AuthServiceType {
     ///   - completion: Completion called after successful sign in
     func signInUser(email: String, password: String, completion: @escaping () -> Void)
     
+    /// Fetches the user currently signed in
+    ///
+    /// - Parameter completion: Called after fetching is complete
+    /// - Returns: User object
     func fetchUser(completion: @escaping (User) -> ())
     
+    /// Signs user out
+    ///
+    /// - Parameter completion: Called when user is successfully signed out
     func signUserOut(completion: @escaping () -> ())
     
+    /// Checks whether a user is currently signed in
+    ///
+    /// - Returns: True or false 
     func isUserSignedIn() -> Bool
 }
 

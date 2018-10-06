@@ -167,10 +167,6 @@ final class HomeScreenViewController: UIViewController {
         }
     }
     
-    fileprivate func sortNotes() {
-        
-    }
-    
     fileprivate func switchBetweenShowAllOrOnlyUsersNotes() {
         if isShowingOnlyCurrentUsersNotes == false {
             guard let uid = user?.uid else { return }
@@ -261,9 +257,6 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleSettings() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Sort notes by distance", style: .default, handler: { (_) in
-            self.sortNotes()
-        }))
         let filterByUserText = isShowingOnlyCurrentUsersNotes == false ? "Show only my notes" : "Show all notes"
         alertController.addAction(UIAlertAction(title: filterByUserText, style: .default, handler: { (_) in
             self.switchBetweenShowAllOrOnlyUsersNotes()
