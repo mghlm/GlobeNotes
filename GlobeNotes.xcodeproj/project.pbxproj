@@ -10,7 +10,7 @@
 		4B205D41A6EB8EBEEA4574DC /* Pods_GlobeNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A48AA5F20103E04BCD0B38 /* Pods_GlobeNotes.framework */; };
 		6E3164FFB19ECC27A04B5B21 /* Pods_GlobeNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */; };
 		A171B94A2F19BB32A90BB959 /* Pods_GlobeNotesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */; };
-		CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenViewModel.swift */; };
+		CC3CE402216671F3005044CE /* MapScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenPresenter.swift */; };
 		CC3CE40421667CD7005044CE /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40321667CD7005044CE /* NoteService.swift */; };
 		CC3CE40621669BD5005044CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40521669BD5005044CE /* AuthService.swift */; };
 		CC3CE4082166A66E005044CE /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4072166A66E005044CE /* NoteViewModel.swift */; };
@@ -68,7 +68,7 @@
 		67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B420BEF1AA7F42725A15A3B1 /* Pods-GlobeNotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobeNotesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobeNotesUITests/Pods-GlobeNotesUITests.release.xcconfig"; sourceTree = "<group>"; };
-		CC3CE401216671F3005044CE /* MapScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewModel.swift; sourceTree = "<group>"; };
+		CC3CE401216671F3005044CE /* MapScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenPresenter.swift; sourceTree = "<group>"; };
 		CC3CE40321667CD7005044CE /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		CC3CE40521669BD5005044CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CC3CE4072166A66E005044CE /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */,
-				CC3CE401216671F3005044CE /* MapScreenViewModel.swift */,
+				CC3CE401216671F3005044CE /* MapScreenPresenter.swift */,
 				CC6FBCEF21636FEE00ABF450 /* NoteAnnotation.swift */,
 			);
 			path = Map;
@@ -564,7 +564,7 @@
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,
 				CC3CE40D21675AA5005044CE /* Coordinator.swift in Sources */,
-				CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */,
+				CC3CE402216671F3005044CE /* MapScreenPresenter.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
 				CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */,
 				CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */,

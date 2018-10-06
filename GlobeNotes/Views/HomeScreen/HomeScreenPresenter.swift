@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol HomeScreenPresenterType {
     func requestLocationAuthorization()
-    
     func isLocationAuthorized() -> Bool
-    
     func startUpdatingLocation()
+    
+    func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
 }
 
 struct HomeScreenPresenter: HomeScreenPresenterType {
@@ -43,5 +44,13 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
-    
+}
+
+extension HomeScreenPresenter {
+    func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note]) {
+        let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
+        let mapScreenViewController = MapScreenViewController()
+        mapScreenViewController.presenter = mapScreenPresenter
+        navigationController.pushViewController(mapScreenViewController, animated: true)
+    }
 }

@@ -9,26 +9,30 @@
 import Foundation
 import MapKit
 
-protocol MapScreenViewModelType {
+protocol MapScreenPresenterType {
     
     func getRegion(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
     func isLocationAuthorized() -> Bool
     func getUsersLocationCoordinates() -> CLLocationCoordinate2D?
-    func fetchNotes(completion: @escaping ([Note]) -> ())
+    
+    /// Adds annotations to the mapView based on the fetched notes
+    ///
+    /// - Parameter notes: All the notes currently in the database
+    func addAnnotations(to mapView: MKMapView)
 }
 
-struct MapScreenViewModel: MapScreenViewModelType {
+struct MapScreenPresenter: MapScreenPresenterType {
     
     // MARK: - Dependencies
     
     private var locationManager: LocationManagerType!
-    private var noteService: NoteServiceType!
+    private var notes: [Note]!
     
     // MARK: - Init
     
-    init(locationManager: LocationManagerType, noteService: NoteServiceType) {
+    init(locationManager: LocationManagerType, notes: [Note]) {
         self.locationManager = locationManager
-        self.noteService = noteService
+        self.notes = notes
     }
     
     // MARK: - Public methods
@@ -36,7 +40,7 @@ struct MapScreenViewModel: MapScreenViewModelType {
     func getRegion(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion? {
         if let userLocation = getUsersLocationCoordinates() {
             let location = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+            let span = MKCoordinateSpan(latitudeDelta: latitudeSpan, longitudeDelta: longitudeSpan)
             let region = MKCoordinateRegion(center: location, span: span)
             
             return region
@@ -52,9 +56,10 @@ struct MapScreenViewModel: MapScreenViewModelType {
         return locationManager.usersCurrentLocation?.coordinate
     }
     
-    func fetchNotes(completion: @escaping ([Note]) -> ()) {
-        noteService.fetchNotes { (notes) in
-            completion(notes)
+    func addAnnotations(to mapView: MKMapView) {
+        for note in notes {
+            let annotation = NoteAnnotation(note: note)
+            mapView.addAnnotation(annotation)
         }
     }
 }
