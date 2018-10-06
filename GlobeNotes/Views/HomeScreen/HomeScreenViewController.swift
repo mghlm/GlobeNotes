@@ -15,10 +15,7 @@ final class HomeScreenViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: HomeScreenViewModel = {
-        let vm = HomeScreenViewModel()
-        return vm
-    }()
+    var presenter: HomeScreenPresenterType!
     
     // MARK: - Private properties
     

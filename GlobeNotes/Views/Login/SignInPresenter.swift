@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-protocol SignInViewModelType {
+protocol SignInPresenterType {
     
     /// Signs in a user to Firebase Authentication
     ///
@@ -18,9 +18,14 @@ protocol SignInViewModelType {
     ///   - password: User's password they created when signing up
     ///   - completion: Completion called after successful sign in
     func signInUser(with email: String, password: String, completion: @escaping () -> Void)
+    
+    /// Navigates to sign up view controller in passed navController
+    ///
+    /// - Parameter navigationController: the navController to navigate in
+    func navigateToSignUp(in navigationController: UINavigationController)
 }
 
-struct SignInViewModel: SignInViewModelType {
+struct SignInPresenter: SignInPresenterType {
     
     // MARK: - Dependencies
     
@@ -38,5 +43,16 @@ struct SignInViewModel: SignInViewModelType {
         authService.signInUser(email: email, password: password) {
             completion()
         }
+    }
+}
+
+// Navigation
+
+extension SignInPresenter {
+    func navigateToSignUp(in navigationController: UINavigationController) {
+        let signUpViewModel = SignUpPresenter(authService: authService)
+        let signUpViewController = SignUpViewController()
+        signUpViewController.presenter = signUpViewModel
+        navigationController.pushViewController(signUpViewController, animated: true)
     }
 }

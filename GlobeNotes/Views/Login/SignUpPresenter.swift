@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-protocol SignUpViewModelType {
+protocol SignUpPresenterType {
     
     /// Creates a new account and signs it up to Firebase Authentication
     ///
@@ -21,7 +21,7 @@ protocol SignUpViewModelType {
     func signUpNewUser(with email: String, username: String, password: String, completion: @escaping () -> Void)
 }
 
-struct SignUpViewModel: SignUpViewModelType {
+struct SignUpPresenter: SignUpPresenterType {
     
     // MARK: - Dependencies
     

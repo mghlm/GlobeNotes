@@ -13,10 +13,7 @@ final class SignUpViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: SignUpViewModelType = {
-        let vm = SignUpViewModel(authService: AuthService())
-        return vm
-    }()
+    var presenter: SignUpPresenterType!
     
     // MARK: - Private Properties
     
@@ -139,7 +136,7 @@ final class SignUpViewController: UIViewController {
         guard let username = usernameTextField.text, !username.isEmpty else { return }
         guard let password = passwordTextField.text, !password.isEmpty else { return }
         
-        viewModel.signUpNewUser(with: email, username: username, password: password, completion: {
+        presenter.signUpNewUser(with: email, username: username, password: password, completion: {
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: SignUpViewController.successAlert, object: nil)
             })
