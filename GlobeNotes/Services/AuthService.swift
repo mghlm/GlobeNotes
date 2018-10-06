@@ -27,6 +27,12 @@ protocol AuthServiceType {
     ///   - password: User's password they created when signing up
     ///   - completion: Completion called after successful sign in
     func signInUser(email: String, password: String, completion: @escaping () -> Void)
+    
+    func fetchUser(completion: @escaping (User) -> ())
+    
+    func signUserOut(completion: @escaping () -> ())
+    
+    func isUserSignedIn() -> Bool
 }
 
 struct AuthService: AuthServiceType {
@@ -66,5 +72,29 @@ struct AuthService: AuthServiceType {
             print("Successfully signed in user", user?.user.uid ?? "")
             completion()
         }
+    }
+    
+    func fetchUser(completion: @escaping (User) -> ()) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let userDictionary = snapshot.value as? [String: Any] else { return }
+            let user = User(uid: uid, dictionary: userDictionary)
+            completion(user)
+        }) { (error) in
+            print("Failed to fetch user:", error)
+        }
+    }
+    
+    func signUserOut(completion: @escaping () -> ()) {
+        do {
+            try Auth.auth().signOut()
+            completion()
+        } catch let error {
+            print("Failed to sign out user:", error)
+        }
+    }
+    
+    func isUserSignedIn() -> Bool  {
+        return Auth.auth().currentUser != nil 
     }
 }

@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         window = UIWindow()
-        let homaScreenPresenter = HomeScreenPresenter(noteService: NoteService(), locationManager: LocationManager())
+        let homeScreenPresenter = HomeScreenPresenter(noteService: NoteService(), authService: AuthService(), locationManager: LocationManager())
         let homeScreenViewController = HomeScreenViewController()
-        homeScreenViewController.presenter = homaScreenPresenter
+        homeScreenViewController.presenter = homeScreenPresenter
         let navController = UINavigationController(rootViewController: homeScreenViewController)
         
         window?.rootViewController = navController
