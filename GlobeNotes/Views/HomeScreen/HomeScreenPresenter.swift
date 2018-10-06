@@ -9,7 +9,11 @@
 import Foundation
 
 protocol HomeScreenPresenterType {
+    func requestLocationAuthorization()
     
+    func isLocationAuthorized() -> Bool
+    
+    func startUpdatingLocation()
 }
 
 struct HomeScreenPresenter: HomeScreenPresenterType {
@@ -24,6 +28,20 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
     init(noteService: NoteServiceType, locationManager: LocationManagerType) {
         self.noteService = noteService
         self.locationManager = locationManager
+    }
+    
+    // MARK: - Public funtions
+    
+    func requestLocationAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func isLocationAuthorized() -> Bool {
+        return locationManager.isLocationAuthorized()
+    }
+    
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
     }
     
 }

@@ -70,11 +70,6 @@ final class HomeScreenViewController: UIViewController {
     
     var user: User?
     
-    // MARK: - Dependencies
-    
-    var locationManager: LocationManagerType!
-    var noteService: NoteServiceType!
-    
     // MARK: - ViewController
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +87,7 @@ final class HomeScreenViewController: UIViewController {
         fetchNotes()
         setupNotifications()
         
-        requestLocationAuthorization(with: locationManager.authorizationStatus)
+        presenter.requestLocationAuthorization()
         
         setupUI()
     }
@@ -168,12 +163,12 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func requestLocationAuthorization(with status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            presenter.requestLocationAuthorization()
             return
         case .denied, .restricted:
             showLocationRequiredAlert()
         default:
-            locationManager.startUpdatingLocation()
+            presenter.startUpdatingLocation()
         }
     }
     
@@ -230,7 +225,7 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleAddNote() {
         guard let userName = user?.userName else { return }
-        if locationManager.isLocationAuthorized() {
+        if presenter.isLocationAuthorized() {
             let addNoteViewController = AddNoteViewController()
             addNoteViewController.userName = userName
             navigationController?.present(addNoteViewController, animated: true, completion: nil)
