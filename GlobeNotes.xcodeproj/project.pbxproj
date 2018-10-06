@@ -36,6 +36,7 @@
 		CC74DDD1215E9500003C06D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDD0215E9500003C06D2 /* User.swift */; };
 		CC74DDD3215E9B01003C06D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */; };
 		CC9A421D2166231D00F17259 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9A421C2166231D00F17259 /* SignUpPresenter.swift */; };
+		CCE558D321697219004051A3 /* NoteDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE558D221697219004051A3 /* NoteDetailsPresenter.swift */; };
 		CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		CC74DDD0215E9500003C06D2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC9A421C2166231D00F17259 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
+		CCE558D221697219004051A3 /* NoteDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsPresenter.swift; sourceTree = "<group>"; };
 		CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				CC6FBCF62163DAED00ABF450 /* NoteDetailsViewController.swift */,
+				CCE558D221697219004051A3 /* NoteDetailsPresenter.swift */,
 			);
 			path = NoteDetails;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				CC3CE402216671F3005044CE /* MapScreenPresenter.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
 				CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */,
+				CCE558D321697219004051A3 /* NoteDetailsPresenter.swift in Sources */,
 				CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */,
 				CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */,
 			);

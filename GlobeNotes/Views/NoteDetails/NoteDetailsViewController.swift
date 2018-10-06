@@ -10,6 +10,10 @@ import UIKit
 
 final class NoteDetailsViewController: UIViewController {
     
+    // MARK: - Dependencies
+    
+    var presenter: NoteDetailsPresenterType!
+    
     // MARK: - Public properties
     
     var note: Note! {

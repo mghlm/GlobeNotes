@@ -48,7 +48,7 @@ class NoteTableViewCell: UITableViewCell {
     fileprivate func setupUI() {
         noteTitleLabel.text = "✏️ \(note.title)"
         setupLocationLabel()
-        noteAuthorLabel.text = note.userName == nil ? "created at \(formattedDateString(for: note.creationDate))" : "created at \(formattedDateString(for: note.creationDate)) by \(note.userName)"
+        noteAuthorLabel.text = "created at \(formattedDateString(for: note.creationDate)) by \(note.userName)"
         addSubview(noteTitleLabel)
         addSubview(locationLabel)
         addSubview(noteAuthorLabel)
