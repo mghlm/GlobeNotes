@@ -65,9 +65,9 @@ final class NoteDetailsViewController: UIViewController {
         view.addSubview(mainTitleLabel)
         contentLabel.text = note.text
         view.addSubview(contentLabel)
-        if let imageUrl = note.imageUrl {
-            setupImageView(with: imageUrl)
-        }
+//        if let imageUrl = note.imageUrl {
+//            setupImageView(with: imageUrl)
+//        }
         view.addSubview(imageView)
         setupConstraints()
     }
@@ -78,22 +78,22 @@ final class NoteDetailsViewController: UIViewController {
         imageView.anchor(top: contentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
     }
     
-    fileprivate func setupImageView(with imageUrl: String) {
-        guard let url = URL(string: imageUrl) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Failed to fetch user profile image:", error.localizedDescription)
-                return
-            }
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self.imageView.image = image
-                self.imageView.layer.cornerRadius = 10
-                self.imageView.clipsToBounds = true
-            }
-            }.resume()
-    }
+//    fileprivate func setupImageView(with imageUrl: String) {
+//        guard let url = URL(string: imageUrl) else { return }
+//        
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            if let error = error {
+//                print("Failed to fetch user profile image:", error.localizedDescription)
+//                return
+//            }
+//            guard let data = data else { return }
+//            let image = UIImage(data: data)
+//            DispatchQueue.main.async {
+//                self.imageView.image = image
+//                self.imageView.layer.cornerRadius = 10
+//                self.imageView.clipsToBounds = true
+//            }
+//            }.resume()
+//    }
     
 }

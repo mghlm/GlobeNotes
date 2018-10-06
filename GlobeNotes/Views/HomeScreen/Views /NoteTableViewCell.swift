@@ -9,7 +9,11 @@
 import UIKit
 import CoreLocation
 
-class NoteTableViewCell: UITableViewCell {
+protocol NoteTableViewCellDelegate: class {
+    
+}
+
+final class NoteTableViewCell: UITableViewCell {
     
     // MARK: - Public properties
     

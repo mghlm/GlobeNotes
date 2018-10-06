@@ -6,7 +6,6 @@
 //  Copyright © 2018 magnus holm. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
 protocol MapScreenPresenterType {
