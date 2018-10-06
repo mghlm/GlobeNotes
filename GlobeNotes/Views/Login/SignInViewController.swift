@@ -13,10 +13,7 @@ final class SignInViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: SignInViewModelType = {
-        let vm = SignInViewModel()
-        return vm
-    }()
+    var presenter: SignInPresenterType!
     
     // MARK: - Private properties
     
@@ -141,7 +138,7 @@ final class SignInViewController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        viewModel.signInUser(with: email, password: password) {
+        presenter.signInUser(with: email, password: password) {
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
             })

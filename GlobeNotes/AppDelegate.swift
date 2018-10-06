@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        
+        
         window = UIWindow()
+        let homeScreenPresenter = HomeScreenPresenter(noteService: NoteService(), authService: AuthService(), locationManager: LocationManager())
         let homeScreenViewController = HomeScreenViewController()
-        homeScreenViewController.locationManager = LocationManager()
-        homeScreenViewController.noteService = NoteService()
+        homeScreenViewController.presenter = homeScreenPresenter
         let navController = UINavigationController(rootViewController: homeScreenViewController)
         
         window?.rootViewController = navController

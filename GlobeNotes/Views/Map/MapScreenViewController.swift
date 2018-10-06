@@ -14,7 +14,7 @@ final class MapScreenViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    var viewModel: MapScreenViewModelType!
+    var presenter: MapScreenPresenterType!
     
     // MARK: - Private properties
     
@@ -22,8 +22,8 @@ final class MapScreenViewController: UIViewController {
     
     // MARK: - Constants
     
-    let latitudeSpan = 0.15
-    let longitudeSpan = 0.15
+    let regionLatitudeSpan = 0.15
+    let regionLongitudeSpan = 0.15
     
     // MARK: - ViewController
     
@@ -48,30 +48,18 @@ final class MapScreenViewController: UIViewController {
     
     fileprivate func setupMapView() {
         mapView = MKMapView()
-        viewModel.fetchNotes { (notes) in
-            self.addAnnotations(with: notes)
-        }
+        presenter.addAnnotations(to: mapView)
         mapView.showsUserLocation = true
-        if viewModel.isLocationAuthorized() {
-            zoomToUsersCurrentLocation(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan)
+        if presenter.isLocationAuthorized() {
+            zoomToUsersCurrentLocation(latitudeSpan: regionLatitudeSpan, longitudeSpan: regionLongitudeSpan)
         }
         view.addSubview(mapView)
     }
     
     /// Zooms to specified region with user's current location as center
     fileprivate func zoomToUsersCurrentLocation(latitudeSpan: Double, longitudeSpan: Double) {
-        if let region = viewModel.getRegion(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
+        if let region = presenter.getRegion(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
             mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    /// Adds annotations to the mapView based on the fetched notes
-    ///
-    /// - Parameter notes: All the notes currently in the database
-    fileprivate func addAnnotations(with notes: [Note]) {
-        for note in notes {
-            let annotation = NoteAnnotation(note: note)
-            mapView.addAnnotation(annotation)
         }
     }
 }

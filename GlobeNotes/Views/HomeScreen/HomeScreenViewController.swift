@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import Firebase
 import FontAwesome_swift
 import CoreLocation
 
 final class HomeScreenViewController: UIViewController {
     
-    // MARK: - Private properties
+    // MARK: - Dependencies
     
-    fileprivate var notes = [Note]()
+    var presenter: HomeScreenPresenterType!
+    
+    // MARK: - Private properties
     
     fileprivate var addNoteButton: UIButton = {
         let button = UIButton()
@@ -57,24 +58,19 @@ final class HomeScreenViewController: UIViewController {
         return tv
     }()
     
-    fileprivate let databaseReference = Database.database().reference(withPath: "notes")
     fileprivate var searchController: UISearchController!
-    fileprivate var staticNotes: [Note]!
+    fileprivate var filteredNotes = [Note]()
+    fileprivate var allNotes: [Note]!
     fileprivate var isShowingOnlyCurrentUsersNotes = false
     
     // MARK: - Public properties
     
     var user: User?
     
-    // MARK: - Dependencies
-    
-    var locationManager: LocationManagerType!
-    var noteService: NoteServiceType!
-    
     // MARK: - ViewController
     
     override func viewWillAppear(_ animated: Bool) {
-        if Auth.auth().currentUser == nil {
+        if !presenter.isUserSignedIn() {
             showSignInScreen()
         }
         if let selectionIndexPath = notesTableView.indexPathForSelectedRow {
@@ -88,7 +84,7 @@ final class HomeScreenViewController: UIViewController {
         fetchNotes()
         setupNotifications()
         
-        requestLocationAuthorization(with: locationManager.authorizationStatus)
+        presenter.requestLocationAuthorization()
         
         setupUI()
     }
@@ -141,22 +137,20 @@ final class HomeScreenViewController: UIViewController {
     }
     
     fileprivate func showSignInScreen() {
-        let signInViewController = SignInViewController()
-        let navController = UINavigationController(rootViewController: signInViewController)
-        present(navController, animated: false)
+        guard let navController = navigationController else { return }
+        presenter.navigateToSignInScreen(in: navController)
     }
     
     fileprivate func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.fetchUserWithUid(uid: uid) { (user) in
-            self.user = user
+        presenter.fetchUser { (user) in
+            self.user = user 
         }
     }
     
     fileprivate func fetchNotes() {
-        Database.fetchNotes { (notes) in
-            self.notes = notes
-            self.staticNotes = notes
+        presenter.fetchNotes { (notes) in
+            self.allNotes = notes
+            self.filteredNotes = notes
             self.notesTableView.reloadData()
         }
     }
@@ -164,12 +158,12 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func requestLocationAuthorization(with status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            presenter.requestLocationAuthorization()
             return
         case .denied, .restricted:
             showLocationRequiredAlert()
         default:
-            locationManager.startUpdatingLocation()
+            presenter.startUpdatingLocation()
         }
     }
     
@@ -180,12 +174,12 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func switchBetweenShowAllOrOnlyUsersNotes() {
         if isShowingOnlyCurrentUsersNotes == false {
             guard let uid = user?.uid else { return }
-            notes = staticNotes.filter { (note) -> Bool in
+            filteredNotes = allNotes.filter { (note) -> Bool in
                 return note.uid == uid
             }
             isShowingOnlyCurrentUsersNotes = true
         } else {
-            notes = staticNotes
+            filteredNotes = allNotes
             isShowingOnlyCurrentUsersNotes = false
         }
         notesTableView.reloadData()
@@ -226,20 +220,18 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleAddNote() {
         guard let userName = user?.userName else { return }
-        if locationManager.isLocationAuthorized() {
-            let addNoteViewController = AddNoteViewController()
-            addNoteViewController.userName = userName
-            navigationController?.present(addNoteViewController, animated: true, completion: nil)
+        guard let navController = navigationController else { return }
+        if presenter.isLocationAuthorized() {
+            presenter.navigateToAddNoteScreen(in: navController, with: userName)
         } else {
             showLocationRequiredAlert()
         }
     }
     
     @objc fileprivate func handleShowSuccessSignInAlert() {
-        self.notes.removeAll()
-        self.fetchNotes()
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.fetchUserWithUid(uid: uid) { (user) in
+        filteredNotes.removeAll()
+        fetchNotes()
+        presenter.fetchUser { (user) in
             self.user = user
             let signInMessage = user.userName == "" ? "Successfully signed in" : "Successfully signed in as \(user.userName)"
             self.showAlert(with: signInMessage, delay: 1.5)
@@ -247,10 +239,9 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func handleShowSuccessSignUpAlert() {
-        self.notes.removeAll()
+        self.filteredNotes.removeAll()
         self.fetchNotes()
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.fetchUserWithUid(uid: uid) { (user) in
+        presenter.fetchUser { (user) in
             self.user = user
             let signInMessage = user.userName == "" ? "Successfully created a new user" : "Successfully created new user \(user.userName)"
             self.showAlert(with: signInMessage, delay: 1.5)
@@ -258,16 +249,14 @@ final class HomeScreenViewController: UIViewController {
     }
     
     @objc fileprivate func refreshAndShowNoteAddedAlert() {
-        notes.removeAll()
+        filteredNotes.removeAll()
         fetchNotes()
         showAlert(with: "Note successfully added!", delay: 1.5)
     }
     
     @objc fileprivate func handleShowMap() {
-        let mapViewController = MapScreenViewController()
-        mapViewController.viewModel = MapScreenViewModel(locationManager: locationManager, noteService: noteService)
-//        mapViewController.notes = notes
-        navigationController?.pushViewController(mapViewController, animated: true)
+        guard let navController = navigationController else { return }
+        presenter.navigateToMapScreen(in: navController, with: allNotes)
     }
     
     @objc fileprivate func handleSettings() {
@@ -280,13 +269,10 @@ final class HomeScreenViewController: UIViewController {
             self.switchBetweenShowAllOrOnlyUsersNotes()
         }))
         alertController.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { (_) in
-            do {
-                try Auth.auth().signOut()
-                let navController = UINavigationController(rootViewController: SignInViewController())
-                self.navigationController?.present(navController, animated: true, completion: nil)
-                self.user = nil 
-            } catch let error {
-                print("Failed to sign out:", error)
+            
+            self.presenter.signUserOut {
+                guard let navController = self.navigationController else { return }
+                self.presenter.navigateToSignInScreen(in: navController)
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -297,9 +283,9 @@ final class HomeScreenViewController: UIViewController {
 extension HomeScreenViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            notes = staticNotes
+            filteredNotes = allNotes
         } else {
-            notes = staticNotes.filter({ (note) -> Bool in
+            filteredNotes = allNotes.filter({ (note) -> Bool in
                 return note.userName.lowercased().contains(searchText.lowercased()) || note.title.lowercased().contains(searchText.lowercased())
             })
         }
@@ -311,7 +297,7 @@ extension HomeScreenViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navController = navigationController else { return }
         let noteDetailsViewController = NoteDetailsViewController()
-        noteDetailsViewController.note = notes[indexPath.row]
+        noteDetailsViewController.note = filteredNotes[indexPath.row]
         navController.pushViewController(noteDetailsViewController, animated: true)
     }
     
@@ -334,12 +320,12 @@ extension HomeScreenViewController: UITableViewDelegate {
 
 extension HomeScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notes.count
+        return filteredNotes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.id) as! NoteTableViewCell
-        let note = notes[indexPath.row]
+        let note = filteredNotes[indexPath.row]
         cell.note = note
         
         return cell

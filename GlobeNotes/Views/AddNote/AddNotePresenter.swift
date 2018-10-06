@@ -9,17 +9,24 @@
 import Foundation
 import Firebase
 
-protocol AddNoteViewModelType {
+protocol AddNotePresenterType {
     
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void)
 }
 
-struct AddNoteViewModel: AddNoteViewModelType {
+struct AddNotePresenter: AddNotePresenterType {
     
-    private let locationManager: LocationManagerType = {
-        let lm = LocationManager()
-        return lm
-    }()
+    // MARK: - Dependencies
+    
+    fileprivate let locationManager: LocationManagerType!
+    
+    // MARK: - Init
+    
+    init(locationManager: LocationManagerType) {
+        self.locationManager = locationManager
+    }
+    
+    // MARK: - Public methods 
     
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }

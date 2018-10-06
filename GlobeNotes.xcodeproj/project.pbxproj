@@ -10,10 +10,14 @@
 		4B205D41A6EB8EBEEA4574DC /* Pods_GlobeNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A48AA5F20103E04BCD0B38 /* Pods_GlobeNotes.framework */; };
 		6E3164FFB19ECC27A04B5B21 /* Pods_GlobeNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */; };
 		A171B94A2F19BB32A90BB959 /* Pods_GlobeNotesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */; };
-		CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenViewModel.swift */; };
+		CC3CE402216671F3005044CE /* MapScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE401216671F3005044CE /* MapScreenPresenter.swift */; };
 		CC3CE40421667CD7005044CE /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40321667CD7005044CE /* NoteService.swift */; };
-		CC5CE30121664A5000974F68 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInViewModel.swift */; };
-		CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNoteViewModel.swift */; };
+		CC3CE40621669BD5005044CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40521669BD5005044CE /* AuthService.swift */; };
+		CC3CE4082166A66E005044CE /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4072166A66E005044CE /* NoteViewModel.swift */; };
+		CC3CE40A2166A7D3005044CE /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4092166A7D3005044CE /* HomeScreenPresenter.swift */; };
+		CC3CE40D21675AA5005044CE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40C21675AA5005044CE /* Coordinator.swift */; };
+		CC5CE30121664A5000974F68 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInPresenter.swift */; };
+		CC5CE3032166527300974F68 /* AddNotePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNotePresenter.swift */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
 		CC6D0368215FCD44005F9CFA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0367215FCD44005F9CFA /* Note.swift */; };
 		CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */; };
@@ -33,7 +37,7 @@
 		CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDCD215E8B35003C06D2 /* Extensions.swift */; };
 		CC74DDD1215E9500003C06D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74DDD0215E9500003C06D2 /* User.swift */; };
 		CC74DDD3215E9B01003C06D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */; };
-		CC9A421D2166231D00F17259 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9A421C2166231D00F17259 /* SignUpViewModel.swift */; };
+		CC9A421D2166231D00F17259 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9A421C2166231D00F17259 /* SignUpPresenter.swift */; };
 		CCEB9ED8215EA46200383156 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,10 +68,14 @@
 		67A879515B96E512F6347966 /* Pods_GlobeNotesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF6F028BB2DFF4C2A5993D9 /* Pods_GlobeNotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobeNotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B420BEF1AA7F42725A15A3B1 /* Pods-GlobeNotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobeNotesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobeNotesUITests/Pods-GlobeNotesUITests.release.xcconfig"; sourceTree = "<group>"; };
-		CC3CE401216671F3005044CE /* MapScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewModel.swift; sourceTree = "<group>"; };
+		CC3CE401216671F3005044CE /* MapScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenPresenter.swift; sourceTree = "<group>"; };
 		CC3CE40321667CD7005044CE /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
-		CC5CE30021664A5000974F68 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		CC5CE3022166527300974F68 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
+		CC3CE40521669BD5005044CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CC3CE4072166A66E005044CE /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		CC3CE4092166A7D3005044CE /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
+		CC3CE40C21675AA5005044CE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CC5CE30021664A5000974F68 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
+		CC5CE3022166527300974F68 /* AddNotePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotePresenter.swift; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		CC6D0367215FCD44005F9CFA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +101,7 @@
 		CC74DDCD215E8B35003C06D2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CC74DDD0215E9500003C06D2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CC74DDD2215E9B01003C06D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CC9A421C2166231D00F17259 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		CC9A421C2166231D00F17259 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +146,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CC3CE40B21675A92005044CE /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CC3CE40C21675AA5005044CE /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		CC6D0364215FCAE4005F9CFA /* Views  */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,18 +166,18 @@
 			isa = PBXGroup;
 			children = (
 				CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */,
-				CC3CE401216671F3005044CE /* MapScreenViewModel.swift */,
+				CC3CE401216671F3005044CE /* MapScreenPresenter.swift */,
 				CC6FBCEF21636FEE00ABF450 /* NoteAnnotation.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
 		};
-		CC6FBCEB21627D3000ABF450 /* Components */ = {
+		CC6FBCEB21627D3000ABF450 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				CC6FBCED21627D5E00ABF450 /* LocationManager.swift */,
 			);
-			path = Components;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		CC6FBCF52163DADC00ABF450 /* NoteDetails */ = {
@@ -176,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */,
-				CC5CE3022166527300974F68 /* AddNoteViewModel.swift */,
+				CC5CE3022166527300974F68 /* AddNotePresenter.swift */,
 			);
 			path = AddNote;
 			sourceTree = "<group>";
@@ -206,8 +222,9 @@
 		CC74DD97215E8731003C06D2 /* GlobeNotes */ = {
 			isa = PBXGroup;
 			children = (
+				CC3CE40B21675A92005044CE /* Coordinator */,
 				CC9A421921661F5500F17259 /* Services */,
-				CC6FBCEB21627D3000ABF450 /* Components */,
+				CC6FBCEB21627D3000ABF450 /* Managers */,
 				CC74DD98215E8731003C06D2 /* AppDelegate.swift */,
 				CC74DD9C215E8731003C06D2 /* Main.storyboard */,
 				CC74DD9F215E8732003C06D2 /* Assets.xcassets */,
@@ -243,9 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				CC74DDC8215E88F0003C06D2 /* SignUpViewController.swift */,
-				CC9A421C2166231D00F17259 /* SignUpViewModel.swift */,
+				CC9A421C2166231D00F17259 /* SignUpPresenter.swift */,
 				CC74DDCA215E8911003C06D2 /* SignInViewController.swift */,
-				CC5CE30021664A5000974F68 /* SignInViewModel.swift */,
+				CC5CE30021664A5000974F68 /* SignInPresenter.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -276,6 +293,7 @@
 			children = (
 				CC74DDD0215E9500003C06D2 /* User.swift */,
 				CC6D0367215FCD44005F9CFA /* Note.swift */,
+				CC3CE4072166A66E005044CE /* NoteViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				CC3CE40321667CD7005044CE /* NoteService.swift */,
+				CC3CE40521669BD5005044CE /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -293,6 +312,7 @@
 			children = (
 				CC6D0364215FCAE4005F9CFA /* Views  */,
 				CCEB9ED7215EA46200383156 /* HomeScreenViewController.swift */,
+				CC3CE4092166A7D3005044CE /* HomeScreenPresenter.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -532,15 +552,19 @@
 				CC71F3E42160F0B9005E33EF /* AddNoteViewController.swift in Sources */,
 				CC6FBCEE21627D5E00ABF450 /* LocationManager.swift in Sources */,
 				CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */,
-				CC9A421D2166231D00F17259 /* SignUpViewModel.swift in Sources */,
-				CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */,
+				CC9A421D2166231D00F17259 /* SignUpPresenter.swift in Sources */,
+				CC3CE40621669BD5005044CE /* AuthService.swift in Sources */,
+				CC5CE3032166527300974F68 /* AddNotePresenter.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC3CE40421667CD7005044CE /* NoteService.swift in Sources */,
+				CC3CE40A2166A7D3005044CE /* HomeScreenPresenter.swift in Sources */,
 				CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */,
-				CC5CE30121664A5000974F68 /* SignInViewModel.swift in Sources */,
+				CC3CE4082166A66E005044CE /* NoteViewModel.swift in Sources */,
+				CC5CE30121664A5000974F68 /* SignInPresenter.swift in Sources */,
 				CC74DDCB215E8911003C06D2 /* SignInViewController.swift in Sources */,
 				CC6D0368215FCD44005F9CFA /* Note.swift in Sources */,
-				CC3CE402216671F3005044CE /* MapScreenViewModel.swift in Sources */,
+				CC3CE40D21675AA5005044CE /* Coordinator.swift in Sources */,
+				CC3CE402216671F3005044CE /* MapScreenPresenter.swift in Sources */,
 				CC74DDD1215E9500003C06D2 /* User.swift in Sources */,
 				CC74DDCE215E8B35003C06D2 /* Extensions.swift in Sources */,
 				CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */,
