@@ -20,6 +20,7 @@ protocol HomeScreenPresenterType {
     
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
     func navigateToSignInScreen(in navigationController: UINavigationController)
+    func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String)
 }
 
 struct HomeScreenPresenter: HomeScreenPresenterType {
@@ -75,6 +76,8 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
     }
 }
 
+// Navigation
+
 extension HomeScreenPresenter {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note]) {
         let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
@@ -88,5 +91,13 @@ extension HomeScreenPresenter {
         let signInViewController = SignInViewController()
         signInViewController.presenter = signInPresenter
         navigationController.present(signInViewController, animated: true)
+    }
+    
+    func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String) {
+        let addNotePresenter = AddNotePresenter(locationManager: locationManager)
+        let addNoteViewController = AddNoteViewController()
+        addNoteViewController.presenter = addNotePresenter
+        addNoteViewController.userName = userName
+        navigationController.present(addNoteViewController, animated: true)
     }
 }

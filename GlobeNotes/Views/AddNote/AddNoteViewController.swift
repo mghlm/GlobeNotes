@@ -7,16 +7,12 @@
 //
 
 import UIKit
-import Firebase
 
 class AddNoteViewController: UIViewController {
     
     // MARK: - Dependencies
     
-    fileprivate var viewModel: AddNoteViewModelType = {
-        let vm = AddNoteViewModel()
-        return vm
-    }()
+    var presenter: AddNotePresenterType!
     
     // MARK: - Private properties
     
@@ -152,7 +148,7 @@ class AddNoteViewController: UIViewController {
         guard let title = titleTextField.text else { return }
         let text = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text ?? ""
         
-        viewModel.submitNote(with: userName, title: title, text: text, creationDate: Date()) {
+        presenter.submitNote(with: userName, title: title, text: text, creationDate: Date()) {
             self.dismiss(animated: true) {
                 NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)
             }

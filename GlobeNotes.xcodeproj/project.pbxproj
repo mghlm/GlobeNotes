@@ -17,7 +17,7 @@
 		CC3CE40A2166A7D3005044CE /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE4092166A7D3005044CE /* HomeScreenPresenter.swift */; };
 		CC3CE40D21675AA5005044CE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CE40C21675AA5005044CE /* Coordinator.swift */; };
 		CC5CE30121664A5000974F68 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE30021664A5000974F68 /* SignInPresenter.swift */; };
-		CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNoteViewModel.swift */; };
+		CC5CE3032166527300974F68 /* AddNotePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5CE3022166527300974F68 /* AddNotePresenter.swift */; };
 		CC6D0366215FCB04005F9CFA /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */; };
 		CC6D0368215FCD44005F9CFA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D0367215FCD44005F9CFA /* Note.swift */; };
 		CC6FBCEA21625FBD00ABF450 /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */; };
@@ -75,7 +75,7 @@
 		CC3CE4092166A7D3005044CE /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		CC3CE40C21675AA5005044CE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CC5CE30021664A5000974F68 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
-		CC5CE3022166527300974F68 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
+		CC5CE3022166527300974F68 /* AddNotePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotePresenter.swift; sourceTree = "<group>"; };
 		CC6D0365215FCB04005F9CFA /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		CC6D0367215FCD44005F9CFA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		CC6FBCE921625FBD00ABF450 /* MapScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				CC71F3E32160F0B9005E33EF /* AddNoteViewController.swift */,
-				CC5CE3022166527300974F68 /* AddNoteViewModel.swift */,
+				CC5CE3022166527300974F68 /* AddNotePresenter.swift */,
 			);
 			path = AddNote;
 			sourceTree = "<group>";
@@ -554,7 +554,7 @@
 				CC6FBCF72163DAED00ABF450 /* NoteDetailsViewController.swift in Sources */,
 				CC9A421D2166231D00F17259 /* SignUpPresenter.swift in Sources */,
 				CC3CE40621669BD5005044CE /* AuthService.swift in Sources */,
-				CC5CE3032166527300974F68 /* AddNoteViewModel.swift in Sources */,
+				CC5CE3032166527300974F68 /* AddNotePresenter.swift in Sources */,
 				CC6FBCF021636FEE00ABF450 /* NoteAnnotation.swift in Sources */,
 				CC3CE40421667CD7005044CE /* NoteService.swift in Sources */,
 				CC3CE40A2166A7D3005044CE /* HomeScreenPresenter.swift in Sources */,

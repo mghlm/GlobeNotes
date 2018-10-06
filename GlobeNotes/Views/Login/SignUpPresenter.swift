@@ -27,10 +27,6 @@ struct SignUpPresenter: SignUpPresenterType {
     
     fileprivate var authService: AuthServiceType!
     
-    // MARK: - Prive properties
-    
-    private var dbRef: DatabaseReference = Database.database().reference()
-    
     // MARK: - Init
     
     init(authService: AuthServiceType) {

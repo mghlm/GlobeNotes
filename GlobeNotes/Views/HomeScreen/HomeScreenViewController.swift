@@ -220,10 +220,9 @@ final class HomeScreenViewController: UIViewController {
     
     @objc fileprivate func handleAddNote() {
         guard let userName = user?.userName else { return }
+        guard let navController = navigationController else { return }
         if presenter.isLocationAuthorized() {
-            let addNoteViewController = AddNoteViewController()
-            addNoteViewController.userName = userName
-            navigationController?.present(addNoteViewController, animated: true, completion: nil)
+            presenter.navigateToAddNoteScreen(in: navController, with: userName)
         } else {
             showLocationRequiredAlert()
         }
