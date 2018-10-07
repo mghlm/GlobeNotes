@@ -20,6 +20,7 @@ protocol HomeScreenPresenterType {
     func signUserOut(completion: @escaping () -> ())
     func isUserSignedIn() -> Bool
     func sortNotesByDistance( from location: CLLocation, with notes: [Note]) -> [Note]
+    func getDistanceFromCurrentLocation(to note: Note) -> String
     
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
     func navigateToSignInScreen(in navigationController: UINavigationController)
@@ -112,5 +113,16 @@ extension HomeScreenPresenter {
         addNoteViewController.presenter = addNotePresenter
         addNoteViewController.userName = userName
         navigationController.present(addNoteViewController, animated: true)
+    }
+    
+    func getDistanceFromCurrentLocation(to note: Note) -> String {
+        if let currentLocation = currentLocation() {
+            var distance = note.distance(to: currentLocation) * 0.00062137
+            if distance > 1 {
+                distance = distance.rounded()
+            }
+            return distance.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", distance) : String(format:"%.1f", distance)
+        }
+        return ""
     }
 }

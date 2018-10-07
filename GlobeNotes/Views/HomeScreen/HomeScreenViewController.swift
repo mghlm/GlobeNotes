@@ -296,22 +296,6 @@ extension HomeScreenViewController: UITableViewDelegate {
         noteDetailsViewController.note = filteredNotes[indexPath.row]
         navController.pushViewController(noteDetailsViewController, animated: true)
     }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        let cell = tableView.cellForRow(at: indexPath) as! NoteTableViewCell
-//        if cell.note.uid == user?.uid {
-//            return true
-//        } else {
-//            return true
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            notes.remove(at: indexPath.row)
-//            tableView.reloadData()
-//        }
-//    }
 }
 
 extension HomeScreenViewController: UITableViewDataSource {
@@ -331,14 +315,7 @@ extension HomeScreenViewController: UITableViewDataSource {
 
 extension HomeScreenViewController: NoteTableViewCellDelegate {
     func getDistanceFromCurrenLocation(to note: Note) -> String {
-        if let currentLocation = presenter.currentLocation() {
-            var distance = note.distance(to: currentLocation) * 0.00062137
-            if distance > 1 {
-                distance = distance.rounded()
-            }
-            return distance.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", distance) : String(format:"%.1f", distance)
-        }
-        return ""
+        return presenter.getDistanceFromCurrentLocation(to: note)
     }
 }
 
