@@ -322,9 +322,20 @@ extension HomeScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.id) as! NoteTableViewCell
         let note = filteredNotes[indexPath.row]
+        cell.delegate = self
         cell.note = note
         
         return cell
+    }
+}
+
+extension HomeScreenViewController: NoteTableViewCellDelegate {
+    func getDistanceFromCurrenLocation(to note: Note) -> String {
+        if let currentLocation = presenter.currentLocation() {
+            let distance = note.distance(to: currentLocation)
+            return String(format:"%.1f", distance)
+        }
+        return ""
     }
 }
 
