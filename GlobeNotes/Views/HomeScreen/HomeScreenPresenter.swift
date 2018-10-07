@@ -19,6 +19,7 @@ protocol HomeScreenPresenterType {
     func fetchUser(completion: @escaping (User) -> ())
     func signUserOut(completion: @escaping () -> ())
     func isUserSignedIn() -> Bool
+    func sortNotesByDateAdded(with notes: [Note]) -> [Note]
     func sortNotesByDistance( from location: CLLocation, with notes: [Note]) -> [Note]
     func getDistanceFromCurrentLocation(to note: Note) -> String
     
@@ -85,9 +86,14 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
         return authService.isUserSignedIn()
     }
     
-    func sortNotesByDistance(from location: CLLocation, with notes: [Note]) -> [Note] {
+    func sortNotesByDateAdded(with notes: [Note]) -> [Note] {
         var sortedNotes = notes
         sortedNotes.sort(by: { $0.creationDate > $1.creationDate })
+        return sortedNotes
+    }
+    
+    func sortNotesByDistance(from location: CLLocation, with notes: [Note]) -> [Note] {
+        var sortedNotes = notes
         sortedNotes.sort(by: { $0.distance(to: location) < $1.distance(to: location) })
         return sortedNotes
     }
@@ -108,7 +114,7 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
 
 extension HomeScreenPresenter {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note]) {
-        let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
+        let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes, singleNote: nil)
         let mapScreenViewController = MapScreenViewController()
         mapScreenViewController.presenter = mapScreenPresenter
         navigationController.pushViewController(mapScreenViewController, animated: true)

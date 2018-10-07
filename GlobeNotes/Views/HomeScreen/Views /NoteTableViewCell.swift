@@ -45,7 +45,6 @@ final class NoteTableViewCell: UITableViewCell {
     fileprivate var locationLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.italicSystemFont(ofSize: 14)
-        lbl.text = "Fetching location..."
         return lbl
     }()
     
@@ -53,7 +52,7 @@ final class NoteTableViewCell: UITableViewCell {
     
     fileprivate func setupUI() {
         noteTitleLabel.text = "✏️ \(note.title)"
-        if let distance = delegate?.getDistanceFromCurrenLocation(to: note) {
+        if let distance = delegate?.getDistanceFromCurrenLocation(to: note), distance != "" {
             locationLabel.text = "📍 Distance: \(distance) miles"
         }
         noteAuthorLabel.text = "created at \(formattedDateString(for: note.creationDate)) by \(note.userName)"

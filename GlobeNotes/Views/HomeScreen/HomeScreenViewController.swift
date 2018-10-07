@@ -150,7 +150,10 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func fetchNotes() {
         presenter.fetchNotes { (notes) in
             self.allNotes = notes
+            // First we sort the notes by date added
+            self.allNotes = self.presenter.sortNotesByDateAdded(with: self.allNotes)
             if let currentLocation = self.presenter.currentLocation() {
+                // If user's location is authorized, we also sort the notes by distance
                 self.allNotes = self.presenter.sortNotesByDistance(from: currentLocation, with: self.allNotes)
             }
             self.filteredNotes = self.allNotes
@@ -286,6 +289,10 @@ extension HomeScreenViewController: UISearchBarDelegate {
             })
         }
         notesTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchNotes()
     }
 }
 
