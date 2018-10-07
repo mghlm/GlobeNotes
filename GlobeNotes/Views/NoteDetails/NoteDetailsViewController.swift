@@ -84,9 +84,6 @@ final class NoteDetailsViewController: UIViewController {
         contentView.addSubview(contentLabel)
         setupCityCountryLabel()
         view.addSubview(cityCountryLabel)
-//        if let imageUrl = note.imageUrl {
-//            setupImageView(with: imageUrl)
-//        }
         view.addSubview(imageView)
         setupConstraints()
     }
@@ -106,30 +103,9 @@ final class NoteDetailsViewController: UIViewController {
                 self.cityCountryLabel.text = ""
                 return
             }
-            
             guard let city = city else { return }
             guard let country = country else { return }
-            
             self.cityCountryLabel.text = "🗺 Note submitted in \(city), \(country)"
         }
     }
-    
-//    fileprivate func setupImageView(with imageUrl: String) {
-//        guard let url = URL(string: imageUrl) else { return }
-//        
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let error = error {
-//                print("Failed to fetch user profile image:", error.localizedDescription)
-//                return
-//            }
-//            guard let data = data else { return }
-//            let image = UIImage(data: data)
-//            DispatchQueue.main.async {
-//                self.imageView.image = image
-//                self.imageView.layer.cornerRadius = 10
-//                self.imageView.clipsToBounds = true
-//            }
-//            }.resume()
-//    }
-    
 }

@@ -146,8 +146,8 @@ final class SignInViewController: UIViewController {
     }
     
     @objc fileprivate func handlePushToSignUp() {
-        let signUpViewController = SignUpViewController()
-        navigationController?.pushViewController(signUpViewController, animated: true)
+        guard let navController = navigationController else { return }
+        presenter.navigateToSignUp(in: navController)
     }
     
     @objc fileprivate func handleDismissKeyboard() {

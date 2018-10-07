@@ -33,7 +33,9 @@ struct Note {
 //        self.imageUrl = dictionary["imageUrl"] as? String
         self.latitude = dictionary["latitude"] as? Double
         self.longitude = dictionary["longitude"] as? Double
-        self.creationDate = Date()
+        
+        let secondsFrom1970 = dictionary["creationDate"] as? Double ?? 0
+        self.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
     }
     
     /// Method used to calculate the distance from a given location to where the note was submitted 

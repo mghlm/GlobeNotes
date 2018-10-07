@@ -86,9 +86,10 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
     }
     
     func sortNotesByDistance(from location: CLLocation, with notes: [Note]) -> [Note] {
-        var notesToSort = notes
-        notesToSort.sort(by: { $0.distance(to: location) < $1.distance(to: location) })
-        return notesToSort
+        var sortedNotes = notes
+        sortedNotes.sort(by: { $0.creationDate > $1.creationDate })
+        sortedNotes.sort(by: { $0.distance(to: location) < $1.distance(to: location) })
+        return sortedNotes
     }
     
     func getDistanceFromCurrentLocation(to note: Note) -> String {
@@ -117,7 +118,8 @@ extension HomeScreenPresenter {
         let signInPresenter = SignInPresenter(authService: authService)
         let signInViewController = SignInViewController()
         signInViewController.presenter = signInPresenter
-        navigationController.present(signInViewController, animated: true)
+        let navController = UINavigationController(rootViewController: signInViewController)
+        navigationController.present(navController, animated: true)
     }
     
     func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String) {
