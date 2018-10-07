@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Note {
     
@@ -20,6 +21,10 @@ struct Note {
     let latitude: Double?
     let longitude: Double?
     let creationDate: Date
+    var location: CLLocation {
+        return CLLocation(latitude: latitude ?? 0, longitude: longitude ?? 0)
+    }
+    
     
     init(dictionary: [String: Any]) {
         self.userName = dictionary["userName"] as! String
@@ -29,5 +34,10 @@ struct Note {
         self.latitude = dictionary["latitude"] as? Double
         self.longitude = dictionary["longitude"] as? Double
         self.creationDate = Date()
+    }
+    
+    /// Method used to calculate the distance from a given location to where the note was submitted 
+    func distance(to location: CLLocation) -> CLLocationDistance {
+        return location.distance(from: self.location)
     }
 }

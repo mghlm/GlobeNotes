@@ -150,7 +150,10 @@ final class HomeScreenViewController: UIViewController {
     fileprivate func fetchNotes() {
         presenter.fetchNotes { (notes) in
             self.allNotes = notes
-            self.filteredNotes = notes
+            if let currentLocation = self.presenter.currentLocation() {
+                self.allNotes = self.presenter.sortNotesByDistance(from: currentLocation, with: self.allNotes)
+            }
+            self.filteredNotes = self.allNotes
             self.notesTableView.reloadData()
         }
     }

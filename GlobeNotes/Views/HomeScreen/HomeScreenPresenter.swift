@@ -7,16 +7,19 @@
 //
 
 import Foundation
+import CoreLocation
 import UIKit
 
 protocol HomeScreenPresenterType {
     func requestLocationAuthorization()
     func isLocationAuthorized() -> Bool
+    func currentLocation() -> CLLocation?
     func startUpdatingLocation()
     func fetchNotes(completion: @escaping ([Note]) -> ())
     func fetchUser(completion: @escaping (User) -> ())
     func signUserOut(completion: @escaping () -> ())
     func isUserSignedIn() -> Bool
+    func sortNotesByDistance( from location: CLLocation, with notes: [Note]) -> [Note]
     
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
     func navigateToSignInScreen(in navigationController: UINavigationController)
@@ -49,6 +52,10 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
         return locationManager.isLocationAuthorized()
     }
     
+    func currentLocation() -> CLLocation? {
+        return locationManager.usersCurrentLocation
+    }
+    
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
@@ -73,6 +80,12 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
     
     func isUserSignedIn() -> Bool {
         return authService.isUserSignedIn()
+    }
+    
+    func sortNotesByDistance(from location: CLLocation, with notes: [Note]) -> [Note] {
+        var notesToSort = notes
+        notesToSort.sort(by: { $0.distance(to: location) < $1.distance(to: location) })
+        return notesToSort
     }
 }
 
