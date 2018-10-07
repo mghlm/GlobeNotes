@@ -332,8 +332,11 @@ extension HomeScreenViewController: UITableViewDataSource {
 extension HomeScreenViewController: NoteTableViewCellDelegate {
     func getDistanceFromCurrenLocation(to note: Note) -> String {
         if let currentLocation = presenter.currentLocation() {
-            let distance = note.distance(to: currentLocation)
-            return String(format:"%.1f", distance)
+            var distance = note.distance(to: currentLocation) * 0.00062137
+            if distance > 1 {
+                distance = distance.rounded()
+            }
+            return distance.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", distance) : String(format:"%.1f", distance)
         }
         return ""
     }
