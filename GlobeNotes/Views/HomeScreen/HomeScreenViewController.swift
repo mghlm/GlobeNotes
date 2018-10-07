@@ -299,7 +299,7 @@ extension HomeScreenViewController: UISearchBarDelegate {
 extension HomeScreenViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navController = navigationController else { return }
-        presenter.navigateToNoteDetailsScreen(in: navController, with: filteredNotes[indexPath.row])
+        presenter.navigateToNoteDetailsScreen(in: navController, with: filteredNotes[indexPath.row], uid: user?.uid)
     }
 }
 

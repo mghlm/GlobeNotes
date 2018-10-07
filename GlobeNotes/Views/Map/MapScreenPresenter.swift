@@ -39,15 +39,13 @@ struct MapScreenPresenter: MapScreenPresenterType {
     // MARK: - Dependencies
     
     private var locationManager: LocationManagerType!
-    private var notes: [Note]?
-    private var note: Note?
+    private var notes: [Note]!
     
     // MARK: - Init
     
-    init(locationManager: LocationManagerType, notes: [Note]?, singleNote: Note?) {
+    init(locationManager: LocationManagerType, notes: [Note]) {
         self.locationManager = locationManager
         self.notes = notes
-        self.note = singleNote
     }
     
     // MARK: - Public methods
@@ -72,11 +70,9 @@ struct MapScreenPresenter: MapScreenPresenterType {
     }
     
     func addAnnotations(to mapView: MKMapView) {
-        if let notes = notes {
-            for note in notes {
-                let annotation = NoteAnnotation(note: note)
-                mapView.addAnnotation(annotation)
-            }
+        for note in notes {
+            let annotation = NoteAnnotation(note: note)
+            mapView.addAnnotation(annotation)
         }
     }
 }

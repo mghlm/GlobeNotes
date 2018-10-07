@@ -26,7 +26,7 @@ protocol HomeScreenPresenterType {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
     func navigateToSignInScreen(in navigationController: UINavigationController)
     func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String)
-    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note)
+    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note, uid: String?)
     
 }
 
@@ -114,7 +114,7 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
 
 extension HomeScreenPresenter {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note]) {
-        let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes, singleNote: nil)
+        let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
         let mapScreenViewController = MapScreenViewController()
         mapScreenViewController.presenter = mapScreenPresenter
         navigationController.pushViewController(mapScreenViewController, animated: true)
@@ -136,10 +136,11 @@ extension HomeScreenPresenter {
         navigationController.present(addNoteViewController, animated: true)
     }
     
-    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note) {
-        let noteDetailsPresenter = NoteDetailsPresenter()
+    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note, uid: String?) {
+        let noteDetailsPresenter = NoteDetailsPresenter(locationManager: locationManager, authService: authService)
         let noteDetailsViewController = NoteDetailsViewController()
         noteDetailsViewController.presenter = noteDetailsPresenter
+        noteDetailsViewController.uid = uid
         noteDetailsViewController.note = note
         navigationController.pushViewController(noteDetailsViewController, animated: true)
     }

@@ -22,11 +22,13 @@ final class NoteDetailsViewController: UIViewController {
         }
     }
     
+    var uid: String?
+    
     // MARK: - Private properties
     
     fileprivate var mainTitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.boldSystemFont(ofSize: 24)
+        lbl.font = UIFont.boldSystemFont(ofSize: 32)
         lbl.numberOfLines = 0
         
         return lbl
@@ -56,10 +58,28 @@ final class NoteDetailsViewController: UIViewController {
         return lbl
     }()
     
-    fileprivate var imageView: UIImageView = {
-        let iv = UIImageView()
+    fileprivate var goToMapButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.rgb(red: 0, green: 122, blue: 255)
+        button.setTitle("See note on map", for: .normal)
+        button.addTarget(self, action: #selector(handleGoToMap), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.white, for: .normal)
         
-        return iv
+        return button
+    }()
+    
+    fileprivate var deleteNoteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.red
+        button.setTitle("Delete note", for: .normal)
+        button.addTarget(self, action: #selector(handleDeleteNote), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.white, for: .normal)
+        
+        return button
     }()
     
     // MARK: - ViewController
@@ -84,7 +104,11 @@ final class NoteDetailsViewController: UIViewController {
         contentView.addSubview(contentLabel)
         setupCityCountryLabel()
         view.addSubview(cityCountryLabel)
-        view.addSubview(imageView)
+        view.addSubview(goToMapButton)
+        if let uid = uid, uid == note.uid {
+            setupDeleteButton()
+        }
+        
         setupConstraints()
     }
     
@@ -93,7 +117,7 @@ final class NoteDetailsViewController: UIViewController {
         contentView.anchor(top: mainTitleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
         contentLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8, width: 0, height: 0)
         cityCountryLabel.anchor(top: contentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
-        imageView.anchor(top: contentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+        goToMapButton.anchor(top: cityCountryLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
     }
     
     fileprivate func setupCityCountryLabel() {
@@ -105,7 +129,23 @@ final class NoteDetailsViewController: UIViewController {
             }
             guard let city = city else { return }
             guard let country = country else { return }
-            self.cityCountryLabel.text = "🗺 Note submitted in \(city), \(country)"
+            self.cityCountryLabel.text = "📍 Note submitted in \(city), \(country)"
         }
+    }
+    
+    fileprivate func setupDeleteButton() {
+        view.addSubview(deleteNoteButton)
+        deleteNoteButton.anchor(top: goToMapButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 0)
+    }
+    
+    // MARK: - Handlers
+    
+    @objc fileprivate func handleGoToMap() {
+        guard let navController = navigationController else { return }
+        presenter.navigateToMapScreen(in: navController, with: note)
+    }
+    
+    @objc fileprivate func handleDeleteNote() {
+        
     }
 }
