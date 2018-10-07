@@ -232,7 +232,7 @@ final class HomeScreenViewController: UIViewController {
         fetchNotes()
         presenter.fetchUser { (user) in
             self.user = user
-            let signInMessage = user.userName == "" ? "Successfully signed in" : "Successfully signed in as \(user.userName)"
+            let signInMessage = "Successfully signed in as \(user.userName)"
             self.showAlert(with: signInMessage, delay: 1.5)
         }
     }
@@ -242,7 +242,7 @@ final class HomeScreenViewController: UIViewController {
         self.fetchNotes()
         presenter.fetchUser { (user) in
             self.user = user
-            let signInMessage = user.userName == "" ? "Successfully created a new user" : "Successfully created new user \(user.userName)"
+            let signInMessage = "Successfully created new user \(user.userName)"
             self.showAlert(with: signInMessage, delay: 1.5)
         }
     }
@@ -292,9 +292,7 @@ extension HomeScreenViewController: UISearchBarDelegate {
 extension HomeScreenViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navController = navigationController else { return }
-        let noteDetailsViewController = NoteDetailsViewController()
-        noteDetailsViewController.note = filteredNotes[indexPath.row]
-        navController.pushViewController(noteDetailsViewController, animated: true)
+        presenter.navigateToNoteDetailsScreen(in: navController, with: filteredNotes[indexPath.row])
     }
 }
 

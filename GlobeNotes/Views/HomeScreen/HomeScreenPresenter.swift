@@ -25,6 +25,8 @@ protocol HomeScreenPresenterType {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
     func navigateToSignInScreen(in navigationController: UINavigationController)
     func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String)
+    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note)
+    
 }
 
 struct HomeScreenPresenter: HomeScreenPresenterType {
@@ -88,6 +90,17 @@ struct HomeScreenPresenter: HomeScreenPresenterType {
         notesToSort.sort(by: { $0.distance(to: location) < $1.distance(to: location) })
         return notesToSort
     }
+    
+    func getDistanceFromCurrentLocation(to note: Note) -> String {
+        if let currentLocation = currentLocation() {
+            var distance = note.distance(to: currentLocation) * 0.00062137
+            if distance > 1 {
+                distance = distance.rounded()
+            }
+            return distance.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", distance) : String(format:"%.1f", distance)
+        }
+        return ""
+    }
 }
 
 // Navigation
@@ -115,14 +128,11 @@ extension HomeScreenPresenter {
         navigationController.present(addNoteViewController, animated: true)
     }
     
-    func getDistanceFromCurrentLocation(to note: Note) -> String {
-        if let currentLocation = currentLocation() {
-            var distance = note.distance(to: currentLocation) * 0.00062137
-            if distance > 1 {
-                distance = distance.rounded()
-            }
-            return distance.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", distance) : String(format:"%.1f", distance)
-        }
-        return ""
+    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note) {
+        let noteDetailsPresenter = NoteDetailsPresenter()
+        let noteDetailsViewController = NoteDetailsViewController()
+        noteDetailsViewController.presenter = noteDetailsPresenter
+        noteDetailsViewController.note = note
+        navigationController.pushViewController(noteDetailsViewController, animated: true)
     }
 }
