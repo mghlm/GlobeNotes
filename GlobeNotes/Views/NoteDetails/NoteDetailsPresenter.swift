@@ -11,9 +11,22 @@ import UIKit
 import CoreLocation
 
 protocol NoteDetailsPresenterType {
+    
+    /// Fetches the Geolocation from the given location
+    ///
+    /// - Parameters:
+    ///   - location: The location to Geocode
+    ///   - completion: Completion with the city and country name for the location, if successful
     func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ city: String?, _ country: String?, _ error: Error?) -> ())
+    
+    /// Fetches the user ID of the currently signed in user
     func getUid()
     
+    /// Pushes the mapscreen VC
+    ///
+    /// - Parameters:
+    ///   - navigationController: The navigation controller to push the VC in
+    ///   - note: The note to show as a pin in the map view
     func navigateToMapScreen(in navigationController: UINavigationController, with note: Note)
 }
 

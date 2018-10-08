@@ -1,6 +1,6 @@
 # Globe Notes
 
-Globe Noets is an app that lets users add notes based on their current location, and explore other notes added around the world either in a map or as a list.
+*Globe Notes is an app that lets users add notes based on their current location, and explore other notes added around the world either in a map or as a list.*
 
 ### Approach taken
 
@@ -14,14 +14,14 @@ The app is built part time over 6 days while working full time as an iOS develop
 The estimated time allocations for the different aspects of the app is as follows:
 
 - Setting up Firebase as a backend: 2 hours
-- Setting up and planning the architecture / design patterns: 1.5 hour
+- Setting up and planning the architecture / design approach: 1.5 hour
 - Setting up managers and service layer: 2.5 hours
 - Setting up the ViewControllers: 7 hours
 - Setting up the Presenters: 6 hours
-- Setting up the Map: 1.5 hours
 - Setting up the UI - 3 hours
+- Setting up Unit and UI tests - 2 hours
 
-Total estimated time spent: 23.5 hours
+Total estimated time spent: 24 hours
 
 ### Technologies used
 
@@ -78,5 +78,3 @@ As a user I can see the location, text, and user-name of notes other users have 
 ```
 As a user I have the ability to search for a note based on contained text or user-name
 ```
-
-*The app was built over 4 days in a total of approximately 18 "man-hours".*

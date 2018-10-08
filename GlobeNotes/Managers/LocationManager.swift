@@ -100,19 +100,3 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Failed to fetch location:", error)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
