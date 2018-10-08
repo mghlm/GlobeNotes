@@ -10,13 +10,9 @@ import MapKit
 
 protocol MapScreenPresenterType {
     
-    /// Gets a region to show on map
-    ///
-    /// - Parameters:
-    ///   - latitudeSpan: The specified span of the latitude
-    ///   - longitudeSpan: The specified span of longitude
-    /// - Returns: A region to use for map
-    func getRegion(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
+    func getRegionForUsersLocation(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
+    
+    func getRegionForNote(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
     
     /// To check if user has authorized location
     ///
@@ -50,12 +46,20 @@ struct MapScreenPresenter: MapScreenPresenterType {
     
     // MARK: - Public methods
     
-    func getRegion(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion? {
+    func getRegionForUsersLocation(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion? {
         if let userLocation = getUsersLocationCoordinates() {
-            let location = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
             let span = MKCoordinateSpan(latitudeDelta: latitudeSpan, longitudeDelta: longitudeSpan)
-            let region = MKCoordinateRegion(center: location, span: span)
-            
+            let region = MKCoordinateRegion(center: userLocation, span: span)
+            return region
+        }
+        return nil
+    }
+    
+    func getRegionForNote(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion? {
+        if let latitude = notes.first?.latitude, let longitude = notes.first?.longitude {
+            let noteLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let span = MKCoordinateSpan(latitudeDelta: latitudeSpan, longitudeDelta: longitudeSpan)
+            let region = MKCoordinateRegion(center: noteLocation, span: span)
             return region
         }
         return nil

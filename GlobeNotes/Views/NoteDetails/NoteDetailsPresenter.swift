@@ -52,6 +52,7 @@ extension NoteDetailsPresenter {
         notes.append(note)
         let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
         let mapScreenViewController = MapScreenViewController()
+        mapScreenViewController.arrivedFromDetails = true
         mapScreenViewController.presenter = mapScreenPresenter
         navigationController.pushViewController(mapScreenViewController, animated: true)
     }

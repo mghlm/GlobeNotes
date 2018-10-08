@@ -116,6 +116,7 @@ extension HomeScreenPresenter {
     func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note]) {
         let mapScreenPresenter = MapScreenPresenter(locationManager: locationManager, notes: notes)
         let mapScreenViewController = MapScreenViewController()
+        mapScreenViewController.arrivedFromDetails = false 
         mapScreenViewController.presenter = mapScreenPresenter
         navigationController.pushViewController(mapScreenViewController, animated: true)
     }

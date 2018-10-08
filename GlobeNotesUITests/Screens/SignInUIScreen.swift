@@ -25,16 +25,16 @@ enum SignInUIScreen {
     }
     
     static func assertScreenExist(in app: XCUIApplication) {
-        XCTAssert(SignUpUIScreen.emailTextField.component(in: app).exists, "Error")
-        XCTAssert(SignUpUIScreen.passwordTextField.component(in: app).exists, "Error")
-        XCTAssert(SignUpUIScreen.submitButton.component(in: app).exists, "Error")
-        XCTAssert(SignUpUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
+        XCTAssert(SignInUIScreen.emailTextField.component(in: app).exists, "Error")
+        XCTAssert(SignInUIScreen.passwordTextField.component(in: app).exists, "Error")
+        XCTAssert(SignInUIScreen.submitButton.component(in: app).exists, "Error")
+        XCTAssert(SignInUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
     }
     
     static func assertScreenDoesNotExist(in app: XCUIApplication) {
-        XCTAssertFalse(SignUpUIScreen.emailTextField.component(in: app).exists, "Error")
-        XCTAssertFalse(SignUpUIScreen.passwordTextField.component(in: app).exists, "Error")
-        XCTAssertFalse(SignUpUIScreen.submitButton.component(in: app).exists, "Error")
-        XCTAssertFalse(SignUpUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
+        XCTAssertFalse(SignInUIScreen.emailTextField.component(in: app).exists, "Error")
+        XCTAssertFalse(SignInUIScreen.passwordTextField.component(in: app).exists, "Error")
+        XCTAssertFalse(SignInUIScreen.submitButton.component(in: app).exists, "Error")
+        XCTAssertFalse(SignInUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
     }
 }

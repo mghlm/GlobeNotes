@@ -20,6 +20,10 @@ final class MapScreenViewController: UIViewController {
     
     fileprivate var mapView: MKMapView!
     
+    // MARK: - Public properties
+    
+    var arrivedFromDetails = false
+    
     // MARK: - Constants
     
     let regionLatitudeSpan = 0.15
@@ -51,22 +55,26 @@ final class MapScreenViewController: UIViewController {
         mapView.delegate = self
         presenter.addAnnotations(to: mapView)
         mapView.showsUserLocation = true
-        if presenter.isLocationAuthorized() {
+        if presenter.isLocationAuthorized(), !arrivedFromDetails {
             zoomToUsersCurrentLocation(latitudeSpan: regionLatitudeSpan, longitudeSpan: regionLongitudeSpan)
+        }
+        if arrivedFromDetails {
+            zoomToNoteLocation(latitudeSpan: regionLatitudeSpan, longitudeSpan: regionLongitudeSpan)
         }
         view.addSubview(mapView)
     }
     
     /// Zooms to specified region with user's current location as center
     fileprivate func zoomToUsersCurrentLocation(latitudeSpan: Double, longitudeSpan: Double) {
-        if let region = presenter.getRegion(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
+        if let region = presenter.getRegionForUsersLocation(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
             mapView.setRegion(region, animated: true)
         }
     }
     
-    fileprivate func setupCalloutView(for annotationView: MKAnnotationView) {
-        let contentView = UIView()
-        
+    fileprivate func zoomToNoteLocation(latitudeSpan: Double, longitudeSpan: Double) {
+        if let region = presenter.getRegionForNote(latitudeSpan: latitudeSpan, longitudeSpan: longitudeSpan) {
+            mapView.setRegion(region, animated: true)
+        }
     }
 }
 
