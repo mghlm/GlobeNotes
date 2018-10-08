@@ -9,10 +9,11 @@
 import XCTest
 @testable import GlobeNotes
 
-class GlobeNotesTests: XCTestCase {
+class NoteTests: XCTestCase {
     
     private let noteDictionaryMock: [String: Any] = ["userName": "Magnus", "title": "Test note", "text": "Test note", "latitude": 51.5074, "longitude": -0.1278, "creationDate": 1539002336.0609941]
-    private let userDictionaryMock: [String: Any] = ["uid": "123456", "userName": "Magnus"]
+    
+    private let homeScreenPresenterMock = HomeScreenPresenter(noteService: NoteServiceMock(), authService: AuthServiceMock(), locationManager: LocationManagerMock())
     
     override func setUp() {
         super.setUp()
@@ -22,7 +23,7 @@ class GlobeNotesTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Note tests
+    // MARK: - Tests
     
     func test_note_json_returns_the_correct_note_object() {
         let note = Note(dictionary: noteDictionaryMock)
@@ -42,12 +43,12 @@ class GlobeNotesTests: XCTestCase {
         XCTAssert(note.location.coordinate.longitude == -0.1278)
     }
     
-    // MARK: - User tests
-    
-    func test_user_json_returns_correct_user_object() {
-        let user = User(uid: userDictionaryMock["uid"] as! String, dictionary: userDictionaryMock)
+    func test_fetch_notes_returns_correct_amount() {
         
-        XCTAssert(user.uid == "123456")
-        XCTAssert(user.userName == "Magnus")
+        var mockNotes = [Note]()
+        homeScreenPresenterMock.fetchNotes { (notes) in
+            mockNotes = notes
+        }
+        XCTAssert(mockNotes.count == 4)
     }
 }
