@@ -15,6 +15,8 @@ protocol NoteServiceType {
     ///
     /// - Parameter completion: To be used with array of all notes when all notes are successfully fetched
     func fetchNotes(completion: @escaping ([Note]) -> ())
+    
+    func submitNote(dictionary: [String: Any], completion: @escaping () -> Void)
 }
 
 struct NoteService: NoteServiceType {
@@ -43,7 +45,11 @@ struct NoteService: NoteServiceType {
         }
     }
     
-    func delete(note: Note) {
+    func submitNote(dictionary: [String: Any], completion: @escaping () -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let dbRef = Database.database().reference().child("notes").child(uid).childByAutoId()
         
+        dbRef.setValue(dictionary)
+        completion()
     }
 }

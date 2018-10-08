@@ -200,7 +200,7 @@ extension HomeScreenPresenter {
     }
     
     func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String) {
-        let addNotePresenter = AddNotePresenter(locationManager: locationManager)
+        let addNotePresenter = AddNotePresenter(locationManager: locationManager, noteService: noteService)
         let addNoteViewController = AddNoteViewController()
         addNoteViewController.presenter = addNotePresenter
         addNoteViewController.userName = userName

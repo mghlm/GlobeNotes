@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 protocol AddNotePresenterType {
     
@@ -27,24 +26,25 @@ struct AddNotePresenter: AddNotePresenterType {
     // MARK: - Dependencies
     
     fileprivate let locationManager: LocationManagerType!
+    fileprivate let noteService: NoteServiceType!
     
     // MARK: - Init
     
-    init(locationManager: LocationManagerType) {
+    init(locationManager: LocationManagerType, noteService: NoteServiceType) {
         self.locationManager = locationManager
+        self.noteService = noteService
     }
     
     // MARK: - Public methods 
     
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let latitude = locationManager.usersCurrentLocation?.coordinate.latitude else { return }
         guard let longitude = locationManager.usersCurrentLocation?.coordinate.longitude else { return }
         
-        let dbRef = Database.database().reference().child("notes").child(uid).childByAutoId()
-        let values = ["userName": username, "title": title, "text": text, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        let dictionary = ["userName": username, "title": title, "text": text, "latitude": latitude, "longitude": longitude, "creationDate": Date().timeIntervalSince1970] as [String: Any]
         
-        dbRef.setValue(values)
-        completion()
+        noteService.submitNote(dictionary: dictionary) {
+            completion()
+        }
     }
 }
