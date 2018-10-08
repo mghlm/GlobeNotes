@@ -2,12 +2,13 @@
 
 Globe Noets is an app that lets users add notes based on their current location, and explore other notes added around the world either in a map or as a list.
 
-*The app was built over 4 days in a total of about 14 "man-hours".*
-
 ### Approach taken
 
 The app is built using a simple MVP (model-view-presenter) architecture, where the presenter is responsible for most of the business logic as well as the navigation. To scale this app, a coordinator pattern could be introduced as further separation of concerns and easier testing.
+
 The app is built using a protocol oriented approach.
+
+*The app was built over 4 days in a total of approximately 18 "man-hours".*
 
 ### Technologies used
 
@@ -39,7 +40,7 @@ The app is built using a protocol oriented approach.
 
 - Add Acitivity Indicator when loading
 
-- Add refresh controller 
+- Add refresh controller
 
 ### Screenshots
 
