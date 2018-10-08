@@ -55,7 +55,7 @@ final class NoteTableViewCell: UITableViewCell {
         if let distance = delegate?.getDistanceFromCurrenLocation(to: note), distance != "" {
             locationLabel.text = "📍 Distance: \(distance) miles"
         }
-        noteAuthorLabel.text = "created at \(formattedDateString(for: note.creationDate)) by \(note.userName)"
+        noteAuthorLabel.text = "created \(formattedDateString(for: note.creationDate)) by \(note.userName)"
         addSubview(noteTitleLabel)
         addSubview(locationLabel)
         addSubview(noteAuthorLabel)

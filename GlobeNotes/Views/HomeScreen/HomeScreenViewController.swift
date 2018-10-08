@@ -30,12 +30,13 @@ final class HomeScreenViewController: UIViewController {
     }()
     
     fileprivate var mapButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.backgroundColor = .clear
         button.setTitle(String.fontAwesomeIcon(name: .mapMarkerAlt), for: .normal)
         button.titleLabel?.font = UIFont.fontAwesome(ofSize: 26, style: .solid)
         button.setTitleColor(UIColor.rgb(red: 0, green: 122, blue: 255), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        button.isUserInteractionEnabled = false
         
         return button
     }()
@@ -157,6 +158,7 @@ final class HomeScreenViewController: UIViewController {
                 self.allNotes = self.presenter.sortNotesByDistance(from: currentLocation, with: self.allNotes)
             }
             self.filteredNotes = self.allNotes
+            self.mapButton.isUserInteractionEnabled = true 
             self.notesTableView.reloadData()
         }
     }

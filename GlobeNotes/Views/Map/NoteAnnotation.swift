@@ -10,11 +10,13 @@ import MapKit
 
 final class NoteAnnotation: NSObject, MKAnnotation {
     let title: String?
+    let text: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
     
     init(note: Note) {
         self.title = note.title
+        self.text = note.text
         self.subtitle = "Note created by \(note.userName)"
         self.coordinate = CLLocationCoordinate2D(latitude: note.latitude ?? 0, longitude: note.longitude ?? 0)
     }
