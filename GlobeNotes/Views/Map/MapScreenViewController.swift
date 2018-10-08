@@ -106,47 +106,6 @@ extension MapScreenViewController: MKMapViewDelegate {
         } else {
             annotationView?.annotation = annotation
         }
-        
         return annotationView
     }
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

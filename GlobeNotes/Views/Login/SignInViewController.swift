@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 final class SignInViewController: UIViewController {
     
@@ -159,25 +158,3 @@ final class SignInViewController: UIViewController {
         view.endEditing(true)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

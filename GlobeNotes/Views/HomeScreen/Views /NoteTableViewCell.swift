@@ -10,7 +10,12 @@ import UIKit
 import CoreLocation
 
 protocol NoteTableViewCellDelegate: class {
-    func getDistanceFromCurrenLocation(to note: Note) -> String 
+    
+    /// Gets the distance from user's current location to the given note
+    ///
+    /// - Parameter note: The note to calculate distance to
+    /// - Returns: Distance in miles as string 
+    func getDistanceFromCurrenLocation(to note: Note) -> String
 }
 
 final class NoteTableViewCell: UITableViewCell {
