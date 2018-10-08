@@ -42,6 +42,8 @@ The app is built using a protocol oriented approach.
 
 - Add refresh controller
 
+- Add buttons to map to toggle between all/one note and center on location 
+
 ### Screenshots
 
 ![alt text](https://i.imgur.com/ZWIRN0o.jpg)
