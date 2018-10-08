@@ -4,6 +4,10 @@ Globe Noets is an app that lets users add notes based on their current location,
 
 *The app was built over 4 days in a total of about 14 "man-hours".*
 
+### Approach taken
+
+The app is built using a simple MVP (model-view-presenter) architecture, where the presenter is responsible for most of the business logic as well as the navigation. To scale this app, a coordinator pattern could be introduced as further separation of concerns and easier testing.
+The app is built using a protocol oriented approach.
 
 ### Technologies used
 
@@ -19,9 +23,23 @@ Globe Noets is an app that lets users add notes based on their current location,
 
 - UI feedback of wrong formatting of email / password not implemented
 
-### Future Additions
+- Apple's rate on geolocate requests are time limited, meaning if a user is to navigate back and forth between the home screen and the details screen, the location of the note (city and country) might not be able to be fetched. From Apple's documentation on the subbject: *Geocoding requests are rate-limited for each app, so making too many requests in a short period of time may cause some of the requests to fail. When the maximum rate is exceeded, the geocoder passes an error object with the value network to your 		completion handler.* https://developer.apple.com/reference/corelocation/clgeocoder/1423621-reversegeocodelocation
 
-- Add here
+- Extremely slow or disabled network is not handled
+
+### Future Improvements / Additions
+
+- Add more unit tests
+
+- Add end-to-end UI tests (screens are set up with UI-elements)
+
+- Different method of injecting Presenters into ViewControllers to avoid global state
+
+- Option to add photo to note
+
+- Add Acitivity Indicator when loading
+
+- Add refresh controller 
 
 ### Screenshots
 
