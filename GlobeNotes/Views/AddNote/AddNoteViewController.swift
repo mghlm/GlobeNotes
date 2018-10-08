@@ -147,7 +147,7 @@ class AddNoteViewController: UIViewController {
     @objc fileprivate func handleSubmit() {
         guard let title = titleTextField.text else { return }
         let text = textTextView.textColor == UIColor.lightGray ? "" : textTextView.text ?? ""
-        
+
         presenter.submitNote(with: userName, title: title, text: text, creationDate: Date()) {
             self.dismiss(animated: true) {
                 NotificationCenter.default.post(name: AddNoteViewController.refreshTableViewNotificationName, object: nil)

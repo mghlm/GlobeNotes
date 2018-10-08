@@ -16,6 +16,11 @@ protocol NoteServiceType {
     /// - Parameter completion: To be used with array of all notes when all notes are successfully fetched
     func fetchNotes(completion: @escaping ([Note]) -> ())
     
+    /// Saves a new note in the firebase database
+    ///
+    /// - Parameters:
+    ///   - dictionary: Dictionary with the values of the note
+    ///   - completion: To be called when the note is successfully saved 
     func submitNote(dictionary: [String: Any], completion: @escaping () -> Void)
 }
 
