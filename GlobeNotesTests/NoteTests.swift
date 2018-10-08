@@ -14,7 +14,6 @@ class NoteTests: XCTestCase {
     private let noteDictionaryMock: [String: Any] = ["userName": "Magnus", "title": "Test note", "text": "Test note", "latitude": 51.5074, "longitude": -0.1278, "creationDate": 1539002336.0609941]
     
     private let homeScreenPresenterMock = HomeScreenPresenter(noteService: NoteServiceMock(), authService: AuthServiceMock(), locationManager: LocationManagerMock())
-    private let homeScreenViewControllerMock = HomeScreenViewController()
     
     override func setUp() {
         super.setUp()
@@ -45,16 +44,10 @@ class NoteTests: XCTestCase {
     }
     
     func test_fetch_notes_returns_correct_amount() {
-        
-        homeScreenViewControllerMock.presenter = homeScreenPresenterMock
-        
         var mockNotes = [Note]()
-        homeScreenViewControllerMock.viewDidLoad()
-    
-//        homeScreenViewControllerMock.fetchNotes { (notes) in
-//            mockNotes = notes
-//        }
-        
-        XCTAssert(homeScreenViewControllerMock.allNotes.count == 4)
+        homeScreenPresenterMock.fetchNotes { (notes) in
+            mockNotes = notes
+        }
+        XCTAssert(mockNotes.count == 4)
     }
 }

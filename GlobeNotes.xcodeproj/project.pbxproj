@@ -238,9 +238,9 @@
 			isa = PBXGroup;
 			children = (
 				CC74DDAD215E8733003C06D2 /* NoteTests.swift */,
-				CC74DDAF215E8733003C06D2 /* Info.plist */,
 				CCDF8842216B92C900AF53E8 /* UserTests.swift */,
 				CCDF8844216B950100AF53E8 /* Mocks.swift */,
+				CC74DDAF215E8733003C06D2 /* Info.plist */,
 			);
 			path = GlobeNotesTests;
 			sourceTree = "<group>";
