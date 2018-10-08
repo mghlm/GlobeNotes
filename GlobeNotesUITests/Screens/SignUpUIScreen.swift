@@ -9,7 +9,7 @@
     import XCTest
     
     enum SignUpUIScreen {
-        case emailTextField, usernameTextField, passwordTextField, submitButton, alreadyHaveAccountButton
+        case emailTextField, usernameTextField, passwordTextField, submitButton
         
         func component(in app: XCUIApplication) -> XCUIElement {
             switch self {
@@ -21,8 +21,6 @@
                 return app.textFields["passwordTextField"]
             case .submitButton:
                 return app.buttons["submitButton"]
-            case .alreadyHaveAccountButton:
-                return app.buttons["alreadyHaveAccountButton"]
             }
         }
         
@@ -31,7 +29,6 @@
             XCTAssert(SignUpUIScreen.usernameTextField.component(in: app).exists, "Error")
             XCTAssert(SignUpUIScreen.passwordTextField.component(in: app).exists, "Error")
             XCTAssert(SignUpUIScreen.submitButton.component(in: app).exists, "Error")
-            XCTAssert(SignUpUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
         }
         
         static func assertScreenDoesNotExist(in app: XCUIApplication) {
@@ -39,6 +36,5 @@
             XCTAssertFalse(SignUpUIScreen.usernameTextField.component(in: app).exists, "Error")
             XCTAssertFalse(SignUpUIScreen.passwordTextField.component(in: app).exists, "Error")
             XCTAssertFalse(SignUpUIScreen.submitButton.component(in: app).exists, "Error")
-            XCTAssertFalse(SignUpUIScreen.alreadyHaveAccountButton.component(in: app).exists, "Error")
         }
     }
