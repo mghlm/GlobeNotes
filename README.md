@@ -8,7 +8,20 @@ The app is built using a simple MVP (model-view-presenter) architecture, where t
 
 The app is built using a protocol oriented approach.
 
-*The app was built over 4 days in a total of approximately 18 "man-hours".*
+### Time allocation
+
+The app is built part time over 6 days while working full time as an iOS developer at the same time.
+The estimated time allocations for the different aspects of the app is as follows:
+
+- Setting up Firebase as a backend: 2 hours
+- Setting up and planning the architecture / design patterns: 1.5 hour
+- Setting up managers and service layer: 2.5 hours
+- Setting up the ViewControllers: 7 hours
+- Setting up the Presenters: 6 hours
+- Setting up the Map: 1.5 hours
+- Setting up the UI - 3 hours
+
+Total estimated time spent: 23.5 hours
 
 ### Technologies used
 
@@ -42,7 +55,7 @@ The app is built using a protocol oriented approach.
 
 - Add refresh controller
 
-- Add buttons to map to toggle between all/one note and center on location 
+- Add buttons to map to toggle between all/one note and center on location
 
 ### Screenshots
 
@@ -65,3 +78,5 @@ As a user I can see the location, text, and user-name of notes other users have 
 ```
 As a user I have the ability to search for a note based on contained text or user-name
 ```
+
+*The app was built over 4 days in a total of approximately 18 "man-hours".*
