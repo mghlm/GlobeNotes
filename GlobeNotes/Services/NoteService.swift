@@ -42,4 +42,8 @@ struct NoteService: NoteServiceType {
             print("Failed to fetch notes:", error)
         }
     }
+    
+    func delete(note: Note) {
+        
+    }
 }
