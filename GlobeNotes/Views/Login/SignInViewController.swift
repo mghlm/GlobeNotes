@@ -41,6 +41,7 @@ final class SignInViewController: UIViewController {
         tf.borderStyle = .roundedRect
         tf.font = UIFont.systemFont(ofSize: 14)
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        tf.accessibilityIdentifier = "emailTextField"
         
         return tf
     }()
@@ -52,6 +53,7 @@ final class SignInViewController: UIViewController {
         tf.font = UIFont.systemFont(ofSize: 14)
         tf.isSecureTextEntry = true
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        tf.accessibilityIdentifier = "passwordTextField"
         
         return tf
     }()
@@ -65,6 +67,8 @@ final class SignInViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = false
+        button.accessibilityIdentifier = "submitButton"
+        
         
         return button
     }()
@@ -74,6 +78,7 @@ final class SignInViewController: UIViewController {
         button.setTitle("Don't have an account? Sign up!", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(handlePushToSignUp), for: .touchUpInside)
+        button.accessibilityIdentifier = "alreadyHaveAccountButton"
         
         return button
     }()
