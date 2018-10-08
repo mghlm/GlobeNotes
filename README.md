@@ -4,10 +4,6 @@ Globe Noets is an app that lets users add notes based on their current location,
 
 *The app was built over 4 days in a total of about 14 "man-hours".*
 
-<!-- ### Screenshots
-
-![alt text](https://i.imgur.com/ZWIRN0o.jpg) -->
-
 
 ### Technologies used
 
@@ -29,11 +25,7 @@ Globe Noets is an app that lets users add notes based on their current location,
 
 ### Screenshots
 
-![alt text](http://i.imgur.com/zWJ4DDu.jpg)
-
-<!-- ### Gif demo
-
-![](http://i.imgur.com/Pc5UGK9.gif) -->
+![alt text](https://i.imgur.com/ZWIRN0o.jpg)
 
 ### User stories for MVP:
 
