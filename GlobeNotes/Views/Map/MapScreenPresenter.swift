@@ -10,8 +10,20 @@ import MapKit
 
 protocol MapScreenPresenterType {
     
+    /// Gets a region to use for startup when screen is pushed from home
+    ///
+    /// - Parameters:
+    ///   - latitudeSpan: The given latitude span of the region
+    ///   - longitudeSpan: The given longitude span of the region
+    /// - Returns: An option region object
     func getRegionForUsersLocation(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
     
+    /// Gets a region to use for startup when screen is pushed from details
+    ///
+    /// - Parameters:
+    ///   - latitudeSpan: The given latitude span of the region
+    ///   - longitudeSpan: The given longitude span of the region
+    /// - Returns: An option region object
     func getRegionForNote(latitudeSpan: Double, longitudeSpan: Double) -> MKCoordinateRegion?
     
     /// To check if user has authorized location

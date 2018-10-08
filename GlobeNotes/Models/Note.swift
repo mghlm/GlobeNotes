@@ -24,7 +24,6 @@ struct Note {
         return CLLocation(latitude: latitude ?? 0, longitude: longitude ?? 0)
     }
     
-    
     init(dictionary: [String: Any]) {
         self.userName = dictionary["userName"] as! String
         self.title = dictionary["title"] as? String ?? ""
@@ -32,6 +31,7 @@ struct Note {
         self.latitude = dictionary["latitude"] as? Double
         self.longitude = dictionary["longitude"] as? Double
         
+        /// Creates the submitted time in seconds for easier sorting
         let secondsFrom1970 = dictionary["creationDate"] as? Double ?? 0
         self.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
     }

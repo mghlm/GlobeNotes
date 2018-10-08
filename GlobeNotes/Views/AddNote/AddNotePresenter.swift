@@ -11,6 +11,14 @@ import Firebase
 
 protocol AddNotePresenterType {
     
+    /// Saves the submitted note in the firebase database
+    ///
+    /// - Parameters:
+    ///   - username: Username of the user submitting the note
+    ///   - title: Title of the submitted note
+    ///   - text: Text of the submitted note
+    ///   - creationDate: The creation date of the submitted note
+    ///   - completion: To be called when note is successfully submitted 
     func submitNote(with username: String, title: String, text: String, creationDate: Date, completion: @escaping () -> Void)
 }
 
