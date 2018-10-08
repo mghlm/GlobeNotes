@@ -10,6 +10,8 @@ import Foundation
 import CoreLocation
 @testable import GlobeNotes
 
+// MARK: - NoteService mock
+
 class NoteServiceMock: NoteServiceType {
     
     let firstNoteDictMock: [String: Any] = ["userName": "Magnus", "title": "Test note 1", "text": "Test note 1", "latitude": 51.5074, "longitude": -0.1278, "creationDate": 1539002336.0609941]
@@ -33,6 +35,8 @@ class NoteServiceMock: NoteServiceType {
     }
     
 }
+
+// MARK: - AuthService mock
 
 class AuthServiceMock: AuthServiceType {
     
@@ -58,6 +62,8 @@ class AuthServiceMock: AuthServiceType {
         return true 
     }
 }
+
+// MARK: - LocationManager mock
 
 class LocationManagerMock: LocationManagerType {
     var usersCurrentLocation: CLLocation?

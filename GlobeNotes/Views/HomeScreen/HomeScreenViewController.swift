@@ -61,7 +61,7 @@ final class HomeScreenViewController: UIViewController {
     
     fileprivate var searchController: UISearchController!
     fileprivate var filteredNotes = [Note]()
-    fileprivate var allNotes: [Note]!
+    private var allNotes: [Note]!
     fileprivate var isShowingOnlyCurrentUsersNotes = false
     
     // MARK: - Public properties
@@ -158,7 +158,7 @@ final class HomeScreenViewController: UIViewController {
                 self.allNotes = self.presenter.sortNotesByDistance(from: currentLocation, with: self.allNotes)
             }
             self.filteredNotes = self.allNotes
-            self.mapButton.isUserInteractionEnabled = true 
+            self.mapButton.isUserInteractionEnabled = true
             self.notesTableView.reloadData()
         }
     }
