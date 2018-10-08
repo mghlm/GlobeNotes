@@ -11,23 +11,93 @@ import CoreLocation
 import UIKit
 
 protocol HomeScreenPresenterType {
+    
+    /// Requests to use the location when the app is in use
     func requestLocationAuthorization()
+    
+    /// Checks if the user has given permission for the app to use location
+    ///
+    /// - Returns: True or false
     func isLocationAuthorized() -> Bool
+    
+    /// Checks the last known location of the user
+    ///
+    /// - Returns: Optional CLLocation of last known location if any
     func currentLocation() -> CLLocation?
+    
+    /// Starts updating the current location
     func startUpdatingLocation()
+    
+    /// Fetches all notes from firebase server
+    ///
+    /// - Parameter completion: To be called after all notes are fetched
+    /// - Returns: Completion with array of all notes
     func fetchNotes(completion: @escaping ([Note]) -> ())
+    
+    /// Fetches the user object of currently signed in user
+    ///
+    /// - Parameter completion: To be called when user is fetched
+    /// - Returns: Completion with User object
     func fetchUser(completion: @escaping (User) -> ())
+    
+    /// Signs out the currently signed in user
+    ///
+    /// - Parameter completion: To be called when user is successfully signed out
+    /// - Returns: Completion
     func signUserOut(completion: @escaping () -> ())
+    
+    /// Checks if a user is currently signed in
+    ///
+    /// - Returns: True or false
     func isUserSignedIn() -> Bool
+    
+    /// Sorts an array of notes by the time they were added to the database
+    ///
+    /// - Parameter notes: The collection of notes to sort
+    /// - Returns: A new collection of sortet notes
     func sortNotesByDateAdded(with notes: [Note]) -> [Note]
+    
+    /// Sorts an array of notes by distance to a given location
+    ///
+    /// - Parameters:
+    ///   - location: The location to measure distance to
+    ///   - notes: The collection of notes to sort
+    /// - Returns: A new collection of sorted notes
     func sortNotesByDistance( from location: CLLocation, with notes: [Note]) -> [Note]
+    
+    /// Gets the distance from the current location to where a given note was added
+    ///
+    /// - Parameter note: The note to measure distance to
+    /// - Returns: Distance in miles as a String. If distance < 1, distance is rounded to .1, otherwise rounded to 1
     func getDistanceFromCurrentLocation(to note: Note) -> String
     
-    func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
-    func navigateToSignInScreen(in navigationController: UINavigationController)
-    func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String)
-    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note, uid: String?)
     
+    /// Pushes the map screen VC
+    ///
+    /// - Parameters:
+    ///   - navigationController: The navigation controller to push the new VC in
+    ///   - notes: The notes to show in the map
+    func navigateToMapScreen(in navigationController: UINavigationController, with notes: [Note])
+    
+    /// Presents the modal sign in screen
+    ///
+    /// - Parameter navigationController: The navigation controller to present the new VC in
+    func navigateToSignInScreen(in navigationController: UINavigationController)
+    
+    /// Presents the add notes modal VC
+    ///
+    /// - Parameters:
+    ///   - navigationController: navigationController: The navigation controller to present the new VC in
+    ///   - userName: The user name of the currently signed in user, to use if user submits a new note
+    func navigateToAddNoteScreen(in navigationController: UINavigationController, with userName: String)
+    
+    /// Pushes the note details screen
+    ///
+    /// - Parameters:
+    ///   - navigationController: The navigation controller to push the new VC in
+    ///   - note: The note to show details about
+    ///   - uid: The uid of the currently signed in user to use to compare with that of the note
+    func navigateToNoteDetailsScreen(in navigationController: UINavigationController, with note: Note, uid: String?)
 }
 
 struct HomeScreenPresenter: HomeScreenPresenterType {
