@@ -54,7 +54,7 @@ Password: "test123"
 
 - Add end-to-end UI tests (screens are set up with UI-elements)
 
-- Different method of injecting Presenters into ViewControllers to avoid global state
+- Introducing a coordinator pattern 
 
 - Option to add photo to note
 
