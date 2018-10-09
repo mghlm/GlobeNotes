@@ -2,6 +2,13 @@
 
 *Globe Notes is an app that lets users add notes based on their current location, and explore other notes added around the world either in a map or as a list.*
 
+#### How to test it
+
+To login, simply create a new user with a valid email address format and a password containing both letters and numbers.
+You are also welcome to use the following test account:
+Email: "Testaccount@gmail.com"
+Password: "test123"
+
 ### Approach taken
 
 The app is built using a simple MVP (model-view-presenter) architecture, where the presenter is responsible for most of the business logic as well as the navigation. To scale this app, a coordinator pattern could be introduced as further separation of concerns and easier testing.
