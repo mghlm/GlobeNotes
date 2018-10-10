@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 final class SignUpViewController: UIViewController {
     
