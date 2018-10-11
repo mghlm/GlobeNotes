@@ -16,11 +16,7 @@ final class NoteDetailsViewController: UIViewController {
     
     // MARK: - Public properties
     
-    var note: Note! {
-        didSet {
-            setupUI()
-        }
-    }
+    var note: Note! 
     
     var uid: String?
     
