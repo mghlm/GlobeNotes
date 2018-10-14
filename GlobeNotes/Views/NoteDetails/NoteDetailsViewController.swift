@@ -14,9 +14,9 @@ final class NoteDetailsViewController: UIViewController {
     
     var presenter: NoteDetailsPresenterType!
     
-    // MARK: - Public properties
+    var note: Note!
     
-    var note: Note! 
+    // MARK: - Public properties
     
     var uid: String?
     
