@@ -26,7 +26,7 @@ protocol AuthServiceType {
     ///   - email: User's email address
     ///   - password: User's password they created when signing up
     ///   - completion: Completion called after successful sign in
-    func signInUser(email: String, password: String, completion: @escaping () -> Void)
+    func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> Void)
     
     /// Fetches the user currently signed in
     ///
@@ -73,14 +73,13 @@ struct AuthService: AuthServiceType {
         }
     }
     
-    func signInUser(email: String, password: String, completion: @escaping () -> Void) {
+    func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {
-                print("Failed to sign in user:", error)
+                completion(nil, error)
                 return
             }
             print("Successfully signed in user", user?.user.uid ?? "")
-            completion()
         }
     }
     

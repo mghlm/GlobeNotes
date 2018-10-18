@@ -80,6 +80,24 @@ final class MapScreenViewController: UIViewController {
 
 extension MapScreenViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let anno = annotation as? NoteAnnotation else { return nil }
+        
+        let identifier = "noteAnnotation"
+        var view: MKMarkerAnnotationView
+        
+        if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+            dequedView.annotation = anno
+            view = dequedView
+        } else {
+            view = MKMarkerAnnotationView(annotation: anno, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            
+        }
+        
+        
+        
+        
         if annotation is MKUserLocation { return nil }
         
         let contentView = UIView()

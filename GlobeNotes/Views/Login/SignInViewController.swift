@@ -126,6 +126,16 @@ final class SignInViewController: UIViewController {
         dontHaveAccountButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 40, paddingRight: 0, width: 0, height: 0)
     }
     
+    fileprivate func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+        
+        let deadline = DispatchTime.now() + 1.5
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     @objc fileprivate func handleTextInputChange() {
         let isFormValid = emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
@@ -142,7 +152,11 @@ final class SignInViewController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        presenter.signInUser(with: email, password: password) {
+        presenter.signInUser(with: email, password: password) { (errorMessage) in
+            if let errorMessage = errorMessage {
+                self.showErrorAlert(with: errorMessage)
+                return
+            }
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: SignInViewController.successAlert, object: nil)
             })
