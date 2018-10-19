@@ -58,8 +58,8 @@ struct SignInPresenter: SignInPresenterType {
                     return
                 }
             }
-            completion(nil)
         }
+        completion(nil)
     }
 }
 
