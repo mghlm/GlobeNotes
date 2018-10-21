@@ -41,6 +41,10 @@ class NoteServiceMock: NoteServiceType {
 // MARK: - AuthService mock
 
 class AuthServiceMock: AuthServiceType {
+    func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
+        <#code#>
+    }
+    
     
     let userDictionaryMock: [String: Any] = ["userName": "Magnus"]
     

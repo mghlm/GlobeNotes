@@ -53,6 +53,7 @@ final class MapScreenViewController: UIViewController {
     fileprivate func setupMapView() {
         mapView = MKMapView()
         mapView.delegate = self
+//        mapView.register(NoteAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         presenter.addAnnotations(to: mapView)
         mapView.showsUserLocation = true
         if presenter.isLocationAuthorized(), !arrivedFromDetails {
@@ -89,10 +90,10 @@ extension MapScreenViewController: MKMapViewDelegate {
         let rightButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30, height: 30)))
         rightButton.setTitle("✏️🌎", for: .normal)
         
-//        let textLabel = UILabel()
-//        textLabel.text = "\(annotation.text ?? "")\n\n\(annotation.subtitle ?? "")"
-//        textLabel.numberOfLines = 0
-//        textLabel.font = UIFont.systemFont(ofSize: 12)
+        let textLabel = UILabel()
+        textLabel.text = "\(annotation.text ?? "")\n\n\(annotation.subtitle ?? "")"
+        textLabel.numberOfLines = 0
+        textLabel.font = UIFont.systemFont(ofSize: 12)
         
 //        let textView = UIView()
 //        textView.backgroundColor = UIColor.rgb(red: 242, green: 242, blue: 242)
@@ -108,7 +109,7 @@ extension MapScreenViewController: MKMapViewDelegate {
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y: 5)
             view.rightCalloutAccessoryView = rightButton
-//            view.detailCalloutAccessoryView = textLabel
+            view.detailCalloutAccessoryView = textLabel
         }
         return view
         

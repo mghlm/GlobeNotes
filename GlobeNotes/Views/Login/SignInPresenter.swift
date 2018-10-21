@@ -52,7 +52,9 @@ struct SignInPresenter: SignInPresenterType {
                     return
                 case .userNotFound:
                     completion("User not found")
-                    return 
+                    return
+                case .wrongPassword:
+                    completion("Wrong password, try again")
                 default:
                     completion("There was an error, try again")
                     return
