@@ -53,7 +53,6 @@ final class MapScreenViewController: UIViewController {
     fileprivate func setupMapView() {
         mapView = MKMapView()
         mapView.delegate = self
-//        mapView.register(NoteAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         presenter.addAnnotations(to: mapView)
         mapView.showsUserLocation = true
         if presenter.isLocationAuthorized(), !arrivedFromDetails {
@@ -95,12 +94,6 @@ extension MapScreenViewController: MKMapViewDelegate {
         textLabel.numberOfLines = 0
         textLabel.font = UIFont.systemFont(ofSize: 12)
         
-//        let textView = UIView()
-//        textView.backgroundColor = UIColor.rgb(red: 242, green: 242, blue: 242)
-//        textView.layer.cornerRadius = 6
-//        textView.clipsToBounds = true
-//        textView.addSubview(textLabel)
-        
         if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
             dequedView.annotation = annotation
             view = dequedView
@@ -112,36 +105,5 @@ extension MapScreenViewController: MKMapViewDelegate {
             view.detailCalloutAccessoryView = textLabel
         }
         return view
-        
-        
-        
-        
-//        if annotation is MKUserLocation { return nil }
-//
-//        let contentView = UIView()
-//        contentView.backgroundColor = UIColor.rgb(red: 242, green: 242, blue: 242)
-//        contentView.layer.cornerRadius = 6
-//        contentView.clipsToBounds = true
-//
-//        let contentLabel = UILabel()
-//        contentLabel.numberOfLines = 0
-//        contentLabel.font = UIFont.systemFont(ofSize: 12)
-//        let text = (annotation as! NoteAnnotation).text
-//        let author = (annotation as! NoteAnnotation).subtitle
-//        contentLabel.text = "\(text ?? "") \n\n\(author ?? "unkown")"
-//
-//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "callOutViewId") as? MKMarkerAnnotationView
-//        let rightButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 30, height: 30)))
-//        rightButton.setTitle("✏️🌎", for: .normal)
-//        if annotationView == nil {
-//            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "callOutViewId")
-//            annotationView?.addSubview(contentView)
-//            annotationView?.detailCalloutAccessoryView = contentLabel
-//            annotationView?.canShowCallout = true
-//            annotationView?.rightCalloutAccessoryView = rightButton
-//        } else {
-//            annotationView?.annotation = annotation
-//        }
-//        return annotationView
     }
 }
