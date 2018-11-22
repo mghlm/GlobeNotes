@@ -8,21 +8,6 @@ The app is built using a simple MVP (model-view-presenter) architecture, where t
 
 The app is built using a protocol oriented approach.
 
-### Time allocation
-
-The app is built part time over 6 days while also working full time as an iOS developer.
-The estimated time allocations for the different aspects of the app is as follows:
-
-- Setting up Firebase as a backend: 2 hours
-- Setting up and planning the architecture / design approach: 2 hours
-- Setting up managers and service layer: 3 hours
-- Setting up the ViewControllers: 6 hours
-- Setting up the Presenters: 5 hours
-- Setting up the UI: 3 hours
-- Setting up Unit and UI tests: 2 hours
-
-Total estimated time spent: 23 hours
-
 ### Technologies used
 
 - [Swift](https://developer.apple.com/swift/)
