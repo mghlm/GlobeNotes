@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import UIKit 
+import UIKit
+import Firebase
 
 protocol SignInPresenterType {
     
@@ -17,7 +18,7 @@ protocol SignInPresenterType {
     ///   - email: User's email address
     ///   - password: User's password they created when signing up
     ///   - completion: Completion called after successful sign in
-    func signInUser(with email: String, password: String, completion: @escaping () -> Void)
+    func signInUser(with email: String, password: String, completion: @escaping (String?) -> Void)
     
     /// Navigates to sign up view controller in passed navController
     ///
@@ -39,10 +40,28 @@ struct SignInPresenter: SignInPresenterType {
     
     // Public methods
     
-    func signInUser(with email: String, password: String, completion: @escaping () -> Void) {
-        authService.signInUser(email: email, password: password) {
-            completion()
+    func signInUser(with email: String, password: String, completion: @escaping (String?) -> Void) {
+        authService.signInUser(email: email, password: password) { (user, error) in
+            if let errorCode = AuthErrorCode(rawValue: error!._code) {
+                switch errorCode {
+                case .emailAlreadyInUse:
+                    completion("Email already in use")
+                    return
+                case .invalidEmail:
+                    completion("Invalid email")
+                    return
+                case .userNotFound:
+                    completion("User not found")
+                    return
+                case .wrongPassword:
+                    completion("Wrong password, try again")
+                default:
+                    completion("There was an error, try again")
+                    return
+                }
+            }
         }
+        completion(nil)
     }
 }
 
